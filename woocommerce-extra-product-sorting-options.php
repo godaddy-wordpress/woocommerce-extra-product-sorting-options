@@ -5,7 +5,7 @@
  * Description: Rename default sorting and optionally add alphabetical and random sorting.
  * Author: SkyVerge
  * Author URI: http://www.skyverge.com/
- * Version: 1.0.0
+ * Version: 1.1.0
  * Text Domain: woocommerce-extra-product-sorting-options
  * Domain Path: /i18n/languages/
  *
@@ -62,6 +62,13 @@ function skyverge_wc_extra_sorting_options_add_settings( $settings ) {
 					'default'       => 'no',
 					'type'          => 'checkbox',
 					'checkboxgroup' => 'start'
+				),
+				array(
+					'desc'          => __( 'Reverse alphabetical sorting', 'woocommerce' ),
+					'id'            => 'wc_reverse_alphabetical_product_sorting',
+					'default'       => 'no',
+					'type'          => 'checkbox',
+					'checkboxgroup' => ''
 				),
 				array(
 					'desc'          => __( 'Random product sorting', 'woocommerce' ),
@@ -130,7 +137,7 @@ function skyverge_alphabetical_woocommerce_catalog_orderby( $sortby ) {
 	$alphabetical_enabled = get_option('wc_alphabetical_product_sorting');
 
 	if($alphabetical_enabled == 'yes') {
-		$sortby['alphabetical'] = __( 'Sort by name: alphabetical', 'woocommerce' );
+		$sortby['alphabetical'] = __( 'Sort by name: A to Z', 'woocommerce' );
 		return $sortby;
 	} else {
 		return $sortby;
@@ -139,6 +146,45 @@ function skyverge_alphabetical_woocommerce_catalog_orderby( $sortby ) {
 add_filter( 'woocommerce_default_catalog_orderby_options', 'skyverge_alphabetical_woocommerce_catalog_orderby' );
 add_filter( 'woocommerce_catalog_orderby', 'skyverge_alphabetical_woocommerce_catalog_orderby' );
 
+
+/**
+ * Add reverse alphabetical sorting option to WC Default Product Sorting / shop pages if enabled
+ *
+ *@since 1.1.0
+ */
+function skyverge_reverse_alphabetical_woocommerce_shop_ordering( $sort_args ) {
+
+	$reverse_alpha_enabled = get_option('wc_reverse_alphabetical_product_sorting');
+
+	if($reverse_alpha_enabled == 'yes') {
+		$orderby_value = isset( $_GET['orderby'] ) ? woocommerce_clean( $_GET['orderby'] ) : apply_filters( 'woocommerce_default_catalog_orderby', get_option( 'woocommerce_default_catalog_orderby' ) );
+
+		if ( 'reverse_alphabetical' == $orderby_value ) {
+			$sort_args['orderby'] = 'title';
+			$sort_args['order'] = 'desc';
+			$sort_args['meta_key'] = '';
+		}
+
+		return $sort_args;
+	} else {
+		return $sort_args;
+	}
+}
+add_filter( 'woocommerce_get_catalog_ordering_args', 'skyverge_reverse_alphabetical_woocommerce_shop_ordering' );
+
+
+function skyverge_reverse_alpha_woocommerce_catalog_orderby( $sortby ) {
+	$reverse_alpha_enabled = get_option('wc_reverse_alphabetical_product_sorting');
+
+	if($reverse_alpha_enabled == 'yes') {
+		$sortby['reverse_alphabetical'] = __( 'Sort by name: Z to A', 'woocommerce' );
+		return $sortby;
+	} else {
+		return $sortby;
+	}
+}
+add_filter( 'woocommerce_default_catalog_orderby_options', 'skyverge_reverse_alpha_woocommerce_catalog_orderby' );
+add_filter( 'woocommerce_catalog_orderby', 'skyverge_reverse_alpha_woocommerce_catalog_orderby' );
 
 /**
  * Add random sorting option to WC Default Product Sorting / shop pages if enabled
