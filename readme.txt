@@ -20,6 +20,7 @@ WooCommerce Extra Product Sorting Options provides options that extend the defau
 
 = Features =
 Includes options to:
+
  - rename default product sorting (i.e., change to "Our Sorting")
  - enable alphabetical product sorting
  - enable reverse alphabetical sorting
@@ -72,7 +73,7 @@ Yes you can! Join in on our [GitHub repository](https://github.com/bekarice/wooc
 
 == Changelog ==
 = 2014.07.30 - version 1.2.0 =
- * Feature: Added "On Sale" sorting (thanks[Bryce Adams](http://bryceadams.com/order-products-sale-woocommerce/) for the idea)
+ * Feature: Added "On Sale" sorting (thanks [Bryce Adams](http://bryceadams.com/order-products-sale-woocommerce/) for the idea)
  
 = 2014.07.29 - version 1.1.0 =
  * Feature: Added reverse alphabetical sorting option
