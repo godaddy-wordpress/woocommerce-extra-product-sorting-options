@@ -1,22 +1,22 @@
 === WooCommerce Extra Product Sorting Options ===
-Contributors: beka.rice, skyverge
+Contributors: beka.rice, skyverge, tamarazuk
 Tags: woocommerce, sorting, product sorting, orderby
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=paypal@skyverge.com&item_name=Donation+for+WooCommerce+Extra+Product+Sorting
 Requires at least: 3.8
-Tested up to: 3.9.1
+Tested up to: 4.0
 Requires WooCommerce at least: 2.1
-Tested WooCommerce up to: 2.2-bleeding
-Stable Tag: 1.2.0
+Tested WooCommerce up to: 2.2
+Stable Tag: 2.0.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Rename default product sorting and add alphabetical, reverse alphabetical, on sale, and random sorting
+Rename the default product sorting option and add up to 6 new sorting options including alphabetical and on-sale sorting.
 
 == Description ==
 
-WooCommerce Extra Product Sorting Options provides options that extend the default WooCommerce orderby options on the shop page. You can optionally set a new name for the default sorting (helpful if you've used this to create a custom sorting order), and can enable alphabetical, reverse alphabetical, on sale, and random product sorting options.
+WooCommerce Extra Product Sorting Options provides options that extend the default WooCommerce orderby options on the shop page. You can optionally set a new name for the default sorting (helpful if you've used this to create a custom sorting order), and can enable up to **6 new sorting options**: alphabetical, reverse alphabetical, on sale, featured, availability, and random product sorting.
 
-**Requires: WooCommerce 2.1+**
+> **Requires: WooCommerce 2.1+**, Compatible with WooCommerce 2.2
 
 = Features =
 Includes options to:
@@ -24,7 +24,9 @@ Includes options to:
  - rename default product sorting (i.e., change to "Our Sorting")
  - enable alphabetical product sorting
  - enable reverse alphabetical sorting
+ - enable featured-first sorting
  - enable on sale sorting (thanks to [Bryce Adams](http://bryceadams.com/order-products-sale-woocommerce/) for the idea)
+ - enable sorting by inventory / availability
  - enable randomized product sorting
 
 = Rename Default Sorting =
@@ -33,12 +35,17 @@ You can customize your product sorting order on your shop pages - [here's a hand
 = Adding Sorting Options =
 When you create a customized sorting order, you lose the ability to sort products alphabetically. This plugin gives you the ability to add new sorting options to list products by title A to Z or in reverse order (Z to A).
 
-You can add the option to sort items by sale status - there's a sorting option to show "On Sale" items first in the shop catalog.
+You can add the option to sort items by sale status - there's a sorting option to show "On Sale" items first in the shop catalog. You can also show featured items first in your catalog.
+
+Want to show items with the highest stock first? You can enable sorting by availability, which will enable sorting from high stock to low stock (See FAQ for more details).
 
 Finally, you can add a "randomized" sorting option just for fun - any time this sorting is selected, the product order will be randomized when the shop page is viewed.
 
+= Looking to remove sorting options? =
+We have a compatible plugin that will let you remove core WooCommerce sorting options, such as the default sorting method. You can check out the [WooCommerce Remove Product Sorting](wordpress.org/plugins/woocommerce-remove-product-sorting/) plugin page for more details.
+
 = More Details =
- - See the [product page](http://www.skyverge.com/product/woocommerce-extra-product-sorting-options/) for full details and documentation
+ - See the [product page](http://www.skyverge.com/product/woocommerce-extra-product-sorting-options/) for full details.
  - View more of SkyVerge's [free WooCommerce extensions](http://profiles.wordpress.org/skyverge/)
  - View all [SkyVerge WooCommerce extensions](http://www.skyverge.com/shop/)
  - View the FAQ for some tips.
@@ -63,15 +70,26 @@ Yep! You can use the [Say What plugin](https://wordpress.org/plugins/say-what/) 
 
 The text domain to use is `woocommerce`.
 
+= Why doesn't sorting by availability work? =
+Don't worry, it does :). It's possible to sort by stock, but this will work for parent products OR on a per-variation base for variable products. While total stock may be 100 for a product, it may be sorted lower because the value used is the highest variation stock (which may be, for example, 85).
+
+If you don't manage your stock, you should **disable** this option - it will simply work as an alphabetical sort if all products are just "In Stock" without inventory managed.
+
 = This is handy! Can I contribute? =
 Yes you can! Join in on our [GitHub repository](https://github.com/bekarice/woocommerce-extra-product-sorting-options/) and submit a pull request :)
 
 == Screenshots ==
 1. Plugin Settings under **WooCommerce &gt; Settings &gt; Products**
-2. New sorting options on the shop page
+2. Some new sorting options on the shop page
 3. Change sorting label (in shop dropdown) with the [Say What plugin](https://wordpress.org/plugins/say-what/)
 
 == Changelog ==
+= 2014.09.15 - version 2.0.0 =
+ * Misc: Refactored to simplify code
+ * Feature: Added "Featured" sorting
+ * Feature: Added "Availability" sorting
+ * Tweak: Changed settings to multi-select instead of checkbox group
+
 = 2014.07.30 - version 1.2.0 =
  * Feature: Added "On Sale" sorting (thanks [Bryce Adams](http://bryceadams.com/order-products-sale-woocommerce/) for the idea)
  

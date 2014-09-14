@@ -2,12 +2,11 @@
 /**
  * Plugin Name: WooCommerce Extra Product Sorting Options
  * Plugin URI: http://www.skyverge.com/product/woocommerce-extra-product-sorting-options/
- * Description: Rename default sorting and optionally add alphabetical, on sale, and random sorting.
+ * Description: Rename default sorting and optionally extra product sorting options.
  * Author: SkyVerge
  * Author URI: http://www.skyverge.com/
- * Version: 1.2.0
+ * Version: 2.0.0
  * Text Domain: woocommerce-extra-product-sorting-options
- * Domain Path: /i18n/languages/
  *
  * Copyright: (c) 2012-2014 SkyVerge, Inc. (info@skyverge.com)
  *
@@ -27,8 +26,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 /**
  * Plugin Description
  *
- * Rename default sorting option - helpful if custom sorting used.
- * Add alphabetical sorting options and random sorting options to shop pages.
+ * Rename default sorting option - helpful if custom sorting is used.
+ * Adds sorting by name, on sale, featured, availability, and random to shop pages.
  *
  */
 
@@ -37,6 +36,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  *
  * @since 1.0.0
  */
+ 
 function skyverge_wc_extra_sorting_options_add_settings( $settings ) {
 
 	$updated_settings = array();
@@ -56,37 +56,26 @@ function skyverge_wc_extra_sorting_options_add_settings( $settings ) {
 					'desc_tip' => __( 'If desired, enter a new name for the default sorting option, e.g., &quot;Our Sorting&quot;', 'woocommerce' ),
 				),
 				array(
-					'title'         => __( 'Add Product Sorting Options', 'woocommerce' ),
-					'desc'          => __( 'Alphabetical product sorting', 'woocommerce' ),
-					'id'            => 'wc_alphabetical_product_sorting',
-					'default'       => 'no',
-					'type'          => 'checkbox',
-					'checkboxgroup' => 'start'
-				),
-				array(
-					'desc'          => __( 'Reverse alphabetical sorting', 'woocommerce' ),
-					'id'            => 'wc_reverse_alphabetical_product_sorting',
-					'default'       => 'no',
-					'type'          => 'checkbox',
-					'checkboxgroup' => ''
-				),
-				array(
-					'desc'          => __( 'On-sale sorting', 'woocommerce' ),
-					'id'            => 'wc_on_sale_product_sorting',
-					'default'       => 'no',
-					'type'          => 'checkbox',
-					'checkboxgroup' => ''
-				),
-				array(
-					'desc'          => __( 'Random product sorting', 'woocommerce' ),
-					'id'            => 'wc_random_product_sorting',
-					'default'       => 'no',
-					'type'          => 'checkbox',
-					'checkboxgroup' => 'end'
+					'name'     => __( 'Add Product Sorting:', 'woocommerce' ),
+					'desc_tip' => __( 'Select sorting options to add to your shop. "Available Stock" sorts products with the most stock first.', 'woocommerce' ),
+				'desc'     	   => '<br/>' . __( 'Tip: These options will be added to the sorting menu in the order that you select them.', 'woocommerce' ),
+					'id'       => 'wc_extra_product_sorting_options',
+					'type'     => 'multiselect',
+					'class'    => 'chosen_select',
+					'options'  => array(
+						'alphabetical'   => __( 'Name: A to Z', 'woocommerce' ),
+						'reverse_alpha'  => __( 'Name: Z to A', 'woocommerce' ),
+						'on_sale_first'  => __( 'On-sale First', 'woocommerce' ),
+						'featured_first' => __( 'Featured First', 'woocommerce' ),
+						'by_stock'   	 => __( 'Available Stock', 'woocommerce' ),
+						'randomize'      => __( 'Random', 'woocommerce' ),
+					),
+					'default'  => '',
 				),
 			);
 
 			$updated_settings = array_merge( $updated_settings, $new_settings );
+			
 		}
 	}
 	return $updated_settings;
@@ -98,12 +87,12 @@ add_filter( 'woocommerce_product_settings', 'skyverge_wc_extra_sorting_options_a
  * Change "Default Sorting" to custom name on shop page and in WC Product Settings
  *
  * @since 1.0.0
-*/
+ */
 
 function skyverge_change_default_sorting_name( $catalog_orderby ) {
-	$new_default_name = get_option('wc_rename_default_sorting');
+	$new_default_name = get_option( 'wc_rename_default_sorting' );
 
-	if($new_default_name == '') {
+	if( $new_default_name == '' ) {
 		return $catalog_orderby;
 	} else {
 		$catalog_orderby = str_replace("Default sorting", $new_default_name, $catalog_orderby);
@@ -115,160 +104,96 @@ add_filter( 'woocommerce_default_catalog_orderby_options', 'skyverge_change_defa
 
 
 /**
- * Add Alphabetical sorting option to WC Default Product Sorting / shop pages if enabled
+ * Add sorting option to WC sorting arguments
  *
- * @since 1.0.0
+ * @since 2.0.0
 */
-function skyverge_alphabetical_woocommerce_shop_ordering( $sort_args ) {
 
-	$alphabetical_enabled = get_option('wc_alphabetical_product_sorting');
+function skyverge_add_new_shop_ordering_args( $sort_args ) {
+		
+	$orderby_value = isset( $_GET['orderby'] ) ? woocommerce_clean( $_GET['orderby'] ) : apply_filters( 'woocommerce_default_catalog_orderby', get_option( 'woocommerce_default_catalog_orderby' ) );
 
-	if($alphabetical_enabled == 'yes') {
-		$orderby_value = isset( $_GET['orderby'] ) ? woocommerce_clean( $_GET['orderby'] ) : apply_filters( 'woocommerce_default_catalog_orderby', get_option( 'woocommerce_default_catalog_orderby' ) );
-
-		if ( 'alphabetical' == $orderby_value ) {
+	switch( $orderby_value ) {
+	
+		case 'alphabetical':
 			$sort_args['orderby'] = 'title';
 			$sort_args['order'] = 'asc';
+			break;
+		
+		case 'reverse_alpha':
+			$sort_args['orderby']  = 'title';
+			$sort_args['order']    = 'desc';
 			$sort_args['meta_key'] = '';
-		}
-
-		return $sort_args;
-	} else {
-		return $sort_args;
-	}
-}
-add_filter( 'woocommerce_get_catalog_ordering_args', 'skyverge_alphabetical_woocommerce_shop_ordering' );
-
-
-function skyverge_alphabetical_woocommerce_catalog_orderby( $sortby ) {
-	$alphabetical_enabled = get_option('wc_alphabetical_product_sorting');
-
-	if($alphabetical_enabled == 'yes') {
-		$sortby['alphabetical'] = __( 'Sort by name: A to Z', 'woocommerce' );
-		return $sortby;
-	} else {
-		return $sortby;
-	}
-}
-add_filter( 'woocommerce_default_catalog_orderby_options', 'skyverge_alphabetical_woocommerce_catalog_orderby' );
-add_filter( 'woocommerce_catalog_orderby', 'skyverge_alphabetical_woocommerce_catalog_orderby' );
-
-
-/**
- * Add reverse alphabetical sorting option to WC Default Product Sorting / shop pages if enabled
- *
- *@since 1.1.0
- */
-function skyverge_reverse_alphabetical_woocommerce_shop_ordering( $sort_args ) {
-
-	$reverse_alpha_enabled = get_option('wc_reverse_alphabetical_product_sorting');
-
-	if($reverse_alpha_enabled == 'yes') {
-		$orderby_value = isset( $_GET['orderby'] ) ? woocommerce_clean( $_GET['orderby'] ) : apply_filters( 'woocommerce_default_catalog_orderby', get_option( 'woocommerce_default_catalog_orderby' ) );
-
-		if ( 'reverse_alphabetical' == $orderby_value ) {
-			$sort_args['orderby'] = 'title';
+			break;
+				
+		case 'by_stock':
+			$sort_args['orderby'] = 'meta_value_num';
 			$sort_args['order'] = 'desc';
-			$sort_args['meta_key'] = '';
-		}
-
-		return $sort_args;
-	} else {
-		return $sort_args;
-	}
-}
-add_filter( 'woocommerce_get_catalog_ordering_args', 'skyverge_reverse_alphabetical_woocommerce_shop_ordering' );
-
-
-function skyverge_reverse_alpha_woocommerce_catalog_orderby( $sortby ) {
-	$reverse_alpha_enabled = get_option('wc_reverse_alphabetical_product_sorting');
-
-	if($reverse_alpha_enabled == 'yes') {
-		$sortby['reverse_alphabetical'] = __( 'Sort by name: Z to A', 'woocommerce' );
-		return $sortby;
-	} else {
-		return $sortby;
-	}
-}
-add_filter( 'woocommerce_default_catalog_orderby_options', 'skyverge_reverse_alpha_woocommerce_catalog_orderby' );
-add_filter( 'woocommerce_catalog_orderby', 'skyverge_reverse_alpha_woocommerce_catalog_orderby' );
-
-/**
- * Add "On Sale" sorting to WC Default Product Sorting / shop pages if enabled
- *
- * @since 1.2.0
- */
-function skyverge_on_sale_shop_ordering( $sort_args ) {
-
-	$on_sale_enabled = get_option('wc_on_sale_product_sorting');
-
-	if( $on_sale_enabled == 'yes') {
-		$orderby_value = isset( $_GET['orderby'] ) ? woocommerce_clean( $_GET['orderby'] ) : apply_filters( 'woocommerce_default_catalog_orderby', get_option( 'woocommerce_default_catalog_orderby' ) );
-		if ( 'on_sale' == $orderby_value ) {
-
+			$sort_args['meta_key'] = '_stock';
+			break;
+				
+		case 'featured_first':
+			$sort_args['orderby'] = 'meta_value';
+			$sort_args['order'] = 'desc';
+			$sort_args['meta_key'] = '_featured';
+			break;
+				
+		case 'on_sale_first':
 			$sort_args['orderby'] = 'meta_value_num';
 			$sort_args['order'] = 'desc';
 			$sort_args['meta_key'] = '_sale_price';
-
-		}
-		return $sort_args;
-	} else {
-		return $sort_args;
-	}
-
-}
-add_filter( 'woocommerce_get_catalog_ordering_args', 'skyverge_on_sale_shop_ordering' );
-
-function skyverge_on_sale_catalog_orderby( $sortby ) {
-
-	$on_sale_enabled = get_option('wc_on_sale_product_sorting');
-
-	if($on_sale_enabled == 'yes') {
-		$sortby['on_sale'] = __( 'Show sale items first', 'woocommerce' );
-		return $sortby;
-	} else {
-		return $sortby;
-	}
-
-}
-add_filter( 'woocommerce_default_catalog_orderby_options', 'skyverge_on_sale_catalog_orderby' );
-add_filter( 'woocommerce_catalog_orderby', 'skyverge_on_sale_catalog_orderby' );
-
-
-/**
- * Add random sorting option to WC Default Product Sorting / shop pages if enabled
- *
- * @since 1.0.0
- */
-function skyverge_random_woocommerce_shop_ordering( $sort_args ) {
-	$random_enabled = get_option('wc_random_product_sorting');
-
-	if($random_enabled == 'yes') {
-		$orderby_value = isset( $_GET['orderby'] ) ? woocommerce_clean( $_GET['orderby'] ) : apply_filters( 'woocommerce_default_catalog_orderby', get_option( 'woocommerce_default_catalog_orderby' ) );
-
-		if ( 'random_list' == $orderby_value ) {
+			break;
+				
+		case 'randomize':
 			$sort_args['orderby'] = 'rand';
 			$sort_args['order'] = '';
 			$sort_args['meta_key'] = '';
+			break;
+		
+	}
+	
+	return $sort_args;
+}
+add_filter( 'woocommerce_get_catalog_ordering_args', 'skyverge_add_new_shop_ordering_args' );
+
+
+function skyverge_add_new_catalog_orderby( $sortby ) {
+
+	$new_sorting_options = get_option('wc_extra_product_sorting_options', array() );
+	
+	foreach( $new_sorting_options as $option ) {
+	
+		switch( $option ) {
+		
+			case 'alphabetical':
+				$sortby['alphabetical'] = __( 'Sort by name: A to Z', 'woocommerce' );
+				break;
+				
+			case 'reverse_alpha':
+				$sortby['reverse_alpha'] = __( 'Sort by name: Z to A', 'woocommerce' );
+				break;
+				
+			case 'by_stock':
+				$sortby['by_stock'] = __( 'Sort by availability', 'woocommerce' );
+				break;
+			
+			case 'featured_first':
+				$sortby['featured_first'] = __( 'Show featured items first', 'woocommerce' );
+				break;
+				
+			case 'on_sale_first':
+				$sortby['on_sale_first'] = __( 'Show sale items first', 'woocommerce' );
+				break;
+				
+			case 'randomize':
+				$sortby['random_list'] = __( 'Sort by: random order', 'woocommerce' );
+				break;
+				 
 		}
-
-		return $sort_args;
-	} else {
-		return $sort_args;
+		
 	}
+	
+	return $sortby;
 }
-add_filter( 'woocommerce_get_catalog_ordering_args', 'skyverge_random_woocommerce_shop_ordering' );
-
-function skyverge_random_woocommerce_catalog_orderby( $sortby ) {
-	$random_enabled = get_option('wc_random_product_sorting');
-
-	if($random_enabled == 'yes') {
-		$sortby['random_list'] = __( 'Sort by: random order', 'woocommerce' );
-
-		return $sortby;
-	} else {
-		return $sortby;
-	}
-}
-add_filter( 'woocommerce_default_catalog_orderby_options', 'skyverge_random_woocommerce_catalog_orderby' );
-add_filter( 'woocommerce_catalog_orderby', 'skyverge_random_woocommerce_catalog_orderby' );
+add_filter( 'woocommerce_default_catalog_orderby_options', 'skyverge_add_new_catalog_orderby' );
+add_filter( 'woocommerce_catalog_orderby', 'skyverge_add_new_catalog_orderby' );
