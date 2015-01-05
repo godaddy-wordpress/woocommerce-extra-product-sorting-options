@@ -3,7 +3,7 @@ Contributors: beka.rice, skyverge, tamarazuk
 Tags: woocommerce, sorting, product sorting, orderby
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=paypal@skyverge.com&item_name=Donation+for+WooCommerce+Extra+Product+Sorting
 Requires at least: 3.8
-Tested up to: 4.0
+Tested up to: 4.1
 Requires WooCommerce at least: 2.1
 Tested WooCommerce up to: 2.2
 Stable Tag: 2.0.0
@@ -25,7 +25,7 @@ Includes options to:
  - enable alphabetical product sorting
  - enable reverse alphabetical sorting
  - enable featured-first sorting
- - enable on sale sorting (thanks to [Bryce Adams](http://bryceadams.com/order-products-sale-woocommerce/) for the idea)
+ - enable on sale sorting (**note**: works only for simple products)
  - enable sorting by inventory / availability
  - enable randomized product sorting
 
@@ -35,9 +35,9 @@ You can customize your product sorting order on your shop pages - [here's a hand
 = Adding Sorting Options =
 When you create a customized sorting order, you lose the ability to sort products alphabetically. This plugin gives you the ability to add new sorting options to list products by title A to Z or in reverse order (Z to A).
 
-You can add the option to sort items by sale status - there's a sorting option to show "On Sale" items first in the shop catalog. You can also show featured items first in your catalog.
+Want to show items with the highest stock first? You can enable sorting by availability, which will enable sorting from high stock to low stock (See FAQ for more details). You can also show featured items first in your catalog.
 
-Want to show items with the highest stock first? You can enable sorting by availability, which will enable sorting from high stock to low stock (See FAQ for more details).
+You can add the option to sort items by sale status - there's a sorting option to show "On Sale" items first in the shop catalog. Please note that only simple products can be sorted by sale status, and variable products will display mixed with non-sale products.
 
 Finally, you can add a "randomized" sorting option just for fun - any time this sorting is selected, the product order will be randomized when the shop page is viewed.
 
@@ -68,12 +68,17 @@ When you check to enable these options, save your Product settings. You'll now b
 = Can I change the sorting label in the shop dropdown? =
 Yep! You can use the [Say What plugin](https://wordpress.org/plugins/say-what/) to change the text - for example, you could change the label that says "Sort by name: A to Z" to "Sort alphabetically". See the screenshots for an example. 
 
-The text domain to use is `woocommerce`.
+The text domain to use is `wc-extra-sorting-options`.
 
 = Why doesn't sorting by availability work? =
-Don't worry, it does :). It's possible to sort by stock, but this will work for parent products OR on a per-variation base for variable products. While total stock may be 100 for a product, it may be sorted lower because the value used is the highest variation stock (which may be, for example, 85).
+Don't worry, it does :). It's possible to sort by stock, but this will work for parent products rather than using the stock available at the variation level. You can set this under Product Data &gt; Inventory by enabling "Manage stock". Set the available stock for _all_ variations, and this will be used to sort the item. You can still manage stock at the variation level.
 
 If you don't manage your stock, you should **disable** this option - it will simply work as an alphabetical sort if all products are just "In Stock" without inventory managed.
+
+= Why can't on-sale sorting work for variable products? =
+Simple products and variable products use two different "keys" to indicate if they're on stock. As a result, we can't order products using two different keys, so we've used the key that indicates a simple product's sale price in this plugin.
+
+We don't anticipate changing this in the foreseeable future, as we've spent a couple hours trying to get the custom search query to work, but WooCommerce core adds search parameters that conflict with it, and we haven't found a suitable work-around.
 
 = This is handy! Can I contribute? =
 Yes you can! Join in on our [GitHub repository](https://github.com/bekarice/woocommerce-extra-product-sorting-options/) and submit a pull request :)
@@ -84,11 +89,12 @@ Yes you can! Join in on our [GitHub repository](https://github.com/bekarice/wooc
 3. Change sorting label (in shop dropdown) with the [Say What plugin](https://wordpress.org/plugins/say-what/)
 
 == Changelog ==
-= 2014.09.15 - version 2.0.0 =
- * Misc: Refactored to simplify code
+= 2015.01.05 - version 2.0.0 =
+ * Misc: Refactored to simplify code and add upgrade routine
  * Feature: Added "Featured" sorting
  * Feature: Added "Availability" sorting
  * Tweak: Changed settings to multi-select instead of checkbox group
+ * Tweak: Text domain is now `wc-extra-sorting-options` instead of `woocommerce-extra-product-sorting-options`
 
 = 2014.07.30 - version 1.2.0 =
  * Feature: Added "On Sale" sorting (thanks [Bryce Adams](http://bryceadams.com/order-products-sale-woocommerce/) for the idea)
