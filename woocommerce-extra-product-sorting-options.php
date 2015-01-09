@@ -5,7 +5,7 @@
  * Description: Rename default sorting and optionally extra product sorting options.
  * Author: SkyVerge
  * Author URI: http://www.skyverge.com/
- * Version: 2.0.0
+ * Version: 2.0.1
  * Text Domain: wc-extra-sorting-options
  *
  * Copyright: (c) 2012-2014 SkyVerge, Inc. (info@skyverge.com)
@@ -33,7 +33,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 class WC_Extra_Sorting_Options {
 	
 	
-	const VERSION = '2.0.0';
+	const VERSION = '2.0.1';
 	
 	
 	public function __construct() {
@@ -151,7 +151,7 @@ class WC_Extra_Sorting_Options {
 					break;
 				
 				case 'randomize':
-					$sortby['random_list'] = __( 'Sort by: random order', 'wc-extra-sorting-options' );
+					$sortby['randomize'] = __( 'Sort by: random order', 'wc-extra-sorting-options' );
 					break;
 				 
 			}

@@ -5,8 +5,8 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=paypal@s
 Requires at least: 3.8
 Tested up to: 4.1
 Requires WooCommerce at least: 2.1
-Tested WooCommerce up to: 2.2
-Stable Tag: 2.0.0
+Tested WooCommerce up to: 2.3
+Stable Tag: 2.0.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -89,6 +89,10 @@ Yes you can! Join in on our [GitHub repository](https://github.com/bekarice/wooc
 3. Change sorting label (in shop dropdown) with the [Say What plugin](https://wordpress.org/plugins/say-what/)
 
 == Changelog ==
+
+= 2015.01.09 - version 2.0.1 =
+ * Fix: Squished a bug affecting random sorting
+
 = 2015.01.05 - version 2.0.0 =
  * Misc: Refactored to simplify code and add upgrade routine
  * Feature: Added "Featured" sorting
