@@ -281,7 +281,7 @@ class WC_Extra_Sorting_Options {
 
 /**
  * The WC_Extra_Sorting_Options global object
- * @name $wc_customizer
- * @global WC_Customizer $GLOBALS['wc_customizer']
+ * @name $wc_extra_sorting_options
+ * @global WC_Extra_Sorting_Options $GLOBALS['wc_extra_sorting_options']
  */
 $GLOBALS['wc_extra_sorting_options'] = new WC_Extra_Sorting_Options();
