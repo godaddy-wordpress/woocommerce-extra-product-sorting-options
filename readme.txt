@@ -42,7 +42,7 @@ You can add the option to sort items by sale status - there's a sorting option t
 Finally, you can add a "randomized" sorting option just for fun - any time this sorting is selected, the product order will be randomized when the shop page is viewed.
 
 = Looking to remove sorting options? =
-We have a compatible plugin that will let you remove core WooCommerce sorting options, such as the default sorting method. You can check out the [WooCommerce Remove Product Sorting](wordpress.org/plugins/woocommerce-remove-product-sorting/) plugin page for more details.
+We have a compatible plugin that will let you remove core WooCommerce sorting options, such as the default sorting method. You can check out the [WooCommerce Remove Product Sorting](http://www.skyverge.com/product/woocommerce-remove-product-sorting/) plugin page for more details.
 
 = More Details =
  - See the [product page](http://www.skyverge.com/product/woocommerce-extra-product-sorting-options/) for full details.
@@ -60,7 +60,7 @@ We have a compatible plugin that will let you remove core WooCommerce sorting op
 
 == Frequently Asked Questions ==
 = Do I need to rename the default sorting? =
-Nope. You can use this plugin to simply add alphabetical, reverse alphabetical, and randomized sorting to your shop pages. Any of the settings are entirely optional.
+Nope. You can use this plugin to simply add new sorting options to your shop pages. Any of the settings are entirely optional.
 
 = How do I set my new sorting option as the default? =
 When you check to enable these options, save your Product settings. You'll now be able to select your new options as a default under the "Default Product Sorting" list.
