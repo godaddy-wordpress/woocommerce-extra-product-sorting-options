@@ -2,7 +2,7 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: WooCommerce Extra Product Sorting Options 2.0.1\n"
+"Project-Id-Version: WooCommerce Extra Product Sorting Options 2.1.0\n"
 "Report-Msgid-Bugs-To: "
 "https://github.com/skyverge/woocommerce-extra-product-sorting-options/"
 "issues\n"

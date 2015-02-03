@@ -5,10 +5,10 @@
  * Description: Rename default sorting and optionally extra product sorting options.
  * Author: SkyVerge
  * Author URI: http://www.skyverge.com/
- * Version: 2.0.1
+ * Version: 2.1.0
  * Text Domain: wc-extra-sorting-options
  *
- * Copyright: (c) 2012-2014 SkyVerge, Inc. (info@skyverge.com)
+ * Copyright: (c) 2012-2015 SkyVerge, Inc. (info@skyverge.com)
  *
  * License: GNU General Public License v3.0
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -16,7 +16,7 @@
  * @package   WC-Extra-Product-Sorting-Options
  * @author    SkyVerge
  * @category  Admin
- * @copyright Copyright (c) 2012-2014, SkyVerge, Inc.
+ * @copyright Copyright (c) 2012-2015, SkyVerge, Inc.
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
  *
  */
@@ -33,7 +33,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 class WC_Extra_Sorting_Options {
 	
 	
-	const VERSION = '2.0.1';
+	const VERSION = '2.1.0';
 	
 	
 	public function __construct() {
