@@ -6,7 +6,7 @@ Requires at least: 3.8
 Tested up to: 4.1
 Requires WooCommerce at least: 2.1
 Tested WooCommerce up to: 2.3
-Stable Tag: 2.1.0
+Stable Tag: 2.1.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -89,6 +89,9 @@ Yes you can! Join in on our [GitHub repository](https://github.com/bekarice/wooc
 3. Change sorting label (in shop dropdown) with the [Say What plugin](https://wordpress.org/plugins/say-what/)
 
 == Changelog ==
+
+= 2015.02.06 - version 2.1.1 =
+ * Fix: bug with loading translations
 
 = 2015.02.03 - version 2.1.0 =
  * Misc: WooCommerce 2.3 compatibility

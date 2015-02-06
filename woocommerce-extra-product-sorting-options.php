@@ -5,7 +5,7 @@
  * Description: Rename default sorting and optionally extra product sorting options.
  * Author: SkyVerge
  * Author URI: http://www.skyverge.com/
- * Version: 2.1.0
+ * Version: 2.1.1
  * Text Domain: wc-extra-sorting-options
  *
  * Copyright: (c) 2012-2015 SkyVerge, Inc. (info@skyverge.com)
@@ -30,6 +30,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  * Adds sorting by name, on sale, featured, availability, and random to shop pages.
  *
  */
+
+
 class WC_Extra_Sorting_Options {
 	
 	
@@ -47,6 +49,8 @@ class WC_Extra_Sorting_Options {
 		// add new product sorting arguments
 		add_filter( 'woocommerce_get_catalog_ordering_args', array( $this, 'add_new_shop_ordering_args' ) );
 		
+		// load translations
+		add_action( 'init', array( $this, 'load_translation' ) );
 		
 		if ( is_admin() && ! defined( 'DOING_AJAX' ) ) {
 		
@@ -56,6 +60,17 @@ class WC_Extra_Sorting_Options {
 			// run every time
 			$this->install();
 		}
+	}
+	
+	
+	/**
+	 * Load Translations
+	 *
+	 * @since 2.1.1
+	 */
+	public function load_translation() {
+		// localization
+		load_plugin_textdomain( 'wc-extra-sorting-options', false, dirname( plugin_basename( __FILE__ ) ) . '/i18n/languages' );
 	}
 	
 	
