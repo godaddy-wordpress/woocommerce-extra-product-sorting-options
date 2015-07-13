@@ -166,7 +166,7 @@ class WC_Extra_Sorting_Options {
 					break;
 				
 				case 'randomize':
-					$sortby['randomize'] = __( 'Sort by: random order', 'wc-extra-sorting-options' );
+					$sortby['rand'] = __( 'Sort by: random order', 'wc-extra-sorting-options' );
 					break;
 				 
 			}
@@ -216,12 +216,6 @@ class WC_Extra_Sorting_Options {
 				$sort_args['orderby'] = 'meta_value';
 				$sort_args['order'] = 'desc';
 				$sort_args['meta_key'] = '_featured';
-				break;
-				
-			case 'randomize':
-				$sort_args['orderby'] = 'rand';
-				$sort_args['order'] = '';
-				$sort_args['meta_key'] = '';
 				break;
 		
 		}
