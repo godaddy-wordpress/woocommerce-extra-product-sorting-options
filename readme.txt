@@ -41,6 +41,8 @@ You can add the option to sort items by sale status - there's a sorting option t
 
 Finally, you can add a "randomized" sorting option just for fun - any time this sorting is selected, the product order will be randomized when the shop page is viewed.
 
+**Note:** Sorting by stock, sale status, and featured status have a fallback to the product title. This means that featured status, stock, and sale status will be used to sort products first, and then they'll be sorted by title second. The [FAQ](https://wordpress.org/plugins/woocommerce-extra-product-sorting-options/faq/) has details on using a different fallback, such as menu order. 
+
 = Looking to remove sorting options? =
 We have a compatible plugin that will let you remove core WooCommerce sorting options, such as the default sorting method. You can check out the [WooCommerce Remove Product Sorting](http://www.skyverge.com/product/woocommerce-remove-product-sorting/) plugin page for more details.
 
@@ -80,6 +82,17 @@ Simple products and variable products use two different "keys" to indicate if th
 
 We don't anticipate changing this in the foreseeable future, as we've spent a couple hours trying to get the custom search query to work, but WooCommerce core adds search parameters that conflict with it, and we haven't found a suitable work-around.
 
+= How do I change the fallback to use something other than the title as the second sorting parameter? =
+
+The fallback used is the product title (in ascending, or alphabetical, order). You can change this with the `wc_extra_sorting_options_fallback` filter. For example, you could use menu order as the fallback instead:
+
+`
+add_filter( 'wc_extra_sorting_options_fallback', 'sv_change_sorting_fallback' );
+function sv_change_sorting_fallback( $fallback ) {
+	return 'menu_order';
+}
+`
+
 = When I view other pages of my shop while using random sorting, some products are repeated. Why does this happen? =
 
 WordPress will get a new random set of products for each page in your shop, so random sorting works best when you have a small number of products and they're all displayed on one page.
@@ -95,6 +108,11 @@ Yes you can! Join in on our [GitHub repository](https://github.com/bekarice/wooc
 3. Change sorting label (in shop dropdown) with the [Say What plugin](https://wordpress.org/plugins/say-what/)
 
 == Changelog ==
+
+= 2015.07.13 - version 2.2.0 =
+ * Feature: added title fallback to use as secondary sorting parameter
+ * Misc: introduced `wc_extra_sorting_options_fallback` filter
+ * Misc: dropped WooCommerce 2.1 support since 2.2 added orderby = rand support
 
 = 2015.02.06 - version 2.1.1 =
  * Fix: bug with loading translations
