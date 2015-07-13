@@ -100,7 +100,7 @@ class WC_Extra_Sorting_Options {
 					array(
 						'name'     => __( 'Add Product Sorting:', 'wc-extra-sorting-options' ),
 						'desc_tip' => __( 'Select sorting options to add to your shop. "Available Stock" sorts products with the most stock first.', 'wc-extra-sorting-options' ),
-						'desc'     => '<br/>' . __( '&quot;On-sale First&quot; shows simple products on sale first; <a href="https://wordpress.org/plugins/woocommerce-extra-product-sorting-options/faq/" target="_blank">see documentation</a> for more details.', 'wc-extra-sorting-options' ),
+						'desc'     => '<br/>' . sprintf( __( '"On-sale First" shows <strong>simple</strong> products on sale first; <a href="%s" target="_blank">see documentation</a> for more details.', 'wc-extra-sorting-options' ), 'https://wordpress.org/plugins/woocommerce-extra-product-sorting-options/faq/' ),
 						'id'       => 'wc_extra_product_sorting_options',
 						'type'     => 'multiselect',
 						'class'    => 'chosen_select',
