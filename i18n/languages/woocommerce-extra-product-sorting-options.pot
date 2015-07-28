@@ -2,7 +2,7 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: WooCommerce Extra Product Sorting Options 2.2.0\n"
+"Project-Id-Version: WooCommerce Extra Product Sorting Options 2.2.1\n"
 "Report-Msgid-Bugs-To: "
 "https://github.com/skyverge/woocommerce-extra-product-sorting-options/"
 "issues\n"
@@ -39,10 +39,10 @@ msgid ""
 msgstr ""
 
 #: build/woocommerce-extra-product-sorting-options.php:103
+#: woocommerce-extra-product-sorting-options.php:103
 msgid ""
-"&quot;On-sale First&quot; shows simple products on sale first; <a "
-"href=\"https://wordpress.org/plugins/woocommerce-extra-product-sorting-"
-"options/faq/\" target=\"_blank\">see documentation</a> for more details."
+"\"On-sale First\" shows <strong>simple</strong> products on sale first; <a "
+"href=\"%s\" target=\"_blank\">see documentation</a> for more details."
 msgstr ""
 
 #: build/woocommerce-extra-product-sorting-options.php:108
@@ -103,12 +103,6 @@ msgstr ""
 #: build/woocommerce-extra-product-sorting-options.php:169
 #: woocommerce-extra-product-sorting-options.php:169
 msgid "Sort by: random order"
-msgstr ""
-
-#: woocommerce-extra-product-sorting-options.php:103
-msgid ""
-"\"On-sale First\" shows <strong>simple</strong> products on sale first; <a "
-"href=\"%s\" target=\"_blank\">see documentation</a> for more details."
 msgstr ""
 
 #. Plugin Name of the plugin/theme
