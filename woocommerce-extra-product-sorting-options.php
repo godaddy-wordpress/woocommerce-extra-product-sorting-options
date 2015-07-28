@@ -5,7 +5,7 @@
  * Description: Rename default sorting and optionally extra product sorting options.
  * Author: SkyVerge
  * Author URI: http://www.skyverge.com/
- * Version: 2.2.0
+ * Version: 2.2.1
  * Text Domain: wc-extra-sorting-options
  *
  * Copyright: (c) 2014-2015 SkyVerge, Inc. (info@skyverge.com)
@@ -35,7 +35,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 class WC_Extra_Sorting_Options {
 	
 	
-	const VERSION = '2.2.0';
+	const VERSION = '2.2.1';
 	
 	
 	public function __construct() {
