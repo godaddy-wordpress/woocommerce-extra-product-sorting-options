@@ -61,6 +61,9 @@ class WC_Extra_Sorting_Options {
 			// add settings
 			add_filter( 'woocommerce_product_settings', array( $this, 'add_settings' ) );
 			
+			// add plugin links
+			add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'add_plugin_links' ) );
+			
 			// run every time
 			$this->install();
 		}
@@ -93,6 +96,24 @@ class WC_Extra_Sorting_Options {
        		self::$instance = new self();
    		}
     	return self::$instance;
+	}
+	
+	
+	/**
+	 * Adds plugin page links
+	 * 
+	 * @since 2.2.2
+	 * @param array $links all plugin links
+	 * @return array $links all plugin links + our custom links (i.e., "Settings")
+	 */
+	public function add_plugin_links( $links ) {
+	
+		$plugin_links = array(
+			'<a href="' . admin_url( 'admin.php?page=wc-settings&tab=products&section=display' ) . '">' . __( 'Configure', 'wc-extra-sorting-options' ) . '</a>',
+			'<a href="https://wordpress.org/support/plugin/woocommerce-extra-product-sorting-options" target="_blank">' . __( 'Support', 'wc-extra-sorting-options' ) . '</a>',
+		);
+		
+		return array_merge( $plugin_links, $links );
 	}
 	
 	
