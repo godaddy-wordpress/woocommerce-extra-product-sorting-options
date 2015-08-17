@@ -6,7 +6,7 @@ Requires at least: 4.0
 Tested up to: 4.3
 Requires WooCommerce at least: 2.2
 Tested WooCommerce up to: 2.4
-Stable Tag: 2.2.1
+Stable Tag: 2.2.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -87,10 +87,33 @@ We don't anticipate changing this in the foreseeable future, as we've spent a co
 The fallback used is the product title (in ascending, or alphabetical, order). You can change this with the `wc_extra_sorting_options_fallback` filter. For example, you could use menu order as the fallback instead:
 
 `
-add_filter( 'wc_extra_sorting_options_fallback', 'sv_change_sorting_fallback' );
 function sv_change_sorting_fallback( $fallback ) {
 	return 'menu_order';
 }
+add_filter( 'wc_extra_sorting_options_fallback', 'sv_change_sorting_fallback' );
+`
+
+To be more advanced, you can change the fallback and its order (with the `wc_extra_sorting_options_fallback_order` filter), and can do so conditionally by orderby value, as this is passed into both filters.
+
+`
+// Change fallback for 'featured first' sorting to date
+function sv_change_sorting_fallback( $fallback, $orderby ) {
+	if ( 'featured_first' === $orderby ) {
+		$fallback = 'date';
+	}
+	return $fallback;
+}
+add_filter( 'wc_extra_sorting_options_fallback', 'sv_change_sorting_fallback', 10, 2 );
+
+
+// Change fallback order for 'featured first' sorting to DESC
+function sv_change_sorting_fallback_order( $fallback_order, $orderby ) {
+	if ( 'featured_first' === $orderby ) {
+		$fallback_order = 'DESC';
+	}
+	return $fallback_order;
+}
+add_filter( 'wc_extra_sorting_options_fallback_order', 'sv_change_sorting_fallback_order', 10, 2 );
 `
 
 = When I view other pages of my shop while using random sorting, some products are repeated. Why does this happen? =
@@ -108,6 +131,10 @@ Yes you can! Join in on our [GitHub repository](https://github.com/bekarice/wooc
 3. Change sorting label (in shop dropdown) with the [Say What plugin](https://wordpress.org/plugins/say-what/)
 
 == Changelog ==
+
+= 2015.08.17 - version 2.2.2 =
+ * Misc: introduced `wc_extra_sorting_options_fallback_order` filter
+ * Misc: pass in `$orderby_value` to `wc_extra_sorting_options_fallback` and `wc_extra_sorting_options_fallback_order` filters to let you change them for particular orderby
 
 = 2015.07.27 - version 2.2.1 =
  * Misc: WooCommerce 2.4 compatibility
