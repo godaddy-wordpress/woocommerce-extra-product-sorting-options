@@ -5,7 +5,7 @@
  * Description: Rename default sorting and optionally extra product sorting options.
  * Author: SkyVerge
  * Author URI: http://www.skyverge.com/
- * Version: 2.2.1
+ * Version: 2.2.2
  * Text Domain: wc-extra-sorting-options
  *
  * Copyright: (c) 2014-2015 SkyVerge, Inc. (info@skyverge.com)
@@ -35,7 +35,11 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 class WC_Extra_Sorting_Options {
 	
 	
-	const VERSION = '2.2.1';
+	const VERSION = '2.2.2';
+	
+	
+	/** @var WC_Extra_Sorting_Options single instance of this plugin */
+	protected static $instance;
 	
 	
 	public function __construct() {
@@ -74,8 +78,26 @@ class WC_Extra_Sorting_Options {
 	}
 	
 	
+	/** Helper methods ******************************************************/
+	
+	
 	/**
-	 *Add Settings to WooCommerce Settings > Products page after "Default Product Sorting" setting
+	 * Main Extra Sorting Instance, ensures only one instance is/can be loaded
+	 *
+	 * @since 2.2.2
+	 * @see wc_extra_sorting_options()
+	 * @return WC_Extra_Sorting_Options
+	 */
+	public static function instance() {
+    	if ( is_null( self::$instance ) ) {
+       		self::$instance = new self();
+   		}
+    	return self::$instance;
+	}
+	
+	
+	/**
+	 * Add Settings to WooCommerce Settings > Products page after "Default Product Sorting" setting
 	 *
 	 * @since 1.0.0
 	 */
@@ -124,6 +146,8 @@ class WC_Extra_Sorting_Options {
 		return $updated_settings;
 	}
 	
+	
+	/** Plugin methods ******************************************************/
 	
 	
 	/**
@@ -288,8 +312,21 @@ class WC_Extra_Sorting_Options {
 
 
 /**
- * The WC_Extra_Sorting_Options global object
+ * Returns the One True Instance of WC Extra Sorting
+ *
+ * @since 2.2.2
+ * @return WC_Extra_Sorting_Options
+ */
+function wc_extra_sorting_options() {
+    return WC_Extra_Sorting_Options::instance();
+}
+
+
+/**
+ * The WC_Extra_Sorting_Options global object, exists only for backwards compat
+ *
+ * @deprecated 2.2.2
  * @name $wc_extra_sorting_options
  * @global WC_Extra_Sorting_Options $GLOBALS['wc_extra_sorting_options']
  */
-$GLOBALS['wc_extra_sorting_options'] = new WC_Extra_Sorting_Options();
+$GLOBALS['wc_extra_sorting_options'] = wc_extra_sorting_options();
