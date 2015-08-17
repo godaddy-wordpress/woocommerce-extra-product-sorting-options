@@ -231,7 +231,8 @@ class WC_Extra_Sorting_Options {
 		
 		$orderby_value = isset( $_GET['orderby'] ) ? wc_clean( $_GET['orderby'] ) : apply_filters( 'woocommerce_default_catalog_orderby', get_option( 'woocommerce_default_catalog_orderby' ) );
 
-		$fallback = apply_filters( 'wc_extra_sorting_options_fallback', 'title' );
+		$fallback = apply_filters( 'wc_extra_sorting_options_fallback', 'title', $orderby_value );
+		$fallback_order = apply_filters( 'wc_extra_sorting_options_fallback_order', 'ASC', $orderby_value );
 		
 		switch( $orderby_value ) {
 	
@@ -247,18 +248,18 @@ class WC_Extra_Sorting_Options {
 				break;
 				
 			case 'by_stock':
-				$sort_args['orderby'] = array( 'meta_value_num' => 'DESC', $fallback => 'ASC' );
+				$sort_args['orderby'] = array( 'meta_value_num' => 'DESC', $fallback => $fallback_order );
 				$sort_args['meta_key'] = '_stock';
 				break;
 				
 								
 			case 'on_sale_first':
-				$sort_args['orderby'] = array( 'meta_value_num' => 'DESC', $fallback => 'ASC' );
+				$sort_args['orderby'] = array( 'meta_value_num' => 'DESC', $fallback => $fallback_order );
 				$sort_args['meta_key'] = '_sale_price';
 				break;
 				
 			case 'featured_first':
-				$sort_args['orderby'] = array( 'meta_value' => 'DESC', $fallback => 'ASC' );
+				$sort_args['orderby'] = array( 'meta_value' => 'DESC', $fallback => $fallback_order );
 				$sort_args['meta_key'] = '_featured';
 				break;
 		
