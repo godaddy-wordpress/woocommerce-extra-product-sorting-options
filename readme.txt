@@ -6,7 +6,7 @@ Requires at least: 4.0
 Tested up to: 4.3
 Requires WooCommerce at least: 2.2
 Tested WooCommerce up to: 2.4
-Stable Tag: 2.2.2
+Stable Tag: 2.2.3
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -61,6 +61,7 @@ We have a compatible plugin that will let you remove core WooCommerce sorting op
 5. View [documentation on the product page](http://www.skyverge.com/product/woocommerce-extra-product-sorting-options/) for more help if needed.
 
 == Frequently Asked Questions ==
+
 = Do I need to rename the default sorting? =
 Nope. You can use this plugin to simply add new sorting options to your shop pages. Any of the settings are entirely optional.
 
@@ -131,6 +132,9 @@ Yes you can! Join in on our [GitHub repository](https://github.com/bekarice/wooc
 3. Change sorting label (in shop dropdown) with the [Say What plugin](https://wordpress.org/plugins/say-what/)
 
 == Changelog ==
+
+= 2015.09.07 - version 2.2.3 =
+ * Fix: properly use `orderby` attributes when passed in via shortcode
 
 = 2015.08.17 - version 2.2.2 =
  * Misc: introduced `wc_extra_sorting_options_fallback_order` filter

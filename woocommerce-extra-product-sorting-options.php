@@ -5,7 +5,7 @@
  * Description: Rename default sorting and optionally extra product sorting options.
  * Author: SkyVerge
  * Author URI: http://www.skyverge.com/
- * Version: 2.2.2
+ * Version: 2.2.3
  * Text Domain: wc-extra-sorting-options
  *
  * Copyright: (c) 2014-2015 SkyVerge, Inc. (info@skyverge.com)
@@ -35,7 +35,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 class WC_Extra_Sorting_Options {
 	
 	
-	const VERSION = '2.2.2';
+	const VERSION = '2.2.3';
 	
 	
 	/** @var WC_Extra_Sorting_Options single instance of this plugin */
@@ -229,7 +229,20 @@ class WC_Extra_Sorting_Options {
 	*/
 	public function add_new_shop_ordering_args( $sort_args ) {
 		
-		$orderby_value = isset( $_GET['orderby'] ) ? wc_clean( $_GET['orderby'] ) : apply_filters( 'woocommerce_default_catalog_orderby', get_option( 'woocommerce_default_catalog_orderby' ) );
+		// If we have the orderby via URL, let's pass it in
+		// This means we're on a shop / archive, so if we don't have it, use the default
+		if ( isset( $_GET['orderby'] ) ) {
+			$orderby_value = wc_clean( $_GET['orderby'] );
+		} else {
+			$orderby_value = apply_filters( 'woocommerce_default_catalog_orderby', get_option( 'woocommerce_default_catalog_orderby' ) );
+		}
+		
+		// Since a shortcode can be used on a non-WC page, we won't have $_GET['orderby']
+		// Grab it from the passed in sorting args instead for non-WC pages
+		// Don't use this on WC pages since it breaks the default
+		if ( ! is_woocommerce() && isset( $sort_args['orderby'] ) ) {
+			$orderby_value = $sort_args['orderby'];
+		}
 
 		$fallback = apply_filters( 'wc_extra_sorting_options_fallback', 'title', $orderby_value );
 		$fallback_order = apply_filters( 'wc_extra_sorting_options_fallback_order', 'ASC', $orderby_value );
