@@ -3,10 +3,10 @@ Contributors: beka.rice, skyverge, tamarazuk
 Tags: woocommerce, sorting, product sorting, orderby
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=paypal@skyverge.com&item_name=Donation+for+WooCommerce+Extra+Product+Sorting
 Requires at least: 4.0
-Tested up to: 4.3
+Tested up to: 4.4.1
 Requires WooCommerce at least: 2.2
-Tested WooCommerce up to: 2.4
-Stable Tag: 2.2.3
+Tested WooCommerce up to: 2.5
+Stable Tag: 2.3.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -16,7 +16,7 @@ Rename the default product sorting option and add up to 6 new sorting options in
 
 WooCommerce Extra Product Sorting Options provides options that extend the default WooCommerce orderby options on the shop page. You can optionally set a new name for the default sorting (helpful if you've used this to create a custom sorting order), and can enable up to **6 new sorting options**: alphabetical, reverse alphabetical, on sale, featured, availability, and random product sorting.
 
-> **Requires: WooCommerce 2.2+ and WordPress 4.0+**, Compatible with WooCommerce 2.3 and 2.4
+> **Requires: WooCommerce 2.2+ and WordPress 4.0+**
 
 = Features =
 Includes options to:
@@ -41,7 +41,7 @@ You can add the option to sort items by sale status - there's a sorting option t
 
 Finally, you can add a "randomized" sorting option just for fun - any time this sorting is selected, the product order will be randomized when the shop page is viewed.
 
-**Note:** Sorting by stock, sale status, and featured status have a fallback to the product title. This means that featured status, stock, and sale status will be used to sort products first, and then they'll be sorted by title second. The [FAQ](https://wordpress.org/plugins/woocommerce-extra-product-sorting-options/faq/) has details on using a different fallback, such as menu order. 
+**Note:** Sorting by stock, sale status, and featured status have a fallback to the product title. This means that featured status, stock, and sale status will be used to sort products first, and then they'll be sorted by title second. The [FAQ](https://wordpress.org/plugins/woocommerce-extra-product-sorting-options/faq/) has details on using a different fallback, such as menu order.
 
 = Looking to remove sorting options? =
 We have a compatible plugin that will let you remove core WooCommerce sorting options, such as the default sorting method. You can check out the [WooCommerce Remove Product Sorting](http://www.skyverge.com/product/woocommerce-remove-product-sorting/) plugin page for more details.
@@ -69,9 +69,9 @@ Nope. You can use this plugin to simply add new sorting options to your shop pag
 When you check to enable these options, save your Product settings. You'll now be able to select your new options as a default under the "Default Product Sorting" list.
 
 = Can I change the sorting label in the shop dropdown? =
-Yep! You can use the [Say What plugin](https://wordpress.org/plugins/say-what/) to change the text - for example, you could change the label that says "Sort by name: A to Z" to "Sort alphabetically". See the screenshots for an example. 
+Yep! You can use the [Say What plugin](https://wordpress.org/plugins/say-what/) to change the text - for example, you could change the label that says "Sort by name: A to Z" to "Sort alphabetically". See the screenshots for an example.
 
-The text domain to use is `wc-extra-sorting-options`.
+The text domain to use is `woocommerce-extra-product-sorting-options`.
 
 = Why doesn't sorting by availability work? =
 Don't worry, it does :). It's possible to sort by stock, but this will work for parent products rather than using the stock available at the variation level. You can set this under Product Data &gt; Inventory by enabling "Manage stock". Set the available stock for _all_ variations, and this will be used to sort the item. You can still manage stock at the variation level.
@@ -83,40 +83,6 @@ Simple products and variable products use two different "keys" to indicate if th
 
 We don't anticipate changing this in the foreseeable future, as we've spent a couple hours trying to get the custom search query to work, but WooCommerce core adds search parameters that conflict with it, and we haven't found a suitable work-around.
 
-= How do I change the fallback to use something other than the title as the second sorting parameter? =
-
-The fallback used is the product title (in ascending, or alphabetical, order). You can change this with the `wc_extra_sorting_options_fallback` filter. For example, you could use menu order as the fallback instead:
-
-`
-function sv_change_sorting_fallback( $fallback ) {
-	return 'menu_order';
-}
-add_filter( 'wc_extra_sorting_options_fallback', 'sv_change_sorting_fallback' );
-`
-
-To be more advanced, you can change the fallback and its order (with the `wc_extra_sorting_options_fallback_order` filter), and can do so conditionally by orderby value, as this is passed into both filters.
-
-`
-// Change fallback for 'featured first' sorting to date
-function sv_change_sorting_fallback( $fallback, $orderby ) {
-	if ( 'featured_first' === $orderby ) {
-		$fallback = 'date';
-	}
-	return $fallback;
-}
-add_filter( 'wc_extra_sorting_options_fallback', 'sv_change_sorting_fallback', 10, 2 );
-
-
-// Change fallback order for 'featured first' sorting to DESC
-function sv_change_sorting_fallback_order( $fallback_order, $orderby ) {
-	if ( 'featured_first' === $orderby ) {
-		$fallback_order = 'DESC';
-	}
-	return $fallback_order;
-}
-add_filter( 'wc_extra_sorting_options_fallback_order', 'sv_change_sorting_fallback_order', 10, 2 );
-`
-
 = When I view other pages of my shop while using random sorting, some products are repeated. Why does this happen? =
 
 WordPress will get a new random set of products for each page in your shop, so random sorting works best when you have a small number of products and they're all displayed on one page.
@@ -124,7 +90,7 @@ WordPress will get a new random set of products for each page in your shop, so r
 In order to "remember" which products have already been displayed, you'd need [some custom code](http://wordpress.stackexchange.com/questions/31647/is-it-possible-to-paginate-posts-correctly-that-are-random-ordered) to store these products in a session, which is not something we support.
 
 = This is handy! Can I contribute? =
-Yes you can! Join in on our [GitHub repository](https://github.com/bekarice/woocommerce-extra-product-sorting-options/) and submit a pull request :)
+Yes you can! Join in on our [GitHub repository](https://github.com/skyverge/woocommerce-extra-product-sorting-options/) and submit a pull request :)
 
 == Screenshots ==
 1. Plugin Settings under **WooCommerce &gt; Settings &gt; Products**
@@ -132,6 +98,10 @@ Yes you can! Join in on our [GitHub repository](https://github.com/bekarice/wooc
 3. Change sorting label (in shop dropdown) with the [Say What plugin](https://wordpress.org/plugins/say-what/)
 
 == Changelog ==
+
+= 2015.12.22 - version 2.3.0 =
+ * Misc: updated textdomain to `woocommerce-extra-product-sorting-options` - **please update translations**!
+ * Misc: WooCommerce 2.5 compatibility
 
 = 2015.09.07 - version 2.2.3 =
  * Fix: properly use `orderby` attributes when passed in via shortcode
@@ -166,7 +136,7 @@ Yes you can! Join in on our [GitHub repository](https://github.com/bekarice/wooc
 
 = 2014.07.30 - version 1.2.0 =
  * Feature: Added "On Sale" sorting (thanks [Bryce Adams](http://bryceadams.com/order-products-sale-woocommerce/) for the idea)
- 
+
 = 2014.07.29 - version 1.1.0 =
  * Feature: Added reverse alphabetical sorting option
 
