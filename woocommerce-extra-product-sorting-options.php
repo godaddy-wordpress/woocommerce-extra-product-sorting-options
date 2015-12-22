@@ -23,6 +23,34 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
+
+// Check if WooCommerce is active
+if ( ! in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) )
+	return;
+
+
+// WC version check
+if ( version_compare( get_option( 'woocommerce_db_version' ), '2.2.0', '<' ) ) {
+
+	function wc_extra_sorting_options_outdated_version_notice() {
+
+		$message = sprintf(
+		/* translators: %1$s and %2$s are <strong> tags. %3$s and %4$s are <a> tags */
+			esc_html__( '%1$sWooCommerce Extra Sorting Options is inactive.%2$s This plugin requires WooCommerce 2.2 or newer. Please %3$supdate WooCommerce to version 2.2 or newer%4$s', 'woocommerce-product-sku-generator' ),
+			'<strong>',
+			'</strong>',
+			'<a href="' . admin_url( 'plugins.php' ) . '">',
+			'&nbsp;&raquo;</a>'
+		);
+
+		echo sprintf( '<div class="error"><p>%s</p></div>', $message );
+	}
+
+	add_action( 'admin_notices', 'wc_extra_sorting_options_outdated_version_notice' );
+
+	return;
+}
+
 /**
  * Plugin Description
  *
