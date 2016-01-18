@@ -1,4 +1,4 @@
-# Copyright (C) 2015 SkyVerge
+# Copyright (C) 2016 SkyVerge
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
@@ -10,10 +10,11 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2015-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2016-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
+#: build/woocommerce-extra-product-sorting-options.php:39
 #: woocommerce-extra-product-sorting-options.php:39
 #. translators: %1$s and %2$s are <strong> tags. %3$s and %4$s are <a> tags
 msgid ""
@@ -22,84 +23,103 @@ msgid ""
 "newer%4$s"
 msgstr ""
 
+#: build/woocommerce-extra-product-sorting-options.php:149
 #: woocommerce-extra-product-sorting-options.php:149
 msgid "Configure"
 msgstr ""
 
+#: build/woocommerce-extra-product-sorting-options.php:150
 #: woocommerce-extra-product-sorting-options.php:150
 msgid "Support"
 msgstr ""
 
+#: build/woocommerce-extra-product-sorting-options.php:174
 #: woocommerce-extra-product-sorting-options.php:174
 msgid "New Default Sorting Label"
 msgstr ""
 
+#: build/woocommerce-extra-product-sorting-options.php:178
 #: woocommerce-extra-product-sorting-options.php:178
 msgid ""
 "If desired, enter a new name for the default sorting option, e.g., "
 "&quot;Our Sorting&quot;"
 msgstr ""
 
+#: build/woocommerce-extra-product-sorting-options.php:181
 #: woocommerce-extra-product-sorting-options.php:181
 msgid "Add Product Sorting:"
 msgstr ""
 
+#: build/woocommerce-extra-product-sorting-options.php:182
 #: woocommerce-extra-product-sorting-options.php:182
 msgid ""
 "Select sorting options to add to your shop. \"Available Stock\" sorts "
 "products with the most stock first."
 msgstr ""
 
+#: build/woocommerce-extra-product-sorting-options.php:183
 #: woocommerce-extra-product-sorting-options.php:183
 msgid ""
 "\"On-sale First\" shows <strong>simple</strong> products on sale first; <a "
 "href=\"%s\" target=\"_blank\">see documentation</a> for more details."
 msgstr ""
 
+#: build/woocommerce-extra-product-sorting-options.php:188
 #: woocommerce-extra-product-sorting-options.php:188
 msgid "Name: A to Z"
 msgstr ""
 
+#: build/woocommerce-extra-product-sorting-options.php:189
 #: woocommerce-extra-product-sorting-options.php:189
 msgid "Name: Z to A"
 msgstr ""
 
+#: build/woocommerce-extra-product-sorting-options.php:190
 #: woocommerce-extra-product-sorting-options.php:190
 msgid "Available Stock"
 msgstr ""
 
+#: build/woocommerce-extra-product-sorting-options.php:191
 #: woocommerce-extra-product-sorting-options.php:191
 msgid "Featured First"
 msgstr ""
 
+#: build/woocommerce-extra-product-sorting-options.php:192
 #: woocommerce-extra-product-sorting-options.php:192
 msgid "On-sale First"
 msgstr ""
 
+#: build/woocommerce-extra-product-sorting-options.php:193
 #: woocommerce-extra-product-sorting-options.php:193
 msgid "Random"
 msgstr ""
 
+#: build/woocommerce-extra-product-sorting-options.php:231
 #: woocommerce-extra-product-sorting-options.php:231
 msgid "Sort by name: A to Z"
 msgstr ""
 
+#: build/woocommerce-extra-product-sorting-options.php:235
 #: woocommerce-extra-product-sorting-options.php:235
 msgid "Sort by name: Z to A"
 msgstr ""
 
+#: build/woocommerce-extra-product-sorting-options.php:239
 #: woocommerce-extra-product-sorting-options.php:239
 msgid "Sort by availability"
 msgstr ""
 
+#: build/woocommerce-extra-product-sorting-options.php:243
 #: woocommerce-extra-product-sorting-options.php:243
 msgid "Show sale items first"
 msgstr ""
 
+#: build/woocommerce-extra-product-sorting-options.php:247
 #: woocommerce-extra-product-sorting-options.php:247
 msgid "Show featured items first"
 msgstr ""
 
+#: build/woocommerce-extra-product-sorting-options.php:251
 #: woocommerce-extra-product-sorting-options.php:251
 msgid "Sort by: random order"
 msgstr ""

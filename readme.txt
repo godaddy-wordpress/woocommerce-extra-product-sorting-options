@@ -99,7 +99,7 @@ Yes you can! Join in on our [GitHub repository](https://github.com/skyverge/wooc
 
 == Changelog ==
 
-= 2015.12.22 - version 2.3.0 =
+= 2016.01.18 - version 2.3.0 =
  * Misc: updated textdomain to `woocommerce-extra-product-sorting-options` - **please update translations**!
  * Misc: WooCommerce 2.5 compatibility
 
