@@ -3,10 +3,10 @@ Contributors: beka.rice, skyverge, tamarazuk
 Tags: woocommerce, sorting, product sorting, orderby
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=paypal@skyverge.com&item_name=Donation+for+WooCommerce+Extra+Product+Sorting
 Requires at least: 4.0
-Tested up to: 4.4.1
-Requires WooCommerce at least: 2.2
-Tested WooCommerce up to: 2.5
-Stable Tag: 2.3.0
+Tested up to: 4.5.2
+Requires WooCommerce at least: 2.3
+Tested WooCommerce up to: 2.6
+Stable Tag: 2.4.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -16,7 +16,7 @@ Rename the default product sorting option and add up to 6 new sorting options in
 
 WooCommerce Extra Product Sorting Options provides options that extend the default WooCommerce orderby options on the shop page. You can optionally set a new name for the default sorting (helpful if you've used this to create a custom sorting order), and can enable up to **6 new sorting options**: alphabetical, reverse alphabetical, on sale, featured, availability, and random product sorting.
 
-> **Requires: WooCommerce 2.2+ and WordPress 4.0+**
+> **Requires: WooCommerce 2.3+ and WordPress 4.0+**
 
 = Features =
 Includes options to:
@@ -27,7 +27,7 @@ Includes options to:
  - enable featured-first sorting
  - enable on sale sorting (**note**: works only for simple products)
  - enable sorting by inventory / availability
- - enable randomized product sorting
+ - enable randomized product sorting (works well for single-page catalogs)
 
 = Rename Default Sorting =
 You can customize your product sorting order on your shop pages - [here's a handy tutorial](http://www.sellwithwp.com/create-woocommerce-custom-product-sorting/) to do so. However, many shop admins like to then rename this from "Default Sorting" to something more descriptive, such as "Our Sorting" or "Our Selection". You can optionally enter a new name for this sorting order if desired.
@@ -39,9 +39,7 @@ Want to show items with the highest stock first? You can enable sorting by avail
 
 You can add the option to sort items by sale status - there's a sorting option to show "On Sale" items first in the shop catalog. Please note that only simple products can be sorted by sale status, and variable products will display mixed with non-sale products.
 
-Finally, you can add a "randomized" sorting option just for fun - any time this sorting is selected, the product order will be randomized when the shop page is viewed.
-
-**Note:** Sorting by stock, sale status, and featured status have a fallback to the product title. This means that featured status, stock, and sale status will be used to sort products first, and then they'll be sorted by title second. The [FAQ](https://wordpress.org/plugins/woocommerce-extra-product-sorting-options/faq/) has details on using a different fallback, such as menu order.
+Finally, you can add a "randomized" sorting option just for fun - any time this sorting is selected, the product order will be randomized when the shop page is viewed. This works best when all products are shown on one page, as paged product catalogs will be "re-randomized" with each page change.
 
 = Looking to remove sorting options? =
 We have a compatible plugin that will let you remove core WooCommerce sorting options, such as the default sorting method. You can check out the [WooCommerce Remove Product Sorting](http://www.skyverge.com/product/woocommerce-remove-product-sorting/) plugin page for more details.
@@ -54,7 +52,7 @@ We have a compatible plugin that will let you remove core WooCommerce sorting op
 
 == Installation ==
 
-1. Be sure you're running WooCommerce 2.2+ and WordPress 4.0+ in your shop.
+1. Be sure you're running WooCommerce 2.3+ and WordPress 4.0+ in your shop.
 2. Upload the entire `woocommerce-extra-product-sorting-options` folder to the `/wp-content/plugins/` directory, or upload the .zip file with the plugin under **Plugins &gt; Add New &gt; Upload**
 3. Activate the plugin through the **Plugins** menu in WordPress
 4. Go to **WooCommerce &gt; Settings &gt; Products**. The new settings are added after "Default Product Sorting". If you enable more sorting options, you can set these as new defaults as well.
@@ -98,6 +96,10 @@ Yes you can! Join in on our [GitHub repository](https://github.com/skyverge/wooc
 3. Change sorting label (in shop dropdown) with the [Say What plugin](https://wordpress.org/plugins/say-what/)
 
 == Changelog ==
+
+= 2016.05.31 - version 2.4.0 =
+ * Misc: added support for WooCommerce 2.6
+ * Misc: removed support for WooCommerce 2.2
 
 = 2016.01.18 - version 2.3.0 =
  * Misc: updated textdomain to `woocommerce-extra-product-sorting-options` - **please update translations**!
