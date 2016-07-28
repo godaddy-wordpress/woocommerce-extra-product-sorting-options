@@ -5,7 +5,7 @@
  * Description: Rename default sorting and optionally extra product sorting options.
  * Author: SkyVerge
  * Author URI: http://www.skyverge.com/
- * Version: 2.4.0
+ * Version: 2.5.0
  * Text Domain: woocommerce-extra-product-sorting-options
  *
  * Copyright: (c) 2014-2016 SkyVerge, Inc. (info@skyverge.com)
@@ -55,7 +55,7 @@ add_action( 'plugins_loaded', 'init_wc_extra_sorting_options' );
 class WC_Extra_Sorting_Options {
 
 
-	const VERSION = '2.4.0';
+	const VERSION = '2.5.0';
 
 
 	/** @var WC_Extra_Sorting_Options single instance of this plugin */
@@ -188,7 +188,7 @@ class WC_Extra_Sorting_Options {
 	public static function render_outdated_wc_version_notice() {
 
 		$message = sprintf(
-		/* translators: %1$s and %2$s are <strong> tags. %3$s and %4$s are <a> tags */
+			/* translators: %1$s and %2$s are <strong> tags. %3$s and %4$s are <a> tags */
 			esc_html__( '%1$sWooCommerce Extra Product Sorting Options is inactive.%2$s This plugin requires WooCommerce 2.3 or newer. Please %3$supdate WooCommerce to version 2.3 or newer%4$s', 'woocommerce-extra-product-sorting-options' ),
 			'<strong>',
 			'</strong>',
@@ -227,21 +227,29 @@ class WC_Extra_Sorting_Options {
 						'desc_tip' => __( 'If desired, enter a new name for the default sorting option, e.g., &quot;Our Sorting&quot;', 'woocommerce-extra-product-sorting-options' ),
 					),
 					array(
-						'name'     => __( 'Add Product Sorting:', 'woocommerce-extra-product-sorting-options' ),
-						'desc_tip' => __( 'Select sorting options to add to your shop. "Available Stock" sorts products with the most stock first.', 'woocommerce-extra-product-sorting-options' ),
-						'desc'     => '<br/>' . sprintf( __( '"On-sale First" shows <strong>simple</strong> products on sale first; <a href="%s" target="_blank">see documentation</a> for more details.', 'woocommerce-extra-product-sorting-options' ), 'https://wordpress.org/plugins/woocommerce-extra-product-sorting-options/faq/' ),
-						'id'       => 'wc_extra_product_sorting_options',
-						'type'     => 'multiselect',
-						'class'    => 'chosen_select',
-						'options'  => array(
+						'name'              => __( 'Add Product Sorting:', 'woocommerce-extra-product-sorting-options' ),
+						'desc_tip'          => __( 'Select sorting options to add to your shop. "Available Stock" sorts products with the most stock first.', 'woocommerce-extra-product-sorting-options' ),
+						/* translators: Placeholders: %1$s - <strong>, %2$s - </strong>, %3$s - <a>, %4$s - </a> */
+						'desc'              => sprintf( __( '"On-sale First" shows %1$ssimple%2$s products on sale first; %3$ssee documentation%4$s for more details.', 'woocommerce-extra-product-sorting-options' ),
+								'<strong>',
+								'</strong>',
+								'<a href="http://wordpress.org/plugins/woocommerce-extra-product-sorting-options/faq/" target="_blank">',
+								'</a>'
+							),
+						'id'                => 'wc_extra_product_sorting_options',
+						'type'              => 'multiselect',
+						'class'             => 'chosen_select',
+						'options'           => array(
 							'alphabetical'   => __( 'Name: A to Z', 'woocommerce-extra-product-sorting-options' ),
 							'reverse_alpha'  => __( 'Name: Z to A', 'woocommerce-extra-product-sorting-options' ),
-							'by_stock'   	 => __( 'Available Stock', 'woocommerce-extra-product-sorting-options' ),
+							'by_stock'       => __( 'Available Stock', 'woocommerce-extra-product-sorting-options' ),
 							'featured_first' => __( 'Featured First', 'woocommerce-extra-product-sorting-options' ),
 							'on_sale_first'  => __( 'On-sale First', 'woocommerce-extra-product-sorting-options' ),
-							'randomize'      => __( 'Random', 'woocommerce-extra-product-sorting-options' ),
 						),
-						'default'  => '',
+						'default'           => '',
+						'custom_attributes' => array(
+							'data-placeholder' => __( 'Select sorting options to add to your shop.', 'woocommerce-extra-product-sorting-options' ),
+						),
 					),
 				);
 
@@ -271,34 +279,29 @@ class WC_Extra_Sorting_Options {
 
 		foreach( $new_sorting_options as $option ) {
 
-			switch( $option ) {
+			switch ( $option ) {
 
 				case 'alphabetical':
-					$sortby['alphabetical'] = __( 'Sort by name: A to Z', 'woocommerce-extra-product-sorting-options' );
-					break;
+					$sortby['alphabetical']   = __( 'Sort by name: A to Z', 'woocommerce-extra-product-sorting-options' );
+				break;
 
 				case 'reverse_alpha':
-					$sortby['reverse_alpha'] = __( 'Sort by name: Z to A', 'woocommerce-extra-product-sorting-options' );
-					break;
+					$sortby['reverse_alpha']  = __( 'Sort by name: Z to A', 'woocommerce-extra-product-sorting-options' );
+				break;
 
 				case 'by_stock':
-					$sortby['by_stock'] = __( 'Sort by availability', 'woocommerce-extra-product-sorting-options' );
-					break;
+					$sortby['by_stock']       = __( 'Sort by availability', 'woocommerce-extra-product-sorting-options' );
+				break;
 
 				case 'on_sale_first':
-					$sortby['on_sale_first'] = __( 'Show sale items first', 'woocommerce-extra-product-sorting-options' );
-					break;
+					$sortby['on_sale_first']  = __( 'Show sale items first', 'woocommerce-extra-product-sorting-options' );
+				break;
 
 				case 'featured_first':
 					$sortby['featured_first'] = __( 'Show featured items first', 'woocommerce-extra-product-sorting-options' );
-					break;
-
-				case 'randomize':
-					$sortby['rand'] = __( 'Sort by: random order', 'woocommerce-extra-product-sorting-options' );
-					break;
+				break;
 
 			}
-
 		}
 
 		return $sortby;
@@ -327,37 +330,37 @@ class WC_Extra_Sorting_Options {
 			$orderby_value = $sort_args['orderby'];
 		}
 
-		$fallback = apply_filters( 'wc_extra_sorting_options_fallback', 'title', $orderby_value );
+		$fallback       = apply_filters( 'wc_extra_sorting_options_fallback', 'title', $orderby_value );
 		$fallback_order = apply_filters( 'wc_extra_sorting_options_fallback_order', 'ASC', $orderby_value );
 
 		switch( $orderby_value ) {
 
 			case 'alphabetical':
 				$sort_args['orderby'] = 'title';
-				$sort_args['order'] = 'asc';
-				break;
+				$sort_args['order']   = 'asc';
+			break;
 
 			case 'reverse_alpha':
 				$sort_args['orderby']  = 'title';
 				$sort_args['order']    = 'desc';
 				$sort_args['meta_key'] = '';
-				break;
+			break;
 
 			case 'by_stock':
-				$sort_args['orderby'] = array( 'meta_value_num' => 'DESC', $fallback => $fallback_order );
+				$sort_args['orderby']  = array( 'meta_value_num' => 'DESC', $fallback => $fallback_order );
 				$sort_args['meta_key'] = '_stock';
-				break;
+			break;
 
 
 			case 'on_sale_first':
-				$sort_args['orderby'] = array( 'meta_value_num' => 'DESC', $fallback => $fallback_order );
+				$sort_args['orderby']  = array( 'meta_value_num' => 'DESC', $fallback => $fallback_order );
 				$sort_args['meta_key'] = '_sale_price';
-				break;
+			break;
 
 			case 'featured_first':
-				$sort_args['orderby'] = array( 'meta_value' => 'DESC', $fallback => $fallback_order );
+				$sort_args['orderby']  = array( 'meta_value' => 'DESC', $fallback => $fallback_order );
 				$sort_args['meta_key'] = '_featured';
-				break;
+			break;
 
 		}
 
@@ -403,10 +406,10 @@ class WC_Extra_Sorting_Options {
 		if ( '1.2.0' === $installed_version ) {
 
 			$old_options = array(
-				'wc_alphabetical_product_sorting' => 'alphabetical',
+				'wc_alphabetical_product_sorting'         => 'alphabetical',
 				'wc_reverse_alphabetical_product_sorting' => 'reverse_alpha',
-				'wc_on_sale_product_sorting' => 'on_sale_first',
-				'wc_random_product_sorting' => 'randomize',
+				'wc_on_sale_product_sorting'              => 'on_sale_first',
+				'wc_random_product_sorting'               => 'randomize',
 			);
 
 			$new_options = array();
@@ -422,8 +425,41 @@ class WC_Extra_Sorting_Options {
 			update_option( 'wc_extra_product_sorting_options', $new_options );
 		}
 
+		// remove random sorting if it was set
+		if ( version_compare( $installed_version, '2.5.0', '<' ) ) {
+
+			$settings = get_option( 'wc_extra_product_sorting_options' );
+
+			if ( in_array( 'randomize', $settings, true ) ) {
+
+				unset( $settings['randomize'] );
+				update_option( 'wc_extra_product_sorting_options', $settings );
+
+				add_action( 'admin_notices', array( $this, 'render_2_5_upgrade_notice' ) );
+			}
+		}
+
 		// update the installed version option
 		update_option( 'wc_extra_sorting_options_version', self::VERSION );
+	}
+
+
+	/**
+	 * Renders a notice when upgrading to v2.5 if random sorting was enabled
+	 *  as this was removed from the plugin
+	 */
+	public function render_2_5_upgrade_notice() {
+
+		$message = sprintf(
+			/* translators: Placeholders: %1$s - <strong>, %2$s - <strong>, %3$s - <a>, %4$s - </a> */
+			esc_html__( '%1$sWooCommerce Extra Product Sorting Options settings have changed.%2$s Random sorting is now disabled. If you need to re-add this option, please %3$sview our plugin notes%4$s.', 'woocommerce-extra-product-sorting-options' ),
+			'<strong>',
+			'</strong>',
+			'<a href="http://wordpress.org/plugins/woocommerce-extra-product-sorting-options/other_notes/" target="_blank">',
+			'&nbsp;&raquo;</a>'
+		);
+
+		printf( '<div class="notice notice-warning is-dismissible"><p>%s</p></div>', $message );
 	}
 
 } // end \WC_Extra_Sorting_Options class
