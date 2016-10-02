@@ -243,6 +243,8 @@ class WC_Extra_Sorting_Options {
 							'alphabetical'   => __( 'Name: A to Z', 'woocommerce-extra-product-sorting-options' ),
 							'reverse_alpha'  => __( 'Name: Z to A', 'woocommerce-extra-product-sorting-options' ),
 							'by_stock'       => __( 'Available Stock', 'woocommerce-extra-product-sorting-options' ),
+							'by_sku'      	 => __( 'Artikelnummer: laag naar hoog' ),
+							'reverse_by_sku' => __( 'Artikelnummer: hoog naar laag' ),
 							'featured_first' => __( 'Featured First', 'woocommerce-extra-product-sorting-options' ),
 							'on_sale_first'  => __( 'On-sale First', 'woocommerce-extra-product-sorting-options' ),
 						),
@@ -291,6 +293,14 @@ class WC_Extra_Sorting_Options {
 
 				case 'by_stock':
 					$sortby['by_stock']       = __( 'Sort by availability', 'woocommerce-extra-product-sorting-options' );
+				break;
+
+				case 'by_sku':
+					$sortby['by_sku']         = __( 'Stijgend artikelnummer' );
+				break;
+
+				case 'reverse_by_sku':
+					$sortby['reverse_by_sku'] = __( 'Dalend artikelnummer' );
 				break;
 
 				case 'on_sale_first':
@@ -351,6 +361,15 @@ class WC_Extra_Sorting_Options {
 				$sort_args['meta_key'] = '_stock';
 			break;
 
+			case 'by_sku':
+				$sort_args['orderby']  = array( 'meta_value_num' => 'ASC', $fallback => $fallback_order );
+				$sort_args['meta_key'] = '_sku';
+			break;
+
+			case 'reverse_by_sku':
+				$sort_args['orderby']  = array( 'meta_value_num' => 'DESC', $fallback => $fallback_order );
+				$sort_args['meta_key'] = '_sku';
+			break;
 
 			case 'on_sale_first':
 				$sort_args['orderby']  = array( 'meta_value_num' => 'DESC', $fallback => $fallback_order );
