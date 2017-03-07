@@ -71,6 +71,11 @@ class WC_Extra_Sorting_Options {
 		// add new product sorting arguments
 		add_filter( 'woocommerce_get_catalog_ordering_args', array( $this, 'add_new_shop_ordering_args' ) );
 
+		// Display a notice for WC 2.7+ stores if Featured sorting was enabled
+		if ( WC_Extra_Sorting_Options::is_wc_gte_27() && in_array( 'featured_first', get_option( 'wc_extra_product_sorting_options' ), true ) ) {
+			add_action( 'admin_notices', array( $this, 'render_wc_27_update_notice' ) );
+		}
+
 		// load translations
 		add_action( 'init', array( $this, 'load_translation' ) );
 
@@ -197,6 +202,26 @@ class WC_Extra_Sorting_Options {
 
 
 	/**
+	 * Render a notice for stores using WC 2.7+ if they had used featured-first sorting.
+	 *
+	 * @since 2.6.0-dev
+	 */
+	public function render_wc_27_update_notice() {
+
+		$message = sprintf(
+			/* translators: Placeholders: %1$s - <strong>, %2$s - <strong>, %3$s - <a>, %4$s - </a> */
+			esc_html__( '%1$sWooCommerce Extra Product Sorting Options settings have changed.%2$s Featured sorting is no longer possible with WooCommerce 2.7+ as this product data has changed. Please %3$sview our plugin notes%4$s for more details.', 'woocommerce-extra-product-sorting-options' ),
+			'<strong>',
+			'</strong>',
+			'<a href="http://wordpress.org/plugins/woocommerce-extra-product-sorting-options/other_notes/" target="_blank">',
+			'&nbsp;&raquo;</a>'
+		);
+
+		printf( '<div class="notice notice-warning is-dismissible"><p>%s</p></div>', $message );
+	}
+
+
+	/**
 	 * Checks if WooCommerce is greater than v2.7.
 	 *
 	 * @since 2.6.0-dev
@@ -220,6 +245,17 @@ class WC_Extra_Sorting_Options {
 	public function add_settings( $settings ) {
 
 		$updated_settings = array();
+		$settings_options = array(
+			'alphabetical'  => __( 'Name: A to Z',    'woocommerce-extra-product-sorting-options' ),
+			'reverse_alpha' => __( 'Name: Z to A',    'woocommerce-extra-product-sorting-options' ),
+			'by_stock'      => __( 'Available Stock', 'woocommerce-extra-product-sorting-options' ),
+			'review_count'  => __( 'Review Count',    'woocommerce-extra-product-sorting-options' ),
+			'on_sale_first' => __( 'On-sale First',   'woocommerce-extra-product-sorting-options' ),
+		);
+
+		if ( ! WC_Extra_Sorting_Options::is_wc_gte_27() ) {
+			$settings_options['featured_first'] = __( 'Featured First', 'woocommerce-extra-product-sorting-options' );
+		}
 
 		foreach ( $settings as $setting ) {
 
@@ -228,6 +264,7 @@ class WC_Extra_Sorting_Options {
 			if ( isset( $setting['id'] ) && 'woocommerce_default_catalog_orderby' === $setting['id'] ) {
 
 				$new_settings = array(
+
 					array(
 						'title'    => __( 'New Default Sorting Label', 'woocommerce-extra-product-sorting-options' ),
 						'id'       => 'wc_rename_default_sorting',
@@ -235,11 +272,12 @@ class WC_Extra_Sorting_Options {
 						'default'  => '',
 						'desc_tip' => __( 'If desired, enter a new name for the default sorting option, e.g., &quot;Our Sorting&quot;', 'woocommerce-extra-product-sorting-options' ),
 					),
+
 					array(
 						'name'              => __( 'Add Product Sorting:', 'woocommerce-extra-product-sorting-options' ),
 						'desc_tip'          => __( 'Select sorting options to add to your shop. "Available Stock" sorts products with the most stock first.', 'woocommerce-extra-product-sorting-options' ),
 						/* translators: Placeholders: %1$s - <strong>, %2$s - </strong>, %3$s - <a>, %4$s - </a> */
-						'desc'              => sprintf( __( '"On-sale First" shows %1$ssimple%2$s products on sale first; %3$ssee documentation%4$s for more details.', 'woocommerce-extra-product-sorting-options' ),
+						'desc'              => '<br />' . sprintf( __( '"On-sale First" shows %1$ssimple%2$s products on sale first; %3$ssee documentation%4$s for more details.', 'woocommerce-extra-product-sorting-options' ),
 								'<strong>',
 								'</strong>',
 								'<a href="http://wordpress.org/plugins/woocommerce-extra-product-sorting-options/faq/" target="_blank">',
@@ -248,13 +286,7 @@ class WC_Extra_Sorting_Options {
 						'id'                => 'wc_extra_product_sorting_options',
 						'type'              => 'multiselect',
 						'class'             => 'chosen_select',
-						'options'           => array(
-							'alphabetical'   => __( 'Name: A to Z', 'woocommerce-extra-product-sorting-options' ),
-							'reverse_alpha'  => __( 'Name: Z to A', 'woocommerce-extra-product-sorting-options' ),
-							'by_stock'       => __( 'Available Stock', 'woocommerce-extra-product-sorting-options' ),
-							'featured_first' => __( 'Featured First', 'woocommerce-extra-product-sorting-options' ),
-							'on_sale_first'  => __( 'On-sale First', 'woocommerce-extra-product-sorting-options' ),
-						),
+						'options'           => $settings_options,
 						'default'           => '',
 						'custom_attributes' => array(
 							'data-placeholder' => __( 'Select sorting options to add to your shop.', 'woocommerce-extra-product-sorting-options' ),
@@ -303,12 +335,18 @@ class WC_Extra_Sorting_Options {
 					$sortby['by_stock']       = __( 'Sort by availability', 'woocommerce-extra-product-sorting-options' );
 				break;
 
+				case 'review_count':
+					$sortby['review_count']   = __( 'Sort by review count', 'woocommerce-extra-product-sorting-options' );
+				break;
+
 				case 'on_sale_first':
 					$sortby['on_sale_first']  = __( 'Show sale items first', 'woocommerce-extra-product-sorting-options' );
 				break;
 
 				case 'featured_first':
-					$sortby['featured_first'] = __( 'Show featured items first', 'woocommerce-extra-product-sorting-options' );
+					if ( ! WC_Extra_Sorting_Options::is_wc_gte_27() ) {
+						$sortby['featured_first'] = __( 'Show featured items first', 'woocommerce-extra-product-sorting-options' );
+					}
 				break;
 
 			}
@@ -369,6 +407,12 @@ class WC_Extra_Sorting_Options {
 
 			break;
 
+			case 'review_count':
+
+				$sort_args['orderby']  = array( 'meta_value' => 'DESC', $fallback => $fallback_order );
+				$sort_args['meta_key'] = '_wc_review_count';
+
+			break;
 
 			case 'on_sale_first':
 
@@ -378,8 +422,12 @@ class WC_Extra_Sorting_Options {
 			break;
 
 			case 'featured_first':
-				$sort_args['orderby']  = array( 'meta_value' => 'DESC', $fallback => $fallback_order );
-				$sort_args['meta_key'] = '_featured';
+
+				if ( ! WC_Extra_Sorting_Options::is_wc_gte_27() ) {
+					$sort_args['orderby']  = array( 'meta_value' => 'DESC', $fallback => $fallback_order );
+					$sort_args['meta_key'] = '_featured';
+				}
+
 			break;
 
 		}
