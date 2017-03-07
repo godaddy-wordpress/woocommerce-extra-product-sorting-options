@@ -1,14 +1,14 @@
 {
 	"name": "woocommerce-extra-product-sorting-options",
-	"version": "1.2.0",
-	"author": "Beka Rice",
-	"homepage": "http://bekarice.com",
+	"version": "2.6.0",
+	"author": "SkyVerge",
+	"homepage": "http://skyverge.com",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/bekarice/woocommerce-extra-product-sorting-options.git"
+		"url": "https://github.com/skyverge/woocommerce-extra-product-sorting-options.git"
 	},
 	"bugs": {
-		"url": "https://github.com/bekarice/woocommerce-extra-product-sorting-options/issues"
+		"url": "https://github.com/skyverge/woocommerce-extra-product-sorting-options/issues"
 	},
 	"engines": {
 		"node": ">= 0.10.0"

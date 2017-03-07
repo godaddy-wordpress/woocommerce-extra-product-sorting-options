@@ -196,6 +196,17 @@ class WC_Extra_Sorting_Options {
 	}
 
 
+	/**
+	 * Checks if WooCommerce is greater than v2.7.
+	 *
+	 * @since 2.6.0-dev
+	 * @return bool true if > v2.7
+	 */
+	public static function is_wc_gte_27() {
+		return defined( 'WC_VERSION' ) && WC_VERSION && version_compare( WC_VERSION, '2.7', '>=' );
+	}
+
+
 	/** Plugin methods ******************************************************/
 
 
@@ -252,7 +263,6 @@ class WC_Extra_Sorting_Options {
 				);
 
 				$updated_settings = array_merge( $updated_settings, $new_settings );
-
 			}
 		}
 
@@ -261,16 +271,18 @@ class WC_Extra_Sorting_Options {
 
 
 	/**
-	 * Change "Default Sorting" to custom name and add new sorting options; added to admin + frontend dropdown
+	 * Change "Default Sorting" to custom name and add new sorting options; added to admin + frontend dropdown.
 	 *
 	 * @since 2.0.0
+	 * @param array $sortby array or sorting option keys and names
+	 * @return array the updated sortby options
 	 */
 	public function modify_sorting_settings( $sortby ) {
 
 		$new_default_name = get_option( 'wc_rename_default_sorting' );
 
 		if ( $new_default_name ) {
-			$sortby = str_replace( "Default sorting", $new_default_name, $sortby );
+			$sortby = str_replace( 'Default sorting', $new_default_name, $sortby );
 		}
 
 		$new_sorting_options = get_option('wc_extra_product_sorting_options', array() );
@@ -307,23 +319,25 @@ class WC_Extra_Sorting_Options {
 
 
 	/**
-	 * Add sorting option to WC sorting arguments
+	 * Add sorting option to WC sorting arguments.
 	 *
 	 * @since 2.0.0
+	 * @param array $sort_args the sorting arguments and query to use for it
+	 * @return array updated sorting arguments
 	*/
 	public function add_new_shop_ordering_args( $sort_args ) {
 
-		// If we have the orderby via URL, let's pass it in
-		// This means we're on a shop / archive, so if we don't have it, use the default
+		// If we have the orderby via URL, let's pass it in.
+		// This means we're on a shop / archive, so if we don't have it, use the default.
 		if ( isset( $_GET['orderby'] ) ) {
 			$orderby_value = wc_clean( $_GET['orderby'] );
 		} else {
 			$orderby_value = apply_filters( 'woocommerce_default_catalog_orderby', get_option( 'woocommerce_default_catalog_orderby' ) );
 		}
 
-		// Since a shortcode can be used on a non-WC page, we won't have $_GET['orderby']
-		// Grab it from the passed in sorting args instead for non-WC pages
-		// Don't use this on WC pages since it breaks the default
+		// Since a shortcode can be used on a non-WC page, we won't have $_GET['orderby'] --
+		// grab it from the passed in sorting args instead for non-WC pages.
+		// Don't use this on WC pages since it breaks the default option!
 		if ( ! is_woocommerce() && isset( $sort_args['orderby'] ) ) {
 			$orderby_value = $sort_args['orderby'];
 		}
@@ -334,25 +348,33 @@ class WC_Extra_Sorting_Options {
 		switch( $orderby_value ) {
 
 			case 'alphabetical':
+
 				$sort_args['orderby'] = 'title';
 				$sort_args['order']   = 'asc';
+
 			break;
 
 			case 'reverse_alpha':
+
 				$sort_args['orderby']  = 'title';
 				$sort_args['order']    = 'desc';
 				$sort_args['meta_key'] = '';
+
 			break;
 
 			case 'by_stock':
+
 				$sort_args['orderby']  = array( 'meta_value_num' => 'DESC', $fallback => $fallback_order );
 				$sort_args['meta_key'] = '_stock';
+
 			break;
 
 
 			case 'on_sale_first':
+
 				$sort_args['orderby']  = array( 'meta_value_num' => 'DESC', $fallback => $fallback_order );
 				$sort_args['meta_key'] = '_sale_price';
+
 			break;
 
 			case 'featured_first':
@@ -370,7 +392,7 @@ class WC_Extra_Sorting_Options {
 
 
 	/**
-	 * Run every time.  Used since the activation hook is not executed when updating a plugin
+	 * Run every time.  Used since the activation hook is not executed when updating a plugin.
 	 *
 	 * @since 2.0.0
 	 */
@@ -381,7 +403,6 @@ class WC_Extra_Sorting_Options {
 
 		// force upgrade to 2.0.0, prior versions did not have version option set
 		if ( ! $installed_version && ! get_option( 'wc_extra_product_sorting_options' ) ) {
-
 			$this->upgrade( '1.2.0' );
 		}
 
@@ -444,7 +465,9 @@ class WC_Extra_Sorting_Options {
 
 	/**
 	 * Renders a notice when upgrading to v2.5 if random sorting was enabled
-	 *  as this was removed from the plugin
+	 *  as this was removed from the plugin.
+	 *
+	 * @since 2.5.0
 	 */
 	public function render_2_5_upgrade_notice() {
 
@@ -460,15 +483,16 @@ class WC_Extra_Sorting_Options {
 		printf( '<div class="notice notice-warning is-dismissible"><p>%s</p></div>', $message );
 	}
 
-} // end \WC_Extra_Sorting_Options class
+
+}
 
 
 /**
- * Returns the One True Instance of WC Extra Sorting
+ * Returns the One True Instance of WC Extra Sorting.
  *
  * @since 2.2.2
  * @return WC_Extra_Sorting_Options
  */
 function wc_extra_sorting_options() {
-    return WC_Extra_Sorting_Options::instance();
+	return WC_Extra_Sorting_Options::instance();
 }
