@@ -409,7 +409,7 @@ class WC_Extra_Sorting_Options {
 
 			case 'review_count':
 
-				$sort_args['orderby']  = array( 'meta_value' => 'DESC', $fallback => $fallback_order );
+				$sort_args['orderby']  = array( 'meta_value_num' => 'DESC', $fallback => $fallback_order );
 				$sort_args['meta_key'] = '_wc_review_count';
 
 			break;
