@@ -71,11 +71,6 @@ class WC_Extra_Sorting_Options {
 		// add new product sorting arguments
 		add_filter( 'woocommerce_get_catalog_ordering_args', array( $this, 'add_new_shop_ordering_args' ) );
 
-		// Display a notice for WC 2.7+ stores if Featured sorting was enabled
-		if ( WC_Extra_Sorting_Options::is_wc_gte_27() && in_array( 'featured_first', get_option( 'wc_extra_product_sorting_options' ), true ) ) {
-			add_action( 'admin_notices', array( $this, 'render_wc_27_update_notice' ) );
-		}
-
 		// load translations
 		add_action( 'init', array( $this, 'load_translation' ) );
 
@@ -202,27 +197,7 @@ class WC_Extra_Sorting_Options {
 
 
 	/**
-	 * Render a notice for stores using WC 2.7+ if they had used featured-first sorting.
-	 *
-	 * @since 2.6.0-dev
-	 */
-	public function render_wc_27_update_notice() {
-
-		$message = sprintf(
-			/* translators: Placeholders: %1$s - <strong>, %2$s - <strong>, %3$s - <a>, %4$s - </a> */
-			esc_html__( '%1$sWooCommerce Extra Product Sorting Options settings have changed.%2$s Featured sorting is no longer possible with WooCommerce 2.7+ as this product data has changed. Please %3$sview our plugin notes%4$s for more details.', 'woocommerce-extra-product-sorting-options' ),
-			'<strong>',
-			'</strong>',
-			'<a href="http://wordpress.org/plugins/woocommerce-extra-product-sorting-options/other_notes/" target="_blank">',
-			'&nbsp;&raquo;</a>'
-		);
-
-		printf( '<div class="notice notice-warning is-dismissible"><p>%s</p></div>', $message );
-	}
-
-
-	/**
-	 * Checks if WooCommerce is greater than v2.7.
+	 * Checks if WooCommerce is greater than v3.0.
 	 *
 	 * @since 2.6.0-dev
 	 * @return bool true if > v3.0
@@ -506,6 +481,16 @@ class WC_Extra_Sorting_Options {
 			}
 		}
 
+		if ( version_compare( $installed_version, '2.6.0', '<' ) ) {
+
+			$settings = get_option( 'wc_extra_product_sorting_options' );
+
+			// let people know the settings will change / have changed in WC 3.0+
+			if ( in_array( 'featured_first', $settings, true ) ) {
+				add_action( 'admin_notices', array( $this, 'render_wc_30_update_notice' ) );
+			}
+		}
+
 		// update the installed version option
 		update_option( 'wc_extra_sorting_options_version', self::VERSION );
 	}
@@ -522,6 +507,37 @@ class WC_Extra_Sorting_Options {
 		$message = sprintf(
 			/* translators: Placeholders: %1$s - <strong>, %2$s - <strong>, %3$s - <a>, %4$s - </a> */
 			esc_html__( '%1$sWooCommerce Extra Product Sorting Options settings have changed.%2$s Random sorting is now disabled. If you need to re-add this option, please %3$sview our plugin notes%4$s.', 'woocommerce-extra-product-sorting-options' ),
+			'<strong>',
+			'</strong>',
+			'<a href="http://wordpress.org/plugins/woocommerce-extra-product-sorting-options/other_notes/" target="_blank">',
+			'&nbsp;&raquo;</a>'
+		);
+
+		printf( '<div class="notice notice-warning is-dismissible"><p>%s</p></div>', $message );
+	}
+
+
+	/**
+	 * Render a notice for stores when upgrading to v2.6 if they use featured-first sorting
+	 *  as this is not available when upgrading to WooCommerce 3.0+.
+	 *
+	 * @since 2.6.0
+	 */
+	public function render_wc_30_update_notice() {
+
+		if ( WC_Extra_Sorting_Options::is_wc_gte_30() ) {
+
+			/* translators: Placeholders: %1$s - <strong>, %2$s - <strong>, %3$s - <a>, %4$s - </a> */
+			$text = __( '%1$sWooCommerce Extra Product Sorting Options settings have changed.%2$s Featured sorting is no longer possible with WooCommerce 3.0+ as this product data has changed. Please %3$sview our plugin notes%4$s for more details.', 'woocommerce-extra-product-sorting-options' );
+
+		} else {
+
+			/* translators: Placeholders: %1$s - <strong>, %2$s - <strong>, %3$s - <a>, %4$s - </a> */
+			$text = __( 'Please note: %1$sWooCommerce Extra Product Sorting Options settings%2$s will change when you upgrade to WooCommerce 3.0+. Featured sorting is not possible with WooCommerce 3.0+ as this product data will change. Please %3$sview our plugin notes%4$s for more details.', 'woocommerce-extra-product-sorting-options' );
+		}
+
+		$message = sprintf(
+			esc_html( $text ),
 			'<strong>',
 			'</strong>',
 			'<a href="http://wordpress.org/plugins/woocommerce-extra-product-sorting-options/other_notes/" target="_blank">',
