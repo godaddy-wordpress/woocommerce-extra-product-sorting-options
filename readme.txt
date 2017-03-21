@@ -5,8 +5,8 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=paypal@s
 Requires at least: 4.1
 Tested up to: 4.7.3
 Requires WooCommerce at least: 2.4
-Stable Tag: 2.6.0-dev
 Tested WooCommerce up to: 3.0
+Stable Tag: 2.6.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -106,7 +106,7 @@ Since this feature wasn't at 100%, we have removed it and turned it into a code 
 
 == Changelog ==
 
-= 2017.nn.nn - version 2.6.0-dev =
+= 2017.03.23 - version 2.6.0 =
  * Feature: Sort products by review count
  * Misc: Removes 'featured first' sorting in shops running WooCommerce 3.0+ since featured meta is no longer available for products ([see notes](http://wordpress.org/plugins/woocommerce-extra-product-sorting-options/other_notes/) for further details)
  * Misc: Added support for WooCommerce 3.0
