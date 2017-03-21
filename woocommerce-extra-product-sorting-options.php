@@ -499,7 +499,7 @@ class WC_Extra_Sorting_Options {
 
 			if ( in_array( 'randomize', $settings, true ) ) {
 
-				unset( $settings['randomize'] );
+				unset( $settings[ array_search( 'randomize', $settings ) ] );
 				update_option( 'wc_extra_product_sorting_options', $settings );
 
 				add_action( 'admin_notices', array( $this, 'render_2_5_upgrade_notice' ) );
