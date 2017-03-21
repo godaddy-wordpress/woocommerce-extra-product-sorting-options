@@ -225,10 +225,10 @@ class WC_Extra_Sorting_Options {
 	 * Checks if WooCommerce is greater than v2.7.
 	 *
 	 * @since 2.6.0-dev
-	 * @return bool true if > v2.7
+	 * @return bool true if > v3.0
 	 */
-	public static function is_wc_gte_27() {
-		return defined( 'WC_VERSION' ) && WC_VERSION && version_compare( WC_VERSION, '2.7', '>=' );
+	public static function is_wc_gte_30() {
+		return defined( 'WC_VERSION' ) && WC_VERSION && version_compare( WC_VERSION, '3.0', '>=' );
 	}
 
 
@@ -253,7 +253,7 @@ class WC_Extra_Sorting_Options {
 			'on_sale_first' => __( 'On-sale First',   'woocommerce-extra-product-sorting-options' ),
 		);
 
-		if ( ! WC_Extra_Sorting_Options::is_wc_gte_27() ) {
+		if ( ! WC_Extra_Sorting_Options::is_wc_gte_30() ) {
 			$settings_options['featured_first'] = __( 'Featured First', 'woocommerce-extra-product-sorting-options' );
 		}
 
@@ -344,7 +344,7 @@ class WC_Extra_Sorting_Options {
 				break;
 
 				case 'featured_first':
-					if ( ! WC_Extra_Sorting_Options::is_wc_gte_27() ) {
+					if ( ! WC_Extra_Sorting_Options::is_wc_gte_30() ) {
 						$sortby['featured_first'] = __( 'Show featured items first', 'woocommerce-extra-product-sorting-options' );
 					}
 				break;
@@ -423,7 +423,7 @@ class WC_Extra_Sorting_Options {
 
 			case 'featured_first':
 
-				if ( ! WC_Extra_Sorting_Options::is_wc_gte_27() ) {
+				if ( ! WC_Extra_Sorting_Options::is_wc_gte_30() ) {
 					$sort_args['orderby']  = array( 'meta_value' => 'DESC', $fallback => $fallback_order );
 					$sort_args['meta_key'] = '_featured';
 				}

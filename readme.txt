@@ -5,8 +5,8 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=paypal@s
 Requires at least: 4.1
 Tested up to: 4.7.3
 Requires WooCommerce at least: 2.4
-Tested WooCommerce up to: 2.7
 Stable Tag: 2.6.0-dev
+Tested WooCommerce up to: 3.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -92,9 +92,9 @@ Yes you can! Join in on our [GitHub repository](https://github.com/skyverge/wooc
 
 **The plugin text domain is**: `woocommerce-extra-product-sorting-options`
 
-= Help! I upgraded to WooCommerce 2.7 and "featured" sorting disappeared. =
+= Help! I upgraded to WooCommerce 3.0 and "featured" sorting disappeared. =
 
-Unfortunately this was removed because the way products are designated as "featured" has changed in WooCommerce 2.7+. Because the way this is stored changed behind the scenes, it's no longer possible to sort products using this value to show featured items first. We're sad to say this means that our plugin cannot offer this option for stores running WooCommerce 2.7+ since the data used to sort this way no longer exists.
+Unfortunately this was removed because the way products are designated as "featured" has changed in WooCommerce 3.0+. Because the way this is stored changed behind the scenes, it's no longer possible to sort products using this value to show featured items first. We're sad to say this means that our plugin cannot offer this option for stores running WooCommerce 3.0+ since the data used to sort this way no longer exists.
 
 = This plugin used to have random sorting, I need it back! =
 
@@ -108,8 +108,8 @@ Since this feature wasn't at 100%, we have removed it and turned it into a code 
 
 = 2017.nn.nn - version 2.6.0-dev =
  * Feature: Sort products by review count
- * Misc: Removes 'featured first' sorting in shops running WooCommerce 2.7+ since featured meta is no longer available for products ([see notes](http://wordpress.org/plugins/woocommerce-extra-product-sorting-options/other_notes/) for further details)
- * Misc: Added support for WooCommerce 2.7
+ * Misc: Removes 'featured first' sorting in shops running WooCommerce 3.0+ since featured meta is no longer available for products ([see notes](http://wordpress.org/plugins/woocommerce-extra-product-sorting-options/other_notes/) for further details)
+ * Misc: Added support for WooCommerce 3.0
  * Misc: Removed support for WooCommerce 2.3.x
 
 = 2016.07.28 - version 2.5.0 =
