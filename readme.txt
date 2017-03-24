@@ -1,12 +1,12 @@
 === WooCommerce Extra Product Sorting Options ===
-Contributors: beka.rice, skyverge, tamarazuk
+Contributors: skyverge, beka.rice, tamarazuk
 Tags: woocommerce, sorting, product sorting, orderby
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=paypal@skyverge.com&item_name=Donation+for+WooCommerce+Extra+Product+Sorting
-Requires at least: 4.0
-Tested up to: 4.6.0
-Requires WooCommerce at least: 2.3
-Tested WooCommerce up to: 2.6
-Stable Tag: 2.5.0
+Requires at least: 4.1
+Tested up to: 4.7.3
+Requires WooCommerce at least: 2.4
+Tested WooCommerce up to: 3.0
+Stable Tag: 2.6.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -14,9 +14,9 @@ Rename the default product sorting option and add up to 5 new sorting options in
 
 == Description ==
 
-WooCommerce Extra Product Sorting Options provides options that extend the default WooCommerce orderby options on the shop page. You can optionally set a new name for the default sorting (helpful if you've used this to create a custom sorting order), and can enable up to **5 new sorting options**: alphabetical, reverse alphabetical, on sale, featured, and availability product sorting.
+WooCommerce Extra Product Sorting Options provides options that extend the default WooCommerce orderby options on the shop page. You can optionally set a new name for the default sorting (helpful if you've used this to create a custom sorting order), and can enable up to **5 new sorting options**: alphabetical, reverse alphabetical, on sale, review count, and availability product sorting.
 
-> **Requires: WooCommerce 2.3+ and WordPress 4.0+**
+> **Requires: WooCommerce 2.4+ and WordPress 4.1+**
 
 = Features =
 Includes options to:
@@ -24,9 +24,9 @@ Includes options to:
  - rename default product sorting (i.e., change to "Our Sorting")
  - enable alphabetical product sorting
  - enable reverse alphabetical sorting
- - enable featured-first sorting
  - enable on sale sorting (**note**: works only for simple products)
  - enable sorting by inventory / availability
+ - enable sorting by review count (most reviews to least)
 
 = Rename Default Sorting =
 You can customize your product sorting order on your shop pages - [here's a handy tutorial](http://www.sellwithwp.com/create-woocommerce-custom-product-sorting/) to do so. However, many shop admins like to then rename this from "Default Sorting" to something more descriptive, such as "Our Sorting" or "Our Selection". You can optionally enter a new name for this sorting order if desired.
@@ -34,7 +34,7 @@ You can customize your product sorting order on your shop pages - [here's a hand
 = Adding Sorting Options =
 When you create a customized sorting order, you lose the ability to sort products alphabetically. This plugin gives you the ability to add new sorting options to list products by title A to Z or in reverse order (Z to A).
 
-Want to show items with the highest stock first? You can enable sorting by availability, which will enable sorting from high stock to low stock (See FAQ for more details). You can also show featured items first in your catalog.
+Want to show items with the highest stock first? You can enable sorting by availability, which will enable sorting from high stock to low stock (See FAQ for more details). You can also sort by the number of product reviews.
 
 You can add the option to sort items by sale status - there's a sorting option to show "On Sale" items first in the shop catalog. Please note that only simple products can be sorted by sale status, and variable products will display mixed with non-sale products.
 
@@ -49,10 +49,10 @@ We have a compatible plugin that will let you remove core WooCommerce sorting op
 
 == Installation ==
 
-1. Be sure you're running WooCommerce 2.3+ and WordPress 4.0+ in your shop.
+1. Be sure you're running WooCommerce 2.4+ and WordPress 4.1+ in your shop.
 2. Upload the entire `woocommerce-extra-product-sorting-options` folder to the `/wp-content/plugins/` directory, or upload the .zip file with the plugin under **Plugins &gt; Add New &gt; Upload**
 3. Activate the plugin through the **Plugins** menu in WordPress
-4. Go to **WooCommerce &gt; Settings &gt; Products**. The new settings are added after "Default Product Sorting". If you enable more sorting options, you can set these as new defaults as well.
+4. Go to **WooCommerce &gt; Settings &gt; Products &gt; Display**. The new settings are added after "Default Product Sorting". If you enable more sorting options, you can set these as new defaults as well.
 5. View [documentation on the product page](http://www.skyverge.com/product/woocommerce-extra-product-sorting-options/) for more help if needed.
 
 == Frequently Asked Questions ==
@@ -92,15 +92,25 @@ Yes you can! Join in on our [GitHub repository](https://github.com/skyverge/wooc
 
 **The plugin text domain is**: `woocommerce-extra-product-sorting-options`
 
+= Help! I upgraded to WooCommerce 3.0 and "featured" sorting disappeared. =
+
+Unfortunately this was removed because the way products are designated as "featured" has changed in WooCommerce 3.0+. Because the way this is stored changed behind the scenes, it's no longer possible to sort products using this value to show featured items first. We're sad to say this means that our plugin cannot offer this option for stores running WooCommerce 3.0+ since the data used to sort this way no longer exists.
+
 = This plugin used to have random sorting, I need it back! =
 
-We removed randomized product sorting because it wasn't 100% functional for many shops (as it required all products to be on one page), and thus is better served as custom code snippet instead of being part of this plugin.
+We removed randomized product sorting some time ago because it wasn't 100% functional for many shops (as it required all products to be on one page), and thus is better served as custom code snippet instead of being part of this plugin.
 
 **Why didn't it work?** WordPress will get a new random set of products for each page in your shop, so random sorting only works at 100% when you have a small number of products and they're all displayed on one page. In order to "remember" which products have already been displayed, you'd need [some custom code](http://wordpress.stackexchange.com/questions/31647/is-it-possible-to-paginate-posts-correctly-that-are-random-ordered) to store these products in a session, which is not something we ever planned to support as it isn't possible with the structure of this plugin.
 
 Since this feature wasn't at 100%, we have removed it and turned it into a code snippet. If you need to re-add randomized sorting, please [use this code snippet](https://gist.github.com/bekarice/bac8b67064001ebc3bc2475424d99f87), ensuring that you [know how to add code to your site](http://skyverge.com/blog/add-custom-code-to-wordpress/).
 
 == Changelog ==
+
+= 2017.03.23 - version 2.6.0 =
+ * Feature: Sort products by review count
+ * Misc: Removes 'featured first' sorting in shops running WooCommerce 3.0+ since featured meta is no longer available for products ([see notes](http://wordpress.org/plugins/woocommerce-extra-product-sorting-options/other_notes/) for further details)
+ * Misc: Added support for WooCommerce 3.0
+ * Misc: Removed support for WooCommerce 2.3.x
 
 = 2016.07.28 - version 2.5.0 =
  * Misc: removed 'randomized' sorting due to issues with larger catalogs ([see notes](http://wordpress.org/plugins/woocommerce-extra-product-sorting-options/other_notes/) for further details)
