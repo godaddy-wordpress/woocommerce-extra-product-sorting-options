@@ -188,12 +188,13 @@ class WC_Extra_Sorting_Options {
 	public static function render_outdated_wc_version_notice() {
 
 		$message = sprintf(
-			/* translators: %1$s and %2$s are <strong> tags. %3$s and %4$s are <a> tags */
-			esc_html__( '%1$sWooCommerce Extra Product Sorting Options is inactive.%2$s This plugin requires WooCommerce 2.4 or newer. Please %3$supdate WooCommerce to version 2.4 or newer%4$s', 'woocommerce-extra-product-sorting-options' ),
+			/* translators: Placeholders: %1$s <strong>, %2$s - </strong>, %3$s and %5$s - <a> tags, %4$s - </a> */
+			esc_html__( '%1$sWooCommerce Extra Product Sorting Options is inactive.%2$s This plugin requires WooCommerce 2.4 or newer. Please %3$supdate WooCommerce%4$s or %5$srun the WooCommerce database upgrade%4$s.', 'woocommerce-extra-product-sorting-options' ),
 			'<strong>',
 			'</strong>',
 			'<a href="' . admin_url( 'plugins.php' ) . '">',
-			'&nbsp;&raquo;</a>'
+			'</a>',
+			'<a href="' . admin_url( 'plugins.php?do_update_woocommerce=true' ) . '">'
 		);
 
 		printf( '<div class="error"><p>%s</p></div>', $message );
