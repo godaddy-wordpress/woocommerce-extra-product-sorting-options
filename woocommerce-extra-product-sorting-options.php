@@ -5,7 +5,7 @@
  * Description: Rename default sorting and optionally extra product sorting options.
  * Author: SkyVerge
  * Author URI: http://www.skyverge.com/
- * Version: 2.6.0
+ * Version: 2.6.1-dev
  * Text Domain: woocommerce-extra-product-sorting-options
  *
  * Copyright: (c) 2014-2017, SkyVerge, Inc. (info@skyverge.com)
@@ -18,7 +18,6 @@
  * @category  Admin
  * @copyright Copyright (c) 2014-2017, SkyVerge, Inc.
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
- *
  */
 
 defined( 'ABSPATH' ) or exit;
@@ -37,7 +36,7 @@ if ( ! WC_Extra_Sorting_Options::is_woocommerce_active() ) {
 
 // WC version check
 if ( version_compare( get_option( 'woocommerce_db_version' ), '2.4.0', '<' ) ) {
-	add_action( 'admin_notices', WC_Extra_Sorting_Options::render_outdated_wc_version_notice() );
+	add_action( 'admin_notices', array( 'WC_Extra_Sorting_Options', 'render_outdated_wc_version_notice' ) );
 	return;
 }
 
@@ -54,12 +53,17 @@ add_action( 'plugins_loaded', 'wc_extra_sorting_options' );
 class WC_Extra_Sorting_Options {
 
 
-	const VERSION = '2.6.0';
+	const VERSION = '2.6.1-dev';
 
 	/** @var WC_Extra_Sorting_Options single instance of this plugin */
 	protected static $instance;
 
 
+	/**
+	 * WC_Extra_Sorting_Options constructor. Initializes the plugin.
+	 *
+	 * @since 2.0.0
+	 */
 	public function __construct() {
 
 		// modify product sorting settings
@@ -184,12 +188,13 @@ class WC_Extra_Sorting_Options {
 	public static function render_outdated_wc_version_notice() {
 
 		$message = sprintf(
-			/* translators: %1$s and %2$s are <strong> tags. %3$s and %4$s are <a> tags */
-			esc_html__( '%1$sWooCommerce Extra Product Sorting Options is inactive.%2$s This plugin requires WooCommerce 2.4 or newer. Please %3$supdate WooCommerce to version 2.4 or newer%4$s', 'woocommerce-extra-product-sorting-options' ),
+			/* translators: Placeholders: %1$s <strong>, %2$s - </strong>, %3$s and %5$s - <a> tags, %4$s - </a> */
+			esc_html__( '%1$sWooCommerce Extra Product Sorting Options is inactive.%2$s This plugin requires WooCommerce 2.4 or newer. Please %3$supdate WooCommerce%4$s or %5$srun the WooCommerce database upgrade%4$s.', 'woocommerce-extra-product-sorting-options' ),
 			'<strong>',
 			'</strong>',
 			'<a href="' . admin_url( 'plugins.php' ) . '">',
-			'&nbsp;&raquo;</a>'
+			'</a>',
+			'<a href="' . admin_url( 'plugins.php?do_update_woocommerce=true' ) . '">'
 		);
 
 		printf( '<div class="error"><p>%s</p></div>', $message );
@@ -282,7 +287,7 @@ class WC_Extra_Sorting_Options {
 	 *
 	 * @since 2.0.0
 	 * @param array $sortby array or sorting option keys and names
-	 * @return array the updated sortby options
+	 * @return array the updated sort by options
 	 */
 	public function modify_sorting_settings( $sortby ) {
 
