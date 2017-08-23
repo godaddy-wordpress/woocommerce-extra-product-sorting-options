@@ -3,10 +3,10 @@ Contributors: skyverge, beka.rice, tamarazuk
 Tags: woocommerce, sorting, product sorting, orderby
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=paypal@skyverge.com&item_name=Donation+for+WooCommerce+Extra+Product+Sorting
 Requires at least: 4.1
-Tested up to: 4.8
+Tested up to: 4.8.1
 WC Requires at least: 2.4
 WC Tested up to: 3.1.1
-Stable Tag: 2.6.1-dev
+Stable Tag: 2.6.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -106,7 +106,7 @@ Since this feature wasn't at 100%, we have removed it and turned it into a code 
 
 == Changelog ==
 
-= 2017.nn.nn - version 2.6.1-dev
+= 2017.08.22 - version 2.6.1
  * Fix: PHP warning when WooCommerce is outdated
 
 = 2017.03.23 - version 2.6.0 =
