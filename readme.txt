@@ -2,11 +2,9 @@
 Contributors: skyverge, beka.rice, tamarazuk
 Tags: woocommerce, sorting, product sorting, orderby
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=paypal@skyverge.com&item_name=Donation+for+WooCommerce+Extra+Product+Sorting
-Requires at least: 4.1
-Tested up to: 4.8.1
-WC Requires at least: 2.4
-WC Tested up to: 3.1.1
-Stable Tag: 2.6.1
+Requires at least: 4.4
+Tested up to: 4.9.2
+Stable Tag: 2.7.0-dev
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -16,7 +14,7 @@ Rename the default product sorting option and add up to 5 new sorting options in
 
 WooCommerce Extra Product Sorting Options provides options that extend the default WooCommerce orderby options on the shop page. You can optionally set a new name for the default sorting (helpful if you've used this to create a custom sorting order), and can enable up to **5 new sorting options**: alphabetical, reverse alphabetical, on sale, review count, and availability product sorting.
 
-> **Requires: WooCommerce 2.4+ and WordPress 4.1+**
+> **Requires: WooCommerce 2.6.14+ and WordPress 4.4+**
 
 = Features =
 Includes options to:
@@ -49,7 +47,7 @@ We have a compatible plugin that will let you remove core WooCommerce sorting op
 
 == Installation ==
 
-1. Be sure you're running WooCommerce 2.4+ and WordPress 4.1+ in your shop.
+1. Be sure you're running WooCommerce 2.6.14+ and WordPress 4.4+ in your shop.
 2. Upload the entire `woocommerce-extra-product-sorting-options` folder to the `/wp-content/plugins/` directory, or upload the .zip file with the plugin under **Plugins &gt; Add New &gt; Upload**
 3. Activate the plugin through the **Plugins** menu in WordPress
 4. Go to **WooCommerce &gt; Settings &gt; Products &gt; Display**. The new settings are added after "Default Product Sorting". If you enable more sorting options, you can set these as new defaults as well.
@@ -105,6 +103,9 @@ We removed randomized product sorting some time ago because it wasn't 100% funct
 Since this feature wasn't at 100%, we have removed it and turned it into a code snippet. If you need to re-add randomized sorting, please [use this code snippet](https://gist.github.com/bekarice/bac8b67064001ebc3bc2475424d99f87), ensuring that you [know how to add code to your site](http://skyverge.com/blog/add-custom-code-to-wordpress/).
 
 == Changelog ==
+
+= 2018.nn.nn - version 2.7.0-dev
+ * Misc: Require WooCommerce 2.6.14 and WordPress 4.4
 
 = 2017.08.22 - version 2.6.1
  * Fix: PHP warning when WooCommerce is outdated

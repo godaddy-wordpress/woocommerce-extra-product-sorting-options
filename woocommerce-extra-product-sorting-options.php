@@ -5,10 +5,10 @@
  * Description: Rename default sorting and optionally extra product sorting options.
  * Author: SkyVerge
  * Author URI: http://www.skyverge.com/
- * Version: 2.6.1
+ * Version: 2.7.0-dev
  * Text Domain: woocommerce-extra-product-sorting-options
  *
- * Copyright: (c) 2014-2017, SkyVerge, Inc. (info@skyverge.com)
+ * Copyright: (c) 2014-2018, SkyVerge, Inc. (info@skyverge.com)
  *
  * License: GNU General Public License v3.0
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -16,8 +16,11 @@
  * @package   WC-Extra-Product-Sorting-Options
  * @author    SkyVerge
  * @category  Admin
- * @copyright Copyright (c) 2014-2017, SkyVerge, Inc.
+ * @copyright Copyright (c) 2014-2018, SkyVerge, Inc.
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
+ *
+ * WC requires at least: 2.6.14
+ * WC tested up to: 3.3.1
  */
 
 defined( 'ABSPATH' ) or exit;
@@ -35,7 +38,7 @@ if ( ! WC_Extra_Sorting_Options::is_woocommerce_active() ) {
 }
 
 // WC version check
-if ( version_compare( get_option( 'woocommerce_db_version' ), '2.4.0', '<' ) ) {
+if ( version_compare( get_option( 'woocommerce_db_version' ), '2.6.14', '<' ) ) {
 	add_action( 'admin_notices', array( 'WC_Extra_Sorting_Options', 'render_outdated_wc_version_notice' ) );
 	return;
 }
@@ -53,7 +56,7 @@ add_action( 'plugins_loaded', 'wc_extra_sorting_options' );
 class WC_Extra_Sorting_Options {
 
 
-	const VERSION = '2.6.1';
+	const VERSION = '2.7.0-dev';
 
 	/** @var WC_Extra_Sorting_Options single instance of this plugin */
 	protected static $instance;
