@@ -105,12 +105,12 @@ Since this feature wasn't at 100%, we have removed it and turned it into a code 
 
 == Changelog ==
 
-= 2018.nn.nn - version 2.7.0-dev
+= 2018.nn.nn - version 2.7.0-dev =
  * Tweak: Moved settings to customizer panel in WooCommerce 3.3+
  * Misc: Add support for WooCommerce 3.3
  * Misc: Require WooCommerce 2.6.14 and WordPress 4.4
 
-= 2017.08.22 - version 2.6.1
+= 2017.08.22 - version 2.6.1 =
  * Fix: PHP warning when WooCommerce is outdated
 
 = 2017.03.23 - version 2.6.0 =

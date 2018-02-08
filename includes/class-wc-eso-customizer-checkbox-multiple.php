@@ -35,16 +35,13 @@ defined( 'ABSPATH' ) or exit;
 class WC_ESO_Customize_Checkbox_Multiple extends WP_Customize_Control {
 
 
-	/** @var string $type type of customize control being rendered. */
-	public $type = 'checkbox-multiple';
-
-
 	/**
 	 * Enqueue scripts/styles.
 	 *
 	 * @since 2.7.0-dev
 	 */
 	public function enqueue() {
+
 		wp_enqueue_script( 'wc-extra-sorting-options-customize-controls', trailingslashit( wc_extra_sorting_options()->get_plugin_url() ) . 'assets/js/customize-controls.js', array( 'jquery' ), WC_Extra_Sorting_Options::VERSION, true );
 	}
 
@@ -56,34 +53,33 @@ class WC_ESO_Customize_Checkbox_Multiple extends WP_Customize_Control {
 	 */
 	public function render_content() {
 
-		if ( empty( $this->choices ) ) {
-			return;
-		} ?>
+		if ( ! empty( $this->choices ) ) : ?>
 
-		<?php if ( ! empty( $this->label ) ) : ?>
-			<span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
-		<?php endif; ?>
+			<?php if ( ! empty( $this->label ) ) : ?>
+				<span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
+			<?php endif; ?>
 
-		<?php if ( ! empty( $this->description ) ) : ?>
-			<span class="description customize-control-description"><?php echo $this->description; ?></span>
-		<?php endif; ?>
+			<?php if ( ! empty( $this->description ) ) : ?>
+				<span class="description customize-control-description"><?php echo wp_kses_post( $this->description ); ?></span>
+			<?php endif; ?>
 
-		<?php $multi_values = ! is_array( $this->value() ) ? explode( ',', $this->value() ) : $this->value(); ?>
+			<?php $multi_values = ! is_array( $this->value() ) ? explode( ',', $this->value() ) : $this->value(); ?>
 
-		<ul>
+			<ul>
 			<?php foreach ( $this->choices as $value => $label ) : ?>
 
 				<li>
 					<label>
-						<input type="checkbox" value="<?php echo esc_attr( $value ); ?>" <?php checked( in_array( $value, $multi_values ) ); ?> />
+						<input type="checkbox" value="<?php echo esc_attr( $value ); ?>" <?php checked( in_array( $value, $multi_values ), true ); ?> />
 						<?php echo esc_html( $label ); ?>
 					</label>
 				</li>
 
 			<?php endforeach; ?>
-		</ul>
+			</ul>
 
-		<input type="hidden" <?php $this->link(); ?> value="<?php echo esc_attr( implode( ',', $multi_values ) ); ?>" />
-		<?php
+			<input type="hidden" <?php $this->link(); ?> value="<?php echo esc_attr( implode( ',', $multi_values ) ); ?>" />
+		<?php endif;
+
 	}
 }

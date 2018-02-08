@@ -162,6 +162,8 @@ class WC_Extra_Sorting_Options {
 	/**
 	 * Add Settings to WooCommerce Settings > Products page after "Default Product Sorting" setting.
 	 *
+	 * @internal
+	 *
 	 * @since 2.7.0-dev
 	 *
 	 * @param \WP_Customize_Manager $wp_customize
@@ -169,7 +171,7 @@ class WC_Extra_Sorting_Options {
 	public function add_customizer_settings( $wp_customize ) {
 
 		// load our custom control type
-		require_once( 'includes/class-wc-eso-customizer-checkbox-multiple.php' );
+		require_once( dirname( __FILE__ ) . '/includes/class-wc-eso-customizer-checkbox-multiple.php' );
 
 		// make sure we can insert our desired controls where we want them {BR 2018-02-08}
 		// this is heavy-handed, but WC core doesn't add priorities for us, shikata ga nai ¯\_(ツ)_/¯
@@ -217,6 +219,7 @@ class WC_Extra_Sorting_Options {
 					'description' => sprintf( __( 'Select sorting options to add to your shop. %1$ssee documentation%2$s for more details.', 'woocommerce-extra-product-sorting-options' ),
 						'<a href="http://wordpress.org/plugins/woocommerce-extra-product-sorting-options/faq/" target="_blank">', '</a>'
 					),
+					'type'        => 'checkbox-multiple',
 					'section'     => 'woocommerce_product_catalog',
 					'priority'    => 11,
 					'choices'     => $this->get_settings_options(),
@@ -228,6 +231,8 @@ class WC_Extra_Sorting_Options {
 
 	/**
 	 * Sanitize the default sorting callback.
+	 *
+	 * @internal
 	 *
 	 * @since 2.7.0-dev
 	 *
@@ -247,7 +252,7 @@ class WC_Extra_Sorting_Options {
 	 *
 	 * @since 2.7.0-dev
 	 *
-	 * @return string[] settings options
+	 * @return array settings options
 	 */
 	protected function get_settings_options() {
 
@@ -279,7 +284,10 @@ class WC_Extra_Sorting_Options {
 		$new_default_name = get_option( 'wc_rename_default_sorting', '' );
 
 		if ( ! empty( $new_default_name ) ) {
-			$sortby = str_replace( 'Default sorting', $new_default_name, $sortby );
+
+			// get the current string in case it's translated
+			$existing = __( 'Default sorting', 'woocommerce' );
+			$sortby = str_replace( $existing, $new_default_name, $sortby );
 		}
 
 		// in WC 3.3+ this is a custom customizer option, so get it as such
