@@ -5,7 +5,7 @@
  * Description: Rename default sorting and optionally extra product sorting options.
  * Author: SkyVerge
  * Author URI: http://www.skyverge.com/
- * Version: 2.7.0-dev
+ * Version: 2.7.0
  * Text Domain: woocommerce-extra-product-sorting-options
  *
  * Copyright: (c) 2014-2018, SkyVerge, Inc. (info@skyverge.com)
@@ -56,7 +56,7 @@ add_action( 'plugins_loaded', 'wc_extra_sorting_options' );
 class WC_Extra_Sorting_Options {
 
 
-	const VERSION = '2.7.0-dev';
+	const VERSION = '2.7.0';
 
 	/** @var WC_Extra_Sorting_Options single instance of this plugin */
 	protected static $instance;
@@ -164,7 +164,7 @@ class WC_Extra_Sorting_Options {
 	 *
 	 * @internal
 	 *
-	 * @since 2.7.0-dev
+	 * @since 2.7.0
 	 *
 	 * @param \WP_Customize_Manager $wp_customize
 	 */
@@ -234,7 +234,7 @@ class WC_Extra_Sorting_Options {
 	 *
 	 * @internal
 	 *
-	 * @since 2.7.0-dev
+	 * @since 2.7.0
 	 *
 	 * @param string[] $values the option value
 	 * @return string[]
@@ -250,7 +250,7 @@ class WC_Extra_Sorting_Options {
 	/**
 	 * Gets the set of settings options.
 	 *
-	 * @since 2.7.0-dev
+	 * @since 2.7.0
 	 *
 	 * @return array settings options
 	 */
@@ -530,7 +530,7 @@ class WC_Extra_Sorting_Options {
 	 *
 	 * @internal
 	 *
-	 * @since 2.7.0-dev
+	 * @since 2.7.0
 	 *
 	 * @param string $version version number
 	 * @return bool true if > version
@@ -545,7 +545,7 @@ class WC_Extra_Sorting_Options {
 	 *
 	 * @internal
 	 *
-	 * @since 2.7.0-dev
+	 * @since 2.7.0
 	 *
 	 * @param string $version version number
 	 * @return bool true if < version
@@ -558,7 +558,7 @@ class WC_Extra_Sorting_Options {
 	/**
 	 * Helper to get the plugin URL.
 	 *
-	 * @since 2.7.0-dev
+	 * @since 2.7.0
 	 *
 	 * @return string the plugin URL
 	 */

@@ -30,7 +30,7 @@ defined( 'ABSPATH' ) or exit;
 /**
  * Multiple checkbox customize control class.
  *
- * @since 2.7.0-dev
+ * @since 2.7.0
  */
 class WC_ESO_Customize_Checkbox_Multiple extends WP_Customize_Control {
 
@@ -38,7 +38,7 @@ class WC_ESO_Customize_Checkbox_Multiple extends WP_Customize_Control {
 	/**
 	 * Enqueue scripts/styles.
 	 *
-	 * @since 2.7.0-dev
+	 * @since 2.7.0
 	 */
 	public function enqueue() {
 
@@ -49,7 +49,7 @@ class WC_ESO_Customize_Checkbox_Multiple extends WP_Customize_Control {
 	/**
 	 * Displays the control content.
 	 *
-	 * @since 2.7.0-dev
+	 * @since 2.7.0
 	 */
 	public function render_content() {
 

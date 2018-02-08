@@ -3,8 +3,8 @@ Contributors: skyverge, beka.rice, tamarazuk
 Tags: woocommerce, sorting, product sorting, orderby
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=paypal@skyverge.com&item_name=Donation+for+WooCommerce+Extra+Product+Sorting
 Requires at least: 4.4
-Tested up to: 4.9.2
-Stable Tag: 2.7.0-dev
+Tested up to: 4.9.4
+Stable Tag: 2.7.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -105,8 +105,9 @@ Since this feature wasn't at 100%, we have removed it and turned it into a code 
 
 == Changelog ==
 
-= 2018.nn.nn - version 2.7.0-dev =
- * Tweak: Moved settings to customizer panel in WooCommerce 3.3+
+= 2018.02.08 - version 2.7.0 =
+ * Tweak: Move settings to customizer panel in WooCommerce 3.3+
+ * Fix: Ensure default sorting can be renamed if translated
  * Misc: Add support for WooCommerce 3.3
  * Misc: Require WooCommerce 2.6.14 and WordPress 4.4
 
