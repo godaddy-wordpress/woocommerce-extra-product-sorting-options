@@ -175,8 +175,14 @@ class WC_Extra_Sorting_Options {
 
 		// make sure we can insert our desired controls where we want them {BR 2018-02-08}
 		// this is heavy-handed, but WC core doesn't add priorities for us, shikata ga nai ¯\_(ツ)_/¯
-		$wp_customize->get_control( 'woocommerce_catalog_columns' )->priority = 15;
-		$wp_customize->get_control( 'woocommerce_catalog_rows' )->priority    = 15;
+		$woocommerce_catalog_columns = $wp_customize->get_control('woocommerce_catalog_columns');
+		if ( $woocommerce_catalog_columns ) {
+			$woocommerce_catalog_columns->priority = 15;
+		}
+		$woocommerce_catalog_rows = $wp_customize->get_control('woocommerce_catalog_rows');
+		if ( $woocommerce_catalog_rows ) {
+			$woocommerce_catalog_rows->priority = 15;
+		}
 
 		$wp_customize->add_setting(
 			'wc_rename_default_sorting',
