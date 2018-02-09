@@ -5,7 +5,7 @@
  * Description: Rename default sorting and optionally extra product sorting options.
  * Author: SkyVerge
  * Author URI: http://www.skyverge.com/
- * Version: 2.7.0
+ * Version: 2.7.1-dev
  * Text Domain: woocommerce-extra-product-sorting-options
  *
  * Copyright: (c) 2014-2018, SkyVerge, Inc. (info@skyverge.com)
@@ -56,7 +56,7 @@ add_action( 'plugins_loaded', 'wc_extra_sorting_options' );
 class WC_Extra_Sorting_Options {
 
 
-	const VERSION = '2.7.0';
+	const VERSION = '2.7.1-dev';
 
 	/** @var WC_Extra_Sorting_Options single instance of this plugin */
 	protected static $instance;
@@ -175,13 +175,12 @@ class WC_Extra_Sorting_Options {
 
 		// make sure we can insert our desired controls where we want them {BR 2018-02-08}
 		// this is heavy-handed, but WC core doesn't add priorities for us, shikata ga nai ¯\_(ツ)_/¯
-		$woocommerce_catalog_columns = $wp_customize->get_control('woocommerce_catalog_columns');
-		if ( $woocommerce_catalog_columns ) {
-			$woocommerce_catalog_columns->priority = 15;
+		if ( $catalog_columns_control = $wp_customize->get_control( 'woocommerce_catalog_columns' ) ) {
+			$catalog_columns_control->priority = 15;
 		}
-		$woocommerce_catalog_rows = $wp_customize->get_control('woocommerce_catalog_rows');
-		if ( $woocommerce_catalog_rows ) {
-			$woocommerce_catalog_rows->priority = 15;
+
+		if ( $catalog_rows_control = $wp_customize->get_control( 'woocommerce_catalog_rows' ) ) {
+			$catalog_rows_control->priority = 15;
 		}
 
 		$wp_customize->add_setting(
