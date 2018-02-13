@@ -19,7 +19,7 @@ WooCommerce Extra Product Sorting Options provides options that extend the defau
 
 ### Changelog
 
-**2018.nn.nn - version 2.7.1-dev**
+**2018.02.13 - version 2.7.1**
  * Fix: PHP warnings for themes that don't support WooCommerce product column and row settings
 
 **2018.02.08 - version 2.7.0**   
