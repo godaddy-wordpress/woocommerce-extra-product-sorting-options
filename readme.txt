@@ -105,6 +105,9 @@ Since this feature wasn't at 100%, we have removed it and turned it into a code 
 
 == Changelog ==
 
+= 2018.nn.nn - version 2.7.2-dev.1 =
+ * Localization - Bundled French translation, thanks Jérôme Wymann!
+
 = 2018.02.13 - version 2.7.1 =
  * Fix: PHP warnings for themes that don't support WooCommerce product column and row settings
 
