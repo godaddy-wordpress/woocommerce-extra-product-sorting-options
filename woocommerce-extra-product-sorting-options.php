@@ -5,7 +5,7 @@
  * Description: Rename default sorting and optionally extra product sorting options.
  * Author: SkyVerge
  * Author URI: http://www.skyverge.com/
- * Version: 2.7.2-dev.1
+ * Version: 2.7.2
  * Text Domain: woocommerce-extra-product-sorting-options
  * Domain Path: /i18n/languages/
  *
@@ -21,7 +21,7 @@
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
  *
  * WC requires at least: 2.6.14
- * WC tested up to: 3.4.3
+ * WC tested up to: 3.4.4
  */
 
 defined( 'ABSPATH' ) or exit;
@@ -53,7 +53,7 @@ class WC_Extra_Sorting_Options {
 
 
 	/** plugin version number */
-	const VERSION = '2.7.2-dev.1';
+	const VERSION = '2.7.2';
 
 	/** required WooCommerce version number */
 	const MIN_WOOCOMMERCE_VERSION = '2.6.14';
@@ -495,13 +495,13 @@ class WC_Extra_Sorting_Options {
 	 * Checks if WooCommerce is active.
 	 *
 	 * @since 2.4.0
-	 * @deprecated 2.7.2-dev.1
+	 * @deprecated 2.7.2
 	 *
 	 * @return bool true if WooCommerce is active, false otherwise
 	 */
 	public static function is_woocommerce_active() {
 
-		_deprecated_function( 'WC_Extra_Sorting_Options::is_woocommerce_active', '2.7.2-dev.1', 'WC_Extra_Sorting_Options::is_plugin_active' );
+		_deprecated_function( 'WC_Extra_Sorting_Options::is_woocommerce_active', '2.7.2', 'WC_Extra_Sorting_Options::is_plugin_active' );
 		return self::is_plugin_active( 'woocommerce.php' );
 	}
 
@@ -509,7 +509,7 @@ class WC_Extra_Sorting_Options {
 	/**
 	 * Helper function to determine whether a plugin is active.
 	 *
-	 * @since 2.7.2-dev.1
+	 * @since 2.7.2
 	 *
 	 * @param string $plugin_name plugin name, as the plugin-filename.php
 	 * @return boolean true if the named plugin is installed and active

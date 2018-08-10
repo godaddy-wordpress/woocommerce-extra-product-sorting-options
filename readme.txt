@@ -3,8 +3,8 @@ Contributors: skyverge, beka.rice, tamarazuk
 Tags: woocommerce, sorting, product sorting, orderby
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=paypal@skyverge.com&item_name=Donation+for+WooCommerce+Extra+Product+Sorting
 Requires at least: 4.4
-Tested up to: 4.9.4
-Stable Tag: 2.7.2-dev.1
+Tested up to: 4.9.8
+Stable Tag: 2.7.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -105,7 +105,7 @@ Since this feature wasn't at 100%, we have removed it and turned it into a code 
 
 == Changelog ==
 
-= 2018.nn.nn - version 2.7.2-dev.1 =
+= 2018.08.10 - version 2.7.2 =
  * Localization - Bundled French translation, thanks Jérôme Wymann!
 
 = 2018.02.13 - version 2.7.1 =
