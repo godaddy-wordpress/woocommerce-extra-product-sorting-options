@@ -7,6 +7,7 @@
  * Author URI: http://www.skyverge.com/
  * Version: 2.7.2-dev.1
  * Text Domain: woocommerce-extra-product-sorting-options
+ * Domain Path: /i18n/languages/
  *
  * Copyright: (c) 2014-2018, SkyVerge, Inc. (info@skyverge.com)
  *
