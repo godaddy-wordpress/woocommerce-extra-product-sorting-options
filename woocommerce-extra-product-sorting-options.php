@@ -5,7 +5,7 @@
  * Description: Rename default sorting and optionally extra product sorting options.
  * Author: SkyVerge
  * Author URI: http://www.skyverge.com/
- * Version: 2.7.2
+ * Version: 2.7.3-dev.1
  * Text Domain: woocommerce-extra-product-sorting-options
  * Domain Path: /i18n/languages/
  *
@@ -21,7 +21,7 @@
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
  *
  * WC requires at least: 2.6.14
- * WC tested up to: 3.4.4
+ * WC tested up to: 3.5.0
  */
 
 defined( 'ABSPATH' ) or exit;
@@ -53,7 +53,7 @@ class WC_Extra_Sorting_Options {
 
 
 	/** plugin version number */
-	const VERSION = '2.7.2';
+	const VERSION = '2.7.3-dev.1';
 
 	/** required WooCommerce version number */
 	const MIN_WOOCOMMERCE_VERSION = '2.6.14';
@@ -354,8 +354,8 @@ class WC_Extra_Sorting_Options {
 
 		// Since a shortcode can be used on a non-WC page, we won't have $_GET['orderby'] --
 		// grab it from the passed in sorting args instead for non-WC pages.
-		// Don't use this on WC pages since it breaks the default option!
-		if ( ! is_woocommerce() && isset( $sort_args['orderby'] ) ) {
+		// Don't use this on WC archives so we don't break the default option
+		if ( ! is_post_type_archive( 'product' ) && ! is_shop() && isset( $sort_args['orderby'] ) ) {
 			$orderby_value = $sort_args['orderby'];
 		}
 
