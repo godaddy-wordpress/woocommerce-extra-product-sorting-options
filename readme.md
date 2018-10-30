@@ -19,8 +19,9 @@ WooCommerce Extra Product Sorting Options provides options that extend the defau
 
 ### Changelog
 
-**2018.10.22 - version 2.7.3**
+**2018.10.30 - version 2.7.3**
  * Fix: Respect product shortcode ordering on product pages
+ * Misc: Add support for WooCommerce 3.5
 
 **2018.08.10 - version 2.7.2**
  * Localization: Bundled French translation, thanks Jérôme Wymann!

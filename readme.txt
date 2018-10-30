@@ -107,6 +107,7 @@ Since this feature wasn't at 100%, we have removed it and turned it into a code 
 
 = 2018.nn.nn - version 2.7.3-dev.1 =
  * Fix: Respect product shortcode ordering on product pages
+ * Misc: Add support for WooCommerce 3.5
 
 = 2018.08.10 - version 2.7.2 =
  * Localization - Bundled French translation, thanks Jérôme Wymann!
