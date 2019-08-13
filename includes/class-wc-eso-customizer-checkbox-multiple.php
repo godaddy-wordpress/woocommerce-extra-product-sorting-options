@@ -82,4 +82,6 @@ class WC_ESO_Customize_Checkbox_Multiple extends WP_Customize_Control {
 		<?php endif;
 
 	}
+
+
 }

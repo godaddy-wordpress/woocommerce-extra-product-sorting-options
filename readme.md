@@ -6,7 +6,7 @@ WooCommerce Extra Product Sorting Options provides options that extend the defau
 
 ### Requirements
 
- - WooCommerce 2.6.14 or newer
+ - WooCommerce 3.0.9 or newer
  - WordPress 4.4 or newer
 
 ### Quick links &amp; info
@@ -18,6 +18,13 @@ WooCommerce Extra Product Sorting Options provides options that extend the defau
  - Text domain: `woocommerce-extra-product-sorting-options`
 
 ### Changelog
+
+**2019.08.13 - version 2.8.0**
+ * Misc: Add support for WooCommerce 3.7
+ * Misc: Remove support for WooCommerce 2.6
+ 
+**2019.06.12 - version 2.7.4**
+ * Misc: Declare support for WooCommerce 3.6 
 
 **2018.10.30 - version 2.7.3**
  * Fix: Respect product shortcode ordering on product pages

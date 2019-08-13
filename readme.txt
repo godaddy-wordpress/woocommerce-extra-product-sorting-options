@@ -3,8 +3,8 @@ Contributors: skyverge, beka.rice, tamarazuk
 Tags: woocommerce, sorting, product sorting, orderby
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=paypal@skyverge.com&item_name=Donation+for+WooCommerce+Extra+Product+Sorting
 Requires at least: 4.4
-Tested up to: 5.2.1
-Stable Tag: 2.7.4
+Tested up to: 5.2.2
+Stable Tag: 2.8.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -104,6 +104,10 @@ We removed randomized product sorting some time ago because it wasn't 100% funct
 Since this feature wasn't at 100%, we have removed it and turned it into a code snippet. If you need to re-add randomized sorting, please [use this code snippet](https://gist.github.com/bekarice/bac8b67064001ebc3bc2475424d99f87), ensuring that you [know how to add code to your site](http://skyverge.com/blog/add-custom-code-to-wordpress/).
 
 == Changelog ==
+
+= 2019.08.13 - version 2.8.0
+ * Misc: Add support for WooCommerce 3.7
+ * Misc: Remove support for WooCommerce 2.6
 
 = 2019.06.12 - version 2.7.4
  * Misc: Declare support for WooCommerce 3.6
