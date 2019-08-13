@@ -14,7 +14,7 @@ Rename the default product sorting option and add up to 5 new sorting options in
 
 WooCommerce Extra Product Sorting Options provides options that extend the default WooCommerce orderby options on the shop page. You can optionally set a new name for the default sorting (helpful if you've used this to create a custom sorting order), and can enable up to **5 new sorting options**: alphabetical, reverse alphabetical, on sale, review count, and availability product sorting.
 
-> **Requires: WooCommerce 2.6.14+ and WordPress 4.4+**
+> **Requires: WooCommerce 3.0.9+ and WordPress 4.4+**
 
 = Features =
 Includes options to:
@@ -47,7 +47,7 @@ We have a compatible plugin that will let you remove core WooCommerce sorting op
 
 == Installation ==
 
-1. Be sure you're running WooCommerce 2.6.14+ and WordPress 4.4+ in your shop.
+1. Be sure you're running WooCommerce 3.0.9+ and WordPress 4.4+ in your shop.
 2. Upload the entire `woocommerce-extra-product-sorting-options` folder to the `/wp-content/plugins/` directory, or upload the .zip file with the plugin under **Plugins &gt; Add New &gt; Upload**
 3. Activate the plugin through the **Plugins** menu in WordPress
 4. Go to **WooCommerce &gt; Settings &gt; Products &gt; Display**. The new settings are added after "Default Product Sorting". If you enable more sorting options, you can set these as new defaults as well.
