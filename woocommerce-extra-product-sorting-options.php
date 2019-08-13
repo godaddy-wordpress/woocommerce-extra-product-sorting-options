@@ -14,7 +14,6 @@
  * License: GNU General Public License v3.0
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
  *
- * @package   WC-Extra-Product-Sorting-Options
  * @author    SkyVerge
  * @category  Admin
  * @copyright Copyright (c) 2014-2019, SkyVerge, Inc.
@@ -25,13 +24,6 @@
  */
 
 defined( 'ABSPATH' ) or exit;
-
-/**
- * # Plugin Description
- *
- * Rename default sorting option - helpful if custom sorting is used.
- * Adds sorting by name, on sale, featured, availability, and random to shop pages.
- */
 
 // WC version check
 if ( ! WC_Extra_Sorting_Options::is_plugin_active( 'woocommerce.php' ) || version_compare( get_option( 'woocommerce_db_version' ), WC_Extra_Sorting_Options::MIN_WOOCOMMERCE_VERSION, '<' ) ) {
