@@ -9,6 +9,7 @@
 
 # NPM debug log
 npm-debug.log
+package-lock.json
 
 # build directory
 /build

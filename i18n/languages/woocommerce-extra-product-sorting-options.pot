@@ -2,11 +2,11 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: WooCommerce Extra Product Sorting Options 2.7.4\n"
+"Project-Id-Version: WooCommerce Extra Product Sorting Options 2.8.0-dev.1\n"
 "Report-Msgid-Bugs-To: "
 "https://wordpress.org/support/plugin/woocommerce-extra-product-sorting-"
 "options\n"
-"POT-Creation-Date: 2019-06-12 23:18:49+00:00\n"
+"POT-Creation-Date: 2019-08-13 05:49:51+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -108,29 +108,29 @@ msgstr ""
 msgid "Show featured items first"
 msgstr ""
 
-#: woocommerce-extra-product-sorting-options.php:443
+#: woocommerce-extra-product-sorting-options.php:445
 #. translators: Placeholders: %s - plugin name
 msgid "You cannot clone instances of %s."
 msgstr ""
 
-#: woocommerce-extra-product-sorting-options.php:454
+#: woocommerce-extra-product-sorting-options.php:456
 #. translators: Placeholders: %s - plugin name
 msgid "You cannot unserialize instances of %s."
 msgstr ""
 
-#: woocommerce-extra-product-sorting-options.php:474
+#: woocommerce-extra-product-sorting-options.php:476
 msgid "Configure"
 msgstr ""
 
-#: woocommerce-extra-product-sorting-options.php:475
+#: woocommerce-extra-product-sorting-options.php:477
 msgid "FAQ"
 msgstr ""
 
-#: woocommerce-extra-product-sorting-options.php:476
+#: woocommerce-extra-product-sorting-options.php:478
 msgid "Support"
 msgstr ""
 
-#: woocommerce-extra-product-sorting-options.php:556
+#: woocommerce-extra-product-sorting-options.php:543
 #. translators: Placeholders: %1$s <strong>, %2$s - </strong>, %3$s - version
 #. number, %4$s + %6$s - <a> tags, %5$s - </a>
 msgid ""
@@ -139,7 +139,7 @@ msgid ""
 "%6$srun the WooCommerce database upgrade%5$s."
 msgstr ""
 
-#: woocommerce-extra-product-sorting-options.php:712
+#: woocommerce-extra-product-sorting-options.php:699
 #. translators: Placeholders: %1$s - <strong>, %2$s - <strong>, %3$s - <a>,
 #. %4$s - </a>
 msgid ""
@@ -148,7 +148,7 @@ msgid ""
 "%3$sview our plugin notes%4$s."
 msgstr ""
 
-#: woocommerce-extra-product-sorting-options.php:734
+#: woocommerce-extra-product-sorting-options.php:721
 #. translators: Placeholders: %1$s - <strong>, %2$s - <strong>, %3$s - <a>,
 #. %4$s - </a>
 msgid ""
@@ -158,7 +158,7 @@ msgid ""
 "details."
 msgstr ""
 
-#: woocommerce-extra-product-sorting-options.php:739
+#: woocommerce-extra-product-sorting-options.php:726
 #. translators: Placeholders: %1$s - <strong>, %2$s - <strong>, %3$s - <a>,
 #. %4$s - </a>
 msgid ""

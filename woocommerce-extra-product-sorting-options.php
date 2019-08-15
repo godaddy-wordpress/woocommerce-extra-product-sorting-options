@@ -5,7 +5,7 @@
  * Description: Rename default sorting and optionally extra product sorting options.
  * Author: SkyVerge
  * Author URI: http://www.skyverge.com/
- * Version: 2.7.4
+ * Version: 2.8.0-dev.1
  * Text Domain: woocommerce-extra-product-sorting-options
  * Domain Path: /i18n/languages/
  *
@@ -14,24 +14,16 @@
  * License: GNU General Public License v3.0
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
  *
- * @package   WC-Extra-Product-Sorting-Options
  * @author    SkyVerge
  * @category  Admin
  * @copyright Copyright (c) 2014-2019, SkyVerge, Inc.
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
  *
- * WC requires at least: 2.6.14
- * WC tested up to: 3.6.4
+ * WC requires at least: 3.0.9
+ * WC tested up to: 3.7.0
  */
 
 defined( 'ABSPATH' ) or exit;
-
-/**
- * # Plugin Description
- *
- * Rename default sorting option - helpful if custom sorting is used.
- * Adds sorting by name, on sale, featured, availability, and random to shop pages.
- */
 
 // WC version check
 if ( ! WC_Extra_Sorting_Options::is_plugin_active( 'woocommerce.php' ) || version_compare( get_option( 'woocommerce_db_version' ), WC_Extra_Sorting_Options::MIN_WOOCOMMERCE_VERSION, '<' ) ) {
@@ -53,10 +45,10 @@ class WC_Extra_Sorting_Options {
 
 
 	/** plugin version number */
-	const VERSION = '2.7.4';
+	const VERSION = '2.8.0-dev.1';
 
 	/** required WooCommerce version number */
-	const MIN_WOOCOMMERCE_VERSION = '2.6.14';
+	const MIN_WOOCOMMERCE_VERSION = '3.0.9';
 
 	/** @var WC_Extra_Sorting_Options single instance of this plugin */
 	protected static $instance;
@@ -423,12 +415,14 @@ class WC_Extra_Sorting_Options {
 	 *
 	 * @since 2.2.2
 	 * @see wc_extra_sorting_options()
-	 * @return WC_Extra_Sorting_Options
+	 * @return \WC_Extra_Sorting_Options
 	 */
 	public static function instance() {
-		if ( is_null( self::$instance ) ) {
+
+		if ( null === self::$instance ) {
 			self::$instance = new self();
 		}
+
 		return self::$instance;
 	}
 
@@ -488,21 +482,6 @@ class WC_Extra_Sorting_Options {
 	public function load_translation() {
 		// localization
 		load_plugin_textdomain( 'woocommerce-extra-product-sorting-options', false, dirname( plugin_basename( __FILE__ ) ) . '/i18n/languages' );
-	}
-
-
-	/**
-	 * Checks if WooCommerce is active.
-	 *
-	 * @since 2.4.0
-	 * @deprecated 2.7.2
-	 *
-	 * @return bool true if WooCommerce is active, false otherwise
-	 */
-	public static function is_woocommerce_active() {
-
-		_deprecated_function( 'WC_Extra_Sorting_Options::is_woocommerce_active', '2.7.2', 'WC_Extra_Sorting_Options::is_plugin_active' );
-		return self::is_plugin_active( 'woocommerce.php' );
 	}
 
 
@@ -758,7 +737,7 @@ class WC_Extra_Sorting_Options {
  * Returns the One True Instance of WC Extra Sorting.
  *
  * @since 2.2.2
- * @return WC_Extra_Sorting_Options
+ * @return \WC_Extra_Sorting_Options
  */
 function wc_extra_sorting_options() {
 	return WC_Extra_Sorting_Options::instance();
