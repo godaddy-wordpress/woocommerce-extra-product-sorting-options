@@ -106,6 +106,7 @@ Since this feature wasn't at 100%, we have removed it and turned it into a code 
 == Changelog ==
 
 = 2020.nn.nn - version 2.8.3-dev.1 =
+ * Misc - Add support for WooCommerce 4.0
 
 = 2020.02.05 - version 2.8.2 =
  * Misc - Add support for WooCommerce 3.9
