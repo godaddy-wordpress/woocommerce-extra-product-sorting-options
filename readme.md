@@ -19,7 +19,7 @@ WooCommerce Extra Product Sorting Options provides options that extend the defau
 
 ### Changelog
 
-**2020.nn.nn - version 2.8.4-dev.1
+**2020.05.04 - version 2.8.4
  * Misc - Add support for WooCommerce 4.1
 
 **2020.03.10 - version 2.8.3
