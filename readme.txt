@@ -106,6 +106,7 @@ Since this feature wasn't at 100%, we have removed it and turned it into a code 
 == Changelog ==
 
 = 2021.nn.nn - version 2.9.0-dev.1 =
+ * Feature - Allow removing default sorting options
  * Misc - Require WordPress 4.6+
  * Misc - Require WooCommerce 3.5+
  * Misc - Require PHP 5.6+
