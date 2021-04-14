@@ -73,17 +73,10 @@ class WC_Extra_Sorting_Options {
 		// load translations
 		add_action( 'init', array( $this, 'load_translation' ) );
 
-		// add settings to customizer in WC 3.3+
-		if ( self::is_wc_gte( '3.3' ) ) {
-			add_action( 'customize_register', array( $this, 'add_customizer_settings' ) );
-		}
+		// add settings to customizer
+		add_action( 'customize_register', array( $this, 'add_customizer_settings' ) );
 
 		if ( is_admin() && ! is_ajax() ) {
-
-			// add settings to product display settings
-			if ( self::is_wc_lt( '3.3' ) ) {
-				add_filter( 'woocommerce_product_settings', array( $this, 'add_settings' ) );
-			}
 
 			// add plugin links
 			add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'add_plugin_links' ) );
@@ -94,60 +87,22 @@ class WC_Extra_Sorting_Options {
 	}
 
 
-	/** Plugin methods ******************************************************/
-
-
 	/**
-	 * Add Settings to WooCommerce Settings > Products page after "Default Product Sorting" setting.
+	 * Adds Settings to WooCommerce Settings > Products page after "Default Product Sorting" setting.
 	 *
 	 * @since 1.0.0
+	 * @deprecated 2.9.0-dev.1
+	 *
+	 * @TODO remove this deprecated method by April 2022 or by version 3.0.0 {FN 2021-04-14}
+	 *
 	 * @param array $settings the current product settings
 	 * @return array updated settings
 	 */
 	public function add_settings( $settings ) {
 
-		$updated_settings = array();
+		wc_deprecated_function( __METHOD__ ,'2.9.0' );
 
-		foreach ( $settings as $setting ) {
-
-			$updated_settings[] = $setting;
-
-			if ( isset( $setting['id'] ) && 'woocommerce_default_catalog_orderby' === $setting['id'] ) {
-
-				$new_settings = array(
-
-					array(
-						'title'    => __( 'New Default Sorting Label', 'woocommerce-extra-product-sorting-options' ),
-						'id'       => 'wc_rename_default_sorting',
-						'type'     => 'text',
-						'default'  => '',
-						'desc_tip' => __( 'If desired, enter a new name for the default sorting option, e.g., &quot;Our Sorting&quot;', 'woocommerce-extra-product-sorting-options' ),
-					),
-
-					array(
-						'name'              => __( 'Add Product Sorting:', 'woocommerce-extra-product-sorting-options' ),
-						'desc_tip'          => __( 'Select sorting options to add to your shop. "Available Stock" sorts products with the most stock first.', 'woocommerce-extra-product-sorting-options' ),
-						/* translators: Placeholders: %1$s - <strong>, %2$s - </strong>, %3$s - <a>, %4$s - </a> */
-						'desc'              => '<br />' . sprintf( __( '"On-sale First" shows %1$ssimple%2$s products on sale first; %3$ssee documentation%4$s for more details.', 'woocommerce-extra-product-sorting-options' ),
-								'<strong>', '</strong>',
-								'<a href="http://wordpress.org/plugins/woocommerce-extra-product-sorting-options/faq/" target="_blank">', '</a>'
-							),
-						'id'                => 'wc_extra_product_sorting_options',
-						'type'              => 'multiselect',
-						'class'             => 'chosen_select',
-						'options'           => $this->get_settings_options(),
-						'default'           => '',
-						'custom_attributes' => array(
-							'data-placeholder' => __( 'Select sorting options to add to your shop.', 'woocommerce-extra-product-sorting-options' ),
-						),
-					),
-				);
-
-				$updated_settings = array_merge( $updated_settings, $new_settings );
-			}
-		}
-
-		return $updated_settings;
+		return $settings;
 	}
 
 
@@ -253,19 +208,13 @@ class WC_Extra_Sorting_Options {
 	 */
 	protected function get_settings_options() {
 
-		$options = array(
+		return [
 			'alphabetical'  => __( 'Name: A to Z',    'woocommerce-extra-product-sorting-options' ),
 			'reverse_alpha' => __( 'Name: Z to A',    'woocommerce-extra-product-sorting-options' ),
 			'by_stock'      => __( 'Available Stock', 'woocommerce-extra-product-sorting-options' ),
 			'review_count'  => __( 'Review Count',    'woocommerce-extra-product-sorting-options' ),
 			'on_sale_first' => __( 'On-sale First',   'woocommerce-extra-product-sorting-options' ),
-		);
-
-		if ( ! self::is_wc_gte( '3.0' ) ) {
-			$options['featured_first'] = __( 'Featured First', 'woocommerce-extra-product-sorting-options' );
-		}
-
-		return $options;
+		];
 	}
 
 
@@ -287,39 +236,26 @@ class WC_Extra_Sorting_Options {
 			$sortby = str_replace( $existing, $new_default_name, $sortby );
 		}
 
-		// in WC 3.3+ this is a custom customizer option, so get it as such
-		$new_sorting_options =  self::is_wc_gte( '3.3' ) ? get_theme_mod( 'wc_extra_product_sorting_options', array() ) : get_option( 'wc_extra_product_sorting_options', array() );
+		$new_sorting_options = get_theme_mod( 'wc_extra_product_sorting_options', array() );
 
 		foreach( $new_sorting_options as $option ) {
 
 			switch ( $option ) {
-
 				case 'alphabetical':
-					$sortby['alphabetical']   = __( 'Sort by name: A to Z', 'woocommerce-extra-product-sorting-options' );
+					$sortby['alphabetical']  = __( 'Sort by name: A to Z', 'woocommerce-extra-product-sorting-options' );
 				break;
-
 				case 'reverse_alpha':
-					$sortby['reverse_alpha']  = __( 'Sort by name: Z to A', 'woocommerce-extra-product-sorting-options' );
+					$sortby['reverse_alpha'] = __( 'Sort by name: Z to A', 'woocommerce-extra-product-sorting-options' );
 				break;
-
 				case 'by_stock':
-					$sortby['by_stock']       = __( 'Sort by availability', 'woocommerce-extra-product-sorting-options' );
+					$sortby['by_stock']      = __( 'Sort by availability', 'woocommerce-extra-product-sorting-options' );
 				break;
-
 				case 'review_count':
-					$sortby['review_count']   = __( 'Sort by review count', 'woocommerce-extra-product-sorting-options' );
+					$sortby['review_count']  = __( 'Sort by review count', 'woocommerce-extra-product-sorting-options' );
 				break;
-
 				case 'on_sale_first':
-					$sortby['on_sale_first']  = __( 'Show sale items first', 'woocommerce-extra-product-sorting-options' );
+					$sortby['on_sale_first'] = __( 'Show sale items first', 'woocommerce-extra-product-sorting-options' );
 				break;
-
-				case 'featured_first':
-					if ( ! WC_Extra_Sorting_Options::is_wc_gte( '3.0' ) ) {
-						$sortby['featured_first'] = __( 'Show featured items first', 'woocommerce-extra-product-sorting-options' );
-					}
-				break;
-
 			}
 		}
 
@@ -391,16 +327,6 @@ class WC_Extra_Sorting_Options {
 				$sort_args['meta_key'] = '_sale_price';
 
 			break;
-
-			case 'featured_first':
-
-				if ( ! WC_Extra_Sorting_Options::is_wc_gte( '3.0' ) ) {
-					$sort_args['orderby']  = array( 'meta_value' => 'DESC', $fallback => $fallback_order );
-					$sort_args['meta_key'] = '_featured';
-				}
-
-			break;
-
 		}
 
 		return $sort_args;
@@ -453,18 +379,14 @@ class WC_Extra_Sorting_Options {
 	 * Adds plugin page links.
 	 *
 	 * @since 2.2.2
+	 *
 	 * @param array $links all plugin links
 	 * @return array $links all plugin links + our custom links (i.e., "Settings")
 	 */
 	public function add_plugin_links( $links ) {
 
-		if ( self::is_wc_gte( '3.3' ) ) {
-			$configure_url = admin_url( 'customize.php?url=' . wc_get_page_permalink( 'shop' ) . '&autofocus[section]=woocommerce_product_catalog' );
-		} else {
-			$configure_url = admin_url( 'admin.php?page=wc-settings&tab=products&section=display' );
-		}
-
-		$plugin_links = array(
+		$configure_url = admin_url( 'customize.php?url=' . wc_get_page_permalink( 'shop' ) . '&autofocus[section]=woocommerce_product_catalog' );
+		$plugin_links  = array(
 			'<a href="' . esc_url( $configure_url ) . '">' . __( 'Configure', 'woocommerce-extra-product-sorting-options' ) . '</a>',
 			'<a href="https://wordpress.org/plugins/woocommerce-extra-product-sorting-options/faq/" target="_blank">'. __( 'FAQ', 'woocommerce-extra-product-sorting-options' ) . '</a>',
 			'<a href="https://wordpress.org/support/plugin/woocommerce-extra-product-sorting-options" target="_blank">' . __( 'Support', 'woocommerce-extra-product-sorting-options' ) . '</a>',
@@ -480,7 +402,7 @@ class WC_Extra_Sorting_Options {
 	 * @since 2.1.1
 	 */
 	public function load_translation() {
-		// localization
+		// s
 		load_plugin_textdomain( 'woocommerce-extra-product-sorting-options', false, dirname( plugin_basename( __FILE__ ) ) . '/i18n/languages' );
 	}
 
@@ -551,11 +473,17 @@ class WC_Extra_Sorting_Options {
 	 * @internal
 	 *
 	 * @since 2.7.0
+	 * @deprecated 2.9.0-dev.1
+	 *
+	 * @TODO remove this method by version 3.0.0 or April 2022 {FN 2021-04-14}
 	 *
 	 * @param string $version version number
-	 * @return bool true if > version
+	 * @return bool
 	 */
 	public static function is_wc_gte( $version ) {
+
+		wc_deprecated_function( __METHOD__, '2.9.0', 'version_compare()' );
+
 		return defined( 'WC_VERSION' ) && WC_VERSION && version_compare( WC_VERSION, $version, '>=' );
 	}
 
@@ -679,54 +607,52 @@ class WC_Extra_Sorting_Options {
 
 
 	/**
-	 * Renders a notice when upgrading to v2.5 if random sorting was enabled
-	 *  as this was removed from the plugin.
+	 * Renders a notice when upgrading to v2.5 if random sorting was enabled, as this was removed from the plugin.
+	 *
+	 * @internal
 	 *
 	 * @since 2.5.0
 	 */
 	public function render_2_5_upgrade_notice() {
 
-		$message = sprintf(
-			/* translators: Placeholders: %1$s - <strong>, %2$s - <strong>, %3$s - <a>, %4$s - </a> */
-			esc_html__( '%1$sWooCommerce Extra Product Sorting Options settings have changed.%2$s Random sorting is now disabled. If you need to re-add this option, please %3$sview our plugin notes%4$s.', 'woocommerce-extra-product-sorting-options' ),
-			'<strong>',
-			'</strong>',
-			'<a href="http://wordpress.org/plugins/woocommerce-extra-product-sorting-options/other_notes/" target="_blank">',
-			'&nbsp;&raquo;</a>'
-		);
-
-		printf( '<div class="notice notice-warning is-dismissible"><p>%s</p></div>', $message );
+		?>
+		<div class="notice notice-warning is-dismissible">
+			<p>
+				<?php printf(
+					/* translators: Placeholders: %1$s - <strong>, %2$s - <strong>, %3$s - <a>, %4$s - </a> */
+					esc_html__( '%1$sWooCommerce Extra Product Sorting Options settings have changed.%2$s Random sorting is now disabled. If you need to re-add this option, please %3$sview our plugin notes%4$s.', 'woocommerce-extra-product-sorting-options' ),
+					'<strong>', '</strong>',
+					'<a href="http://wordpress.org/plugins/woocommerce-extra-product-sorting-options/other_notes/" target="_blank">', '&nbsp;&raquo;</a>'
+				); ?>
+			</p>
+		</div>
+		<?php
 	}
 
 
 	/**
-	 * Render a notice for stores when upgrading to v2.6 if they use featured-first sorting
-	 *  as this is not available when upgrading to WooCommerce 3.0+.
+	 * Render a notice for stores when upgrading to v2.6 if they use featured-first sorting, as this is not available when upgrading to WooCommerce 3.0+.
+	 *
+	 * @internal
 	 *
 	 * @since 2.6.0
 	 */
 	public function render_wc_30_update_notice() {
 
-		if ( WC_Extra_Sorting_Options::is_wc_gte( '3.0' ) ) {
-
-			/* translators: Placeholders: %1$s - <strong>, %2$s - <strong>, %3$s - <a>, %4$s - </a> */
-			$text = __( '%1$sWooCommerce Extra Product Sorting Options settings have changed.%2$s Featured sorting is no longer possible with WooCommerce 3.0+ as this product data has changed. Please %3$sview our plugin notes%4$s for more details.', 'woocommerce-extra-product-sorting-options' );
-
-		} else {
-
-			/* translators: Placeholders: %1$s - <strong>, %2$s - <strong>, %3$s - <a>, %4$s - </a> */
-			$text = __( 'Please note: %1$sWooCommerce Extra Product Sorting Options settings%2$s will change when you upgrade to WooCommerce 3.0+. Featured sorting is not possible with WooCommerce 3.0+ as this product data will change. Please %3$sview our plugin notes%4$s for more details.', 'woocommerce-extra-product-sorting-options' );
-		}
-
-		$message = sprintf(
-			esc_html( $text ),
-			'<strong>',
-			'</strong>',
-			'<a href="http://wordpress.org/plugins/woocommerce-extra-product-sorting-options/other_notes/" target="_blank">',
-			'&nbsp;&raquo;</a>'
-		);
-
-		printf( '<div class="notice notice-warning is-dismissible"><p>%s</p></div>', $message );
+		?>
+		<div class="notice notice-warning is-dismissible">
+			<p>
+				<?php printf(
+					/* translators: Placeholders: %1$s - <strong>, %2$s - <strong>, %3$s - <a>, %4$s - </a> */
+					esc_html__( '%1$sWooCommerce Extra Product Sorting Options settings have changed.%2$s Featured sorting is no longer possible with WooCommerce 3.0+ as this product data has changed. Please %3$sview our plugin notes%4$s for more details.', 'woocommerce-extra-product-sorting-options' ),
+					'<strong>',
+					'</strong>',
+					'<a href="http://wordpress.org/plugins/woocommerce-extra-product-sorting-options/other_notes/" target="_blank">',
+					'&nbsp;&raquo;</a>'
+				); ?>
+			</p>
+		</div>
+		<?php
 	}
 
 
