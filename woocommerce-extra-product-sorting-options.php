@@ -173,7 +173,35 @@ class WC_Extra_Sorting_Options {
 					'type'        => 'checkbox-multiple',
 					'section'     => 'woocommerce_product_catalog',
 					'priority'    => 11,
-					'choices'     => $this->get_settings_options(),
+					'choices'     => $this->get_extra_sorting_setting_options(),
+				]
+			)
+		);
+
+		$wp_customize->add_setting(
+			'wc_remove_product_sorting_options',
+			[
+				'default'           => [],
+				'capability'        => 'manage_woocommerce',
+				'sanitize_callback' => [ $this, 'sanitize_option_list' ],
+			]
+		);
+
+		$wp_customize->add_control(
+			new WC_ESO_Customize_Checkbox_Multiple(
+				$wp_customize,
+				'wc_remove_product_sorting_options',
+				[
+					'label'       => __( 'Remove Product Sorting:', 'woocommerce-extra-product-sorting-options' ),
+					'description' => sprintf(
+						/* translators: Placeholders: %1$s - <a>, %2$s - </a> */
+						__( 'Select default sorting options to remove from your shop. %1$ssee documentation%2$s for more details.', 'woocommerce-extra-product-sorting-options' ),
+						'<a href="http://wordpress.org/plugins/woocommerce-extra-product-sorting-options/faq/" target="_blank">', '</a>'
+					),
+					'type'        => 'checkbox-multiple',
+					'section'     => 'woocommerce_product_catalog',
+					'priority'    => 11,
+					'choices'     => $this->get_default_sorting_setting_options(),
 				]
 			)
 		);
@@ -202,10 +230,28 @@ class WC_Extra_Sorting_Options {
 	 * Gets the set of settings options.
 	 *
 	 * @since 2.7.0
+	 * @deprecated 2.9.0-dev.1
+	 *
+	 * @TODO remove this method by version 3.0.0 or by April 2022 {FN 2021-04-14}
 	 *
 	 * @return array settings options
 	 */
 	protected function get_settings_options() {
+
+		wc_deprecated_function( __METHOD__, '2.9.0' );
+
+		return $this->get_extra_sorting_setting_options();
+	}
+
+
+	/**
+	 * Gets the set of settings options.
+	 *
+	 * @since 2.7.0
+	 *
+	 * @return array settings options
+	 */
+	protected function get_extra_sorting_setting_options() {
 
 		return [
 			'alphabetical'  => __( 'Name: A to Z',    'woocommerce-extra-product-sorting-options' ),
@@ -214,6 +260,29 @@ class WC_Extra_Sorting_Options {
 			'review_count'  => __( 'Review Count',    'woocommerce-extra-product-sorting-options' ),
 			'on_sale_first' => __( 'On-sale First',   'woocommerce-extra-product-sorting-options' ),
 		];
+	}
+
+
+	/**
+	 * Gets WooCommerce default sorting options.
+	 *
+	 * WooCommerce doesn't store these into an option, but hardcodes them wrapped in a filter.
+	 *
+	 * @since 2.9.0-dev.1
+	 *
+	 * @return array
+	 */
+	private function get_default_sorting_setting_options() {
+
+		/* WooCommerce textdomain used intentionally - WooCommerce core filter documented in wc-template-functions.php */
+		return (array) apply_filters( 'woocommerce_catalog_orderby', [
+			'menu_order' => __( 'Default sorting', 'woocommerce' ),
+			'popularity' => __( 'Sort by popularity', 'woocommerce' ),
+			'rating'     => __( 'Sort by average rating', 'woocommerce' ),
+			'date'       => __( 'Sort by latest', 'woocommerce' ),
+			'price'      => __( 'Sort by price: low to high', 'woocommerce' ),
+			'price-desc' => __( 'Sort by price: high to low', 'woocommerce' ),
+		] );
 	}
 
 
