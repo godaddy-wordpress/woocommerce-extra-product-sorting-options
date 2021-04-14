@@ -60,16 +60,15 @@ class WC_Extra_Sorting_Options {
 	public function __construct() {
 
 		// modify product sorting settings
-		add_filter( 'woocommerce_catalog_orderby', [ $this, 'modify_sorting_settings' ] );
+		add_filter( 'woocommerce_catalog_orderby',                 [ $this, 'modify_sorting_settings' ], 99 );
+		// add new sorting options to order by dropdowns
+		add_filter( 'woocommerce_default_catalog_orderby_options', [ $this, 'modify_sorting_settings' ], 99 );
 
-		// add new sorting options to orderby dropdown
-		add_filter( 'woocommerce_default_catalog_orderby_options', [ $this, 'modify_sorting_settings' ] );
+		// unhook the sorting dropdown completely if there are no options
+		add_action( 'wp', [ $this, 'maybe_remove_catalog_orderby' ], 99 );
 
 		// add new product sorting arguments
 		add_filter( 'woocommerce_get_catalog_ordering_args', [ $this, 'add_new_shop_ordering_args' ] );
-
-		// unhook the sorting dropdown completely if there are no options
-		add_action( 'wp', [ $this, 'maybe_remove_catalog_orderby' ], 999 );
 
 		// load translations
 		add_action( 'init', [ $this, 'load_translation' ] );
@@ -204,7 +203,8 @@ class WC_Extra_Sorting_Options {
 					'type'        => 'checkbox-multiple',
 					'section'     => 'woocommerce_product_catalog',
 					'priority'    => 11,
-					'choices'     => $this->get_core_sorting_setting_options(),
+					// ensures the options added by the other setting are not listed in this control
+					'choices'     => array_diff_key( $this->get_core_sorting_setting_options(), $this->get_extra_sorting_setting_options() ),
 				]
 			)
 		);
@@ -269,7 +269,7 @@ class WC_Extra_Sorting_Options {
 	/**
 	 * Gets WooCommerce default sorting options as settings options.
 	 *
-	 * WooCommerce doesn't store these into an option, but hardcodes them wrapped in a filter.
+	 * WooCommerce doesn't store these into an option, and rather hardcodes them wrapped in a filter.
 	 *
 	 * @since 2.9.0-dev.1
 	 *
@@ -290,52 +290,60 @@ class WC_Extra_Sorting_Options {
 
 
 	/**
-	 * Changes "Default Sorting" to the custom name and adds new sorting options.
+	 * Modifies WooCommerce sorting settings.
 	 *
-	 * Added to admin + frontend dropdown.
+	 * - Changes "Default Sorting" to the custom name and adds new sorting options
+	 * - Adds any extra sorting options
+	 * - Removes any default sorting options
+	 *
+	 * Effective in both admin and frontend options.
 	 *
 	 * @internal
 	 *
 	 * @since 2.0.0
 	 *
-	 * @param array $sortby array or sorting option keys and names
-	 * @return array the updated sort by options
+	 * @param array $order_by associative array of sorting option keys and names
+	 * @return array
 	 */
-	public function modify_sorting_settings( $sortby ) {
+	public function modify_sorting_settings( $order_by ) {
 
-		$new_default_name = get_option( 'wc_rename_default_sorting', '' );
+		// maybe update the default sorting label
+		$new_default_name = get_theme_mod( 'wc_rename_default_sorting', '' );
 
-		if ( ! empty( $new_default_name ) ) {
-
-			// get the current string in case it's translated
-			$existing = __( 'Default sorting', 'woocommerce' );
-			$sortby = str_replace( $existing, $new_default_name, $sortby );
+		if ( ! empty( $new_default_name ) && ( $default_option = get_option( 'woocommerce_default_catalog_orderby', 'menu_order' ) ) ) {
+			$order_by[ $default_option ] = $new_default_name;
 		}
 
+		// add any extra sorting options
 		$new_sorting_options = get_theme_mod( 'wc_extra_product_sorting_options', [] );
 
 		foreach( $new_sorting_options as $option ) {
 
 			switch ( $option ) {
 				case 'alphabetical':
-					$sortby['alphabetical']  = __( 'Sort by name: A to Z', 'woocommerce-extra-product-sorting-options' );
+					$order_by['alphabetical']  = __( 'Sort by name: A to Z', 'woocommerce-extra-product-sorting-options' );
 				break;
 				case 'reverse_alpha':
-					$sortby['reverse_alpha'] = __( 'Sort by name: Z to A', 'woocommerce-extra-product-sorting-options' );
+					$order_by['reverse_alpha'] = __( 'Sort by name: Z to A', 'woocommerce-extra-product-sorting-options' );
 				break;
 				case 'by_stock':
-					$sortby['by_stock']      = __( 'Sort by availability', 'woocommerce-extra-product-sorting-options' );
+					$order_by['by_stock']      = __( 'Sort by availability', 'woocommerce-extra-product-sorting-options' );
 				break;
 				case 'review_count':
-					$sortby['review_count']  = __( 'Sort by review count', 'woocommerce-extra-product-sorting-options' );
+					$order_by['review_count']  = __( 'Sort by review count', 'woocommerce-extra-product-sorting-options' );
 				break;
 				case 'on_sale_first':
-					$sortby['on_sale_first'] = __( 'Show sale items first', 'woocommerce-extra-product-sorting-options' );
+					$order_by['on_sale_first'] = __( 'Show sale items first', 'woocommerce-extra-product-sorting-options' );
 				break;
 			}
 		}
 
-		return $sortby;
+		// remove any default sorting options
+		foreach ( (array) get_theme_mod( 'wc_remove_product_sorting', [] ) as $removed_option ) {
+			unset( $order_by[ $removed_option ] );
+		}
+
+		return $order_by;
 	}
 
 
@@ -356,7 +364,8 @@ class WC_Extra_Sorting_Options {
 		if ( isset( $_GET['orderby'] ) ) {
 			$orderby_value = wc_clean( $_GET['orderby'] );
 		} else {
-			$orderby_value = apply_filters( 'woocommerce_default_catalog_orderby', get_option( 'woocommerce_default_catalog_orderby' ) );
+			/* WooCommerce core filter defined in wc-template-functions.php */
+			$orderby_value = (string) apply_filters( 'woocommerce_default_catalog_orderby', get_option( 'woocommerce_default_catalog_orderby', 'menu_order' ) );
 		}
 
 		// Since a shortcode can be used on a non-WC page, we won't have $_GET['orderby'].
@@ -366,8 +375,25 @@ class WC_Extra_Sorting_Options {
 			$orderby_value = $sort_args['orderby'];
 		}
 
-		$fallback       = apply_filters( 'wc_extra_sorting_options_fallback', 'title', $orderby_value );
-		$fallback_order = apply_filters( 'wc_extra_sorting_options_fallback_order', 'ASC', $orderby_value );
+		/**
+		 * Filters the extra sorting option fallback.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $fallback defaults to 'title'
+		 * @param string $orderby_value
+		 */
+		$fallback = (string) apply_filters( 'wc_extra_sorting_options_fallback', 'title', $orderby_value );
+
+		/**
+		 * Filters the extra sorting option order.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $fallback_order defaults to 'ASC' (ascending)
+		 * @param string $orderby_value
+		 */
+		$fallback_order = (string) apply_filters( 'wc_extra_sorting_options_fallback_order', 'ASC', $orderby_value );
 
 		switch( $orderby_value ) {
 
@@ -421,19 +447,12 @@ class WC_Extra_Sorting_Options {
 	 */
 	public function maybe_remove_catalog_orderby() {
 
-		$enabled              = array_diff( array_keys( $this->get_core_sorting_options() ), array_values( $this->get_removed_sorting_options() ) );
-		$active_plugins       = (array) get_option( 'active_plugins', [] );
-		$extra_sorting_plugin = 'woocommerce-extra-product-sorting-options/woocommerce-extra-product-sorting-options.php';
-
-		if ( is_multisite() ) {
-			$active_plugins = array_merge( $active_plugins, get_site_option( 'active_sitewide_plugins', [] ) );
-		}
-
-		// check for our extra sorting options plugin, just in case there are custom options added, too
-		if ( array_key_exists( $extra_sorting_plugin, $active_plugins ) || in_array( $extra_sorting_plugin, $active_plugins, false ) ) {
-			$extra_sorting = get_theme_mod( 'wc_extra_product_sorting_options', [] );
-			$enabled       = array_merge( $enabled, $extra_sorting );
-		}
+		// sums up all the default and extra sorting options, minus the default ones removed, if any
+		$enabled = array_filter( array_diff(
+			array_keys( $this->get_core_sorting_setting_options() ),
+			array_values( get_theme_mod( 'wc_remove_product_sorting', [] ) ),
+			(array) get_theme_mod( 'wc_extra_product_sorting_options', [] )
+		) );
 
 		/**
 		 * Filters whether the sorting dropdown should be unhooked from the shop page when there are no core sorting options.
@@ -444,7 +463,7 @@ class WC_Extra_Sorting_Options {
 		 *
 		 * @param bool $remove true if the dropdown should be removed
 		 */
-		if ( empty( $enabled ) && (bool) apply_filters( 'wc_remove_sorting_options_hide_dropdown', true ) ) {
+		if ( (bool) apply_filters( 'wc_remove_sorting_options_hide_dropdown', empty( $enabled ) ) ) {
 
 			// WooCommerce core output
 			remove_action( 'woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 30 );
@@ -722,8 +741,8 @@ class WC_Extra_Sorting_Options {
 		}
 
 		// add the setting option for removing default sorting options unless migrated from legacy free plugin
-		if ( version_compare( $installed_version, '2.9.0', '<' ) && ! get_option( 'wc_remove_product_sorting' ) ) {
-			update_option( 'wc_remove_product_sorting', [] );
+		if ( version_compare( $installed_version, '2.9.0', '<' ) && ! get_theme_mod( 'wc_remove_product_sorting' ) ) {
+			set_theme_mod( 'wc_remove_product_sorting', [] );
 		}
 
 		// update the installed version option
