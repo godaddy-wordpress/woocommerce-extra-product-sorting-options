@@ -179,7 +179,7 @@ class WC_Extra_Sorting_Options {
 		);
 
 		$wp_customize->add_setting(
-			'wc_remove_product_sorting_options',
+			'wc_remove_product_sorting',
 			[
 				'default'           => [],
 				'capability'        => 'manage_woocommerce',
@@ -190,7 +190,7 @@ class WC_Extra_Sorting_Options {
 		$wp_customize->add_control(
 			new WC_ESO_Customize_Checkbox_Multiple(
 				$wp_customize,
-				'wc_remove_product_sorting_options',
+				'wc_remove_product_sorting',
 				[
 					'label'       => __( 'Remove Product Sorting:', 'woocommerce-extra-product-sorting-options' ),
 					'description' => sprintf(
@@ -201,7 +201,7 @@ class WC_Extra_Sorting_Options {
 					'type'        => 'checkbox-multiple',
 					'section'     => 'woocommerce_product_catalog',
 					'priority'    => 11,
-					'choices'     => $this->get_default_sorting_setting_options(),
+					'choices'     => $this->get_core_sorting_setting_options(),
 				]
 			)
 		);
@@ -272,7 +272,7 @@ class WC_Extra_Sorting_Options {
 	 *
 	 * @return array
 	 */
-	private function get_default_sorting_setting_options() {
+	private function get_core_sorting_setting_options() {
 
 		/* WooCommerce textdomain used intentionally - WooCommerce core filter documented in wc-template-functions.php */
 		return (array) apply_filters( 'woocommerce_catalog_orderby', [
@@ -658,6 +658,11 @@ class WC_Extra_Sorting_Options {
 		// copy enabled sorting settings to theme mods for WC 3.3+ usage
 		if ( version_compare( $installed_version, '2.6.2', '<' ) ) {
 			set_theme_mod( 'wc_extra_product_sorting_options', get_option( 'wc_extra_product_sorting_options', [] ) );
+		}
+
+		// add the setting option for removing default sorting options unless migrated from legacy free plugin
+		if ( version_compare( $installed_version, '2.9.0', '<' ) && ! get_option( 'wc_remove_product_sorting' ) ) {
+			update_option( 'wc_remove_product_sorting', [] );
 		}
 
 		// update the installed version option
