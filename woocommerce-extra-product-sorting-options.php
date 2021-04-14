@@ -5,7 +5,7 @@
  * Description: Rename default sorting and optionally extra product sorting options.
  * Author: SkyVerge
  * Author URI: http://www.skyverge.com/
- * Version: 2.8.4
+ * Version: 2.9.0-dev.1
  * Text Domain: woocommerce-extra-product-sorting-options
  * Domain Path: /i18n/languages/
  *
@@ -45,7 +45,7 @@ class WC_Extra_Sorting_Options {
 
 
 	/** plugin version number */
-	const VERSION = '2.8.4';
+	const VERSION = '2.9.0-dev.1';
 
 	/** required WooCommerce version number */
 	const MIN_WOOCOMMERCE_VERSION = '3.0.9';
