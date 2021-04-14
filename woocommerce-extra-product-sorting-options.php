@@ -204,7 +204,7 @@ class WC_Extra_Sorting_Options {
 					'section'     => 'woocommerce_product_catalog',
 					'priority'    => 11,
 					// ensures the options added by the other setting are not listed in this control
-					'choices'     => array_diff_key( $this->get_core_sorting_setting_options(), $this->get_extra_sorting_setting_options() ),
+					'choices'     => array_diff_key( $this->get_core_sorting_setting_options( false ), $this->get_extra_sorting_setting_options() ),
 				]
 			)
 		);
@@ -273,19 +273,23 @@ class WC_Extra_Sorting_Options {
 	 *
 	 * @since 2.9.0-dev.1
 	 *
+	 * @param bool $filter_output whether to filter the output through the WooCommerce core filter (default true)
 	 * @return array
 	 */
-	private function get_core_sorting_setting_options() {
+	private function get_core_sorting_setting_options( $filter_output = true ) {
 
-		/* WooCommerce textdomain used intentionally - WooCommerce core filter documented in wc-template-functions.php */
-		return (array) apply_filters( 'woocommerce_catalog_orderby', [
+		// WooCommerce textdomain used intentionally
+		$options = [
 			'menu_order' => __( 'Default sorting', 'woocommerce' ),
 			'popularity' => __( 'Sort by popularity', 'woocommerce' ),
 			'rating'     => __( 'Sort by average rating', 'woocommerce' ),
 			'date'       => __( 'Sort by latest', 'woocommerce' ),
 			'price'      => __( 'Sort by price: low to high', 'woocommerce' ),
 			'price-desc' => __( 'Sort by price: high to low', 'woocommerce' ),
-		] );
+		];
+
+		/*  WooCommerce core filter documented in wc-template-functions.php */
+		return ! $filter_output ? $options : (array) apply_filters( 'woocommerce_catalog_orderby', $options );
 	}
 
 
