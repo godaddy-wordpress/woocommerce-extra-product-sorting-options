@@ -81,10 +81,9 @@ We don't anticipate changing this in the foreseeable future, as we've spent a co
 Yes you can! Join in on our [GitHub repository](https://github.com/skyverge/woocommerce-extra-product-sorting-options/) and submit a pull request :)
 
 == Screenshots ==
-1. [WooCommerce 3.3+] Plugin Settings in the WooCommerce customizer panel
+1. Plugin Settings in the WooCommerce customizer panel
 2. Some new sorting options on the shop page
-3. [WooCommerce < 3.3] Plugin settings under **WooCommerce &gt; Settings &gt; Products**
-4. Change sorting label (in shop dropdown) with the [Say What plugin](https://wordpress.org/plugins/say-what/)
+3. Change sorting label (in shop dropdown) with the [Say What plugin](https://wordpress.org/plugins/say-what/)
 
 == Other Notes ==
 
