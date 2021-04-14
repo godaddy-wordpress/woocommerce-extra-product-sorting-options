@@ -116,7 +116,7 @@ class WC_Extra_Sorting_Options {
 	public function add_customizer_settings( $wp_customize ) {
 
 		// load our custom control type
-		require_once( dirname( __FILE__ ) . '/includes/class-wc-eso-customizer-checkbox-multiple.php' );
+		require_once __DIR__ . '/includes/class-wc-eso-customizer-checkbox-multiple.php';
 
 		// make sure we can insert our desired controls where we want them {BR 2018-02-08}
 		// this is heavy-handed, but WC core doesn't add priorities for us, shikata ga nai ¯\_(ツ)_/¯
