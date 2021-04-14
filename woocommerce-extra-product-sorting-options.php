@@ -68,6 +68,9 @@ class WC_Extra_Sorting_Options {
 		// add new product sorting arguments
 		add_filter( 'woocommerce_get_catalog_ordering_args', [ $this, 'add_new_shop_ordering_args' ] );
 
+		// unhook the sorting dropdown completely if there are no options
+		add_action( 'wp', [ $this, 'maybe_remove_catalog_orderby' ], 999 );
+
 		// load translations
 		add_action( 'init', [ $this, 'load_translation' ] );
 
@@ -406,6 +409,50 @@ class WC_Extra_Sorting_Options {
 		}
 
 		return $sort_args;
+	}
+
+
+	/**
+	 * Unhooks the sorting dropdown if all options have been removed.
+	 *
+	 * @internal
+	 *
+	 * @since 2.9.0-dev.1
+	 */
+	public function maybe_remove_catalog_orderby() {
+
+		$enabled              = array_diff( array_keys( $this->get_core_sorting_options() ), array_values( $this->get_removed_sorting_options() ) );
+		$active_plugins       = (array) get_option( 'active_plugins', [] );
+		$extra_sorting_plugin = 'woocommerce-extra-product-sorting-options/woocommerce-extra-product-sorting-options.php';
+
+		if ( is_multisite() ) {
+			$active_plugins = array_merge( $active_plugins, get_site_option( 'active_sitewide_plugins', [] ) );
+		}
+
+		// check for our extra sorting options plugin, just in case there are custom options added, too
+		if ( array_key_exists( $extra_sorting_plugin, $active_plugins ) || in_array( $extra_sorting_plugin, $active_plugins, false ) ) {
+			$extra_sorting = get_theme_mod( 'wc_extra_product_sorting_options', [] );
+			$enabled       = array_merge( $enabled, $extra_sorting );
+		}
+
+		/**
+		 * Filters whether the sorting dropdown should be unhooked from the shop page when there are no core sorting options.
+		 *
+		 * Inherited from WooCommerce Remove Product Sorting Options legacy plugin.
+		 *
+		 * @since 2.9.0-dev.1
+		 *
+		 * @param bool $remove true if the dropdown should be removed
+		 */
+		if ( empty( $enabled ) && (bool) apply_filters( 'wc_remove_sorting_options_hide_dropdown', true ) ) {
+
+			// WooCommerce core output
+			remove_action( 'woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 30 );
+
+			// Storefront theme
+			remove_action( 'woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 10 );
+			remove_action( 'woocommerce_after_shop_loop',  'woocommerce_catalog_ordering', 10 );
+		}
 	}
 
 
