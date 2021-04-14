@@ -19,12 +19,11 @@
  *  upon which this class is based.
  *
  * @author    SkyVerge
- * @copyright Copyright (c) 2014-2020, SkyVerge, Inc.
+ * @copyright Copyright (c) 2014-2021, SkyVerge, Inc.
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
  */
 
 defined( 'ABSPATH' ) or exit;
-
 
 /**
  * Multiple checkbox customize control class.
