@@ -308,7 +308,7 @@ class WC_Extra_Sorting_Options {
 	public function modify_sorting_settings( $order_by ) {
 
 		// maybe update the default sorting label
-		$new_default_name = get_theme_mod( 'wc_rename_default_sorting', '' );
+		$new_default_name = get_option( 'wc_rename_default_sorting', '' );
 
 		if ( ! empty( $new_default_name ) && ( $default_option = get_option( 'woocommerce_default_catalog_orderby', 'menu_order' ) ) ) {
 			$order_by[ $default_option ] = $new_default_name;
