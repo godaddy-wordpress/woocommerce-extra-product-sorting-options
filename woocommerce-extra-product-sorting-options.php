@@ -53,7 +53,7 @@ class WC_Extra_Sorting_Options {
 
 
 	/**
-	 * WC_Extra_Sorting_Options constructor. Initializes the plugin.
+	 * Initializes the plugin.
 	 *
 	 * @since 2.0.0
 	 */
@@ -105,7 +105,7 @@ class WC_Extra_Sorting_Options {
 
 
 	/**
-	 * Add Settings to WooCommerce Settings > Products page after "Default Product Sorting" setting.
+	 * Adds Settings to WooCommerce Settings > Products page after "Default Product Sorting" setting.
 	 *
 	 * @internal
 	 *
@@ -245,7 +245,7 @@ class WC_Extra_Sorting_Options {
 
 
 	/**
-	 * Gets the set of settings options.
+	 * Gets sorting options as settings options.
 	 *
 	 * @since 2.7.0
 	 *
@@ -264,7 +264,7 @@ class WC_Extra_Sorting_Options {
 
 
 	/**
-	 * Gets WooCommerce default sorting options.
+	 * Gets WooCommerce default sorting options as settings options.
 	 *
 	 * WooCommerce doesn't store these into an option, but hardcodes them wrapped in a filter.
 	 *
@@ -287,9 +287,14 @@ class WC_Extra_Sorting_Options {
 
 
 	/**
-	 * Change "Default Sorting" to custom name and add new sorting options; added to admin + frontend dropdown.
+	 * Changes "Default Sorting" to the custom name and adds new sorting options.
+	 *
+	 * Added to admin + frontend dropdown.
+	 *
+	 * @internal
 	 *
 	 * @since 2.0.0
+	 *
 	 * @param array $sortby array or sorting option keys and names
 	 * @return array the updated sort by options
 	 */
@@ -332,9 +337,12 @@ class WC_Extra_Sorting_Options {
 
 
 	/**
-	 * Add sorting option to WC sorting arguments.
+	 * Adds sorting option to WooCommerce sorting arguments.
+	 *
+	 * @internal
 	 *
 	 * @since 2.0.0
+	 *
 	 * @param array $sort_args the sorting arguments and query to use for it
 	 * @return array updated sorting arguments
 	*/
@@ -402,10 +410,12 @@ class WC_Extra_Sorting_Options {
 
 
 	/**
-	 * Main Extra Sorting Instance, ensures only one instance is/can be loaded.
+	 * Gets the plugin instance (singleton pattern).
+	 *
+	 * @see wc_extra_sorting_options()
 	 *
 	 * @since 2.2.2
-	 * @see wc_extra_sorting_options()
+	 *
 	 * @return \WC_Extra_Sorting_Options
 	 */
 	public static function instance() {
@@ -442,6 +452,8 @@ class WC_Extra_Sorting_Options {
 
 	/**
 	 * Adds plugin page links.
+	 *
+	 * @internal
 	 *
 	 * @since 2.2.2
 	 *
@@ -480,7 +492,7 @@ class WC_Extra_Sorting_Options {
 	 * @since 2.7.2
 	 *
 	 * @param string $plugin_name plugin name, as the plugin-filename.php
-	 * @return boolean true if the named plugin is installed and active
+	 * @return bool
 	 */
 	public static function is_plugin_active( $plugin_name ) {
 
@@ -567,7 +579,7 @@ class WC_Extra_Sorting_Options {
 
 
 	/**
-	 * Helper to get the plugin URL.
+	 * Gets the plugin URL.
 	 *
 	 * @since 2.7.0
 	 *
@@ -580,7 +592,9 @@ class WC_Extra_Sorting_Options {
 
 
 	/**
-	 * Run every time.  Used since the activation hook is not executed when updating a plugin.
+	 * Performs lifecycle routines.
+	 *
+	 * Runs every time, since the activation hook is not executed when updating a plugin.
 	 *
 	 * @since 2.0.0
 	 */
@@ -598,14 +612,14 @@ class WC_Extra_Sorting_Options {
 		if ( -1 === version_compare( $installed_version, self::VERSION ) ) {
 			$this->upgrade( $installed_version );
 		}
-
 	}
 
 
 	/**
-	 * Perform any version-related changes.
+	 * Performs any version-related changes.
 	 *
 	 * @since 2.0.0
+	 *
 	 * @param int $installed_version the currently installed version of the plugin
 	 */
 	private function upgrade( $installed_version ) {
@@ -724,9 +738,10 @@ class WC_Extra_Sorting_Options {
 
 
 /**
- * Returns the One True Instance of WC Extra Sorting.
+ * Gets the singleton instance of WooCommerce Extra Sorting Options.
  *
  * @since 2.2.2
+ *
  * @return \WC_Extra_Sorting_Options
  */
 function wc_extra_sorting_options() {
