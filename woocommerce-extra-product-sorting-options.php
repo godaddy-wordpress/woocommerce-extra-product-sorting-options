@@ -257,7 +257,7 @@ class WC_Extra_Sorting_Options {
 	 *
 	 * @return array settings options
 	 */
-	protected function get_extra_sorting_setting_options() {
+	private function get_extra_sorting_setting_options() {
 
 		return [
 			'alphabetical'  => __( 'Name: A to Z',    'woocommerce-extra-product-sorting-options' ),
@@ -293,6 +293,39 @@ class WC_Extra_Sorting_Options {
 
 		/*  WooCommerce core filter documented in wc-template-functions.php */
 		return ! $filter_output ? $options : (array) apply_filters( 'woocommerce_catalog_orderby', $options );
+	}
+
+
+	/**
+	 * Gets the number of available sorting options.
+	 *
+	 * @since 2.9.0-dev.1
+	 *
+	 * @return int
+	 */
+	private function get_available_sorting_options_count() {
+
+		return count( $this->get_available_sorting_options() );
+	}
+
+
+	/**
+	 * Gets the available sorting options.
+	 *
+	 * @since 2.9.0-dev.1
+	 *
+	 * @return array
+	 */
+	private function get_available_sorting_options() {
+
+		// sums up all the default and extra sorting options, minus the default ones removed, if any
+		return array_unique( array_filter( array_diff(
+			array_merge(
+				array_keys( $this->get_core_sorting_setting_options() ),
+				(array) get_theme_mod( 'wc_extra_product_sorting_options', [] )
+			),
+			(array) get_theme_mod( 'wc_remove_product_sorting', [] )
+		) ) );
 	}
 
 
@@ -462,39 +495,6 @@ class WC_Extra_Sorting_Options {
 		}
 
 		return $default_orderby;
-	}
-
-
-	/**
-	 * Gets the number of available sorting options.
-	 *
-	 * @since 2.9.0-dev.1
-	 *
-	 * @return int
-	 */
-	private function get_available_sorting_options_count() {
-
-		return count( $this->get_available_sorting_options() );
-	}
-
-
-	/**
-	 * Gets the available sorting options.
-	 *
-	 * @since 2.9.0-dev.1
-	 *
-	 * @return array
-	 */
-	private function get_available_sorting_options() {
-
-		// sums up all the default and extra sorting options, minus the default ones removed, if any
-		return array_unique( array_filter( array_diff(
-			array_merge(
-				array_keys( $this->get_core_sorting_setting_options() ),
-				(array) get_theme_mod( 'wc_extra_product_sorting_options', [] )
-			),
-			(array) get_theme_mod( 'wc_remove_product_sorting', [] )
-		) ) );
 	}
 
 
