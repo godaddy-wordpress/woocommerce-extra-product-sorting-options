@@ -28,8 +28,6 @@ Includes options to:
  - enable sorting by review count (most reviews to least)
  - remove core sorting options
 
- - remove core sorting options
-
 = Rename Default Sorting =
 You can customize your product sorting order on your shop pages - [here's a handy tutorial](http://www.sellwithwp.com/create-woocommerce-custom-product-sorting/) to do so. However, many shop admins like to then rename this from "Default Sorting" to something more descriptive, such as "Our Sorting" or "Our Selection". You can optionally enter a new name for this sorting order if desired.
 
