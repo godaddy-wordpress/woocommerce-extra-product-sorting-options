@@ -64,6 +64,9 @@ class WC_Extra_Sorting_Options {
 		// add new sorting options to order by dropdowns
 		add_filter( 'woocommerce_default_catalog_orderby_options', [ $this, 'modify_sorting_settings' ], 99 );
 
+		// if there is only one available sorting option, make it default
+		add_filter( 'woocommerce_default_catalog_orderby', [ $this, 'maybe_update_default_catalog_orderby'] );
+
 		// unhook the sorting dropdown completely if there are no options
 		add_action( 'wp', [ $this, 'maybe_remove_catalog_orderby' ], 99 );
 
@@ -443,6 +446,59 @@ class WC_Extra_Sorting_Options {
 
 
 	/**
+	 * Changes the default sorting if there is only one sorting option available.
+	 *
+	 * @since 2.9.0-dev.1
+	 *
+	 * @internal
+	 *
+	 * @param string $default_orderby
+	 * @return string
+	 */
+	public function maybe_update_default_catalog_orderby( $default_orderby ) {
+
+		if ( 1 === $this->get_available_sorting_options_count() ) {
+			$default_orderby = (string) current($this->get_available_sorting_options());
+		}
+
+		return $default_orderby;
+	}
+
+
+	/**
+	 * Gets the number of available sorting options.
+	 *
+	 * @since 2.9.0-dev.1
+	 *
+	 * @return int
+	 */
+	private function get_available_sorting_options_count() {
+
+		return count( $this->get_available_sorting_options() );
+	}
+
+
+	/**
+	 * Gets the available sorting options.
+	 *
+	 * @since 2.9.0-dev.1
+	 *
+	 * @return array
+	 */
+	private function get_available_sorting_options() {
+
+		// sums up all the default and extra sorting options, minus the default ones removed, if any
+		return array_unique( array_filter( array_diff(
+			array_merge(
+				array_keys( $this->get_core_sorting_setting_options() ),
+				(array) get_theme_mod( 'wc_extra_product_sorting_options', [] )
+			),
+			(array) get_theme_mod( 'wc_remove_product_sorting', [] )
+		) ) );
+	}
+
+
+	/**
 	 * Unhooks the sorting dropdown if all options have been removed.
 	 *
 	 * @internal
@@ -450,15 +506,6 @@ class WC_Extra_Sorting_Options {
 	 * @since 2.9.0-dev.1
 	 */
 	public function maybe_remove_catalog_orderby() {
-
-		// sums up all the default and extra sorting options, minus the default ones removed, if any
-		$enabled = array_filter( array_diff(
-			array_merge(
-				array_keys( $this->get_core_sorting_setting_options() ),
-				(array) get_theme_mod( 'wc_extra_product_sorting_options', [] )
-			),
-			(array) get_theme_mod( 'wc_remove_product_sorting', [] )
-		) );
 
 		/**
 		 * Filters whether the sorting dropdown should be unhooked from the shop page when there are no core sorting options.
@@ -469,7 +516,7 @@ class WC_Extra_Sorting_Options {
 		 *
 		 * @param bool $remove true if the dropdown should be removed
 		 */
-		if ( (bool) apply_filters( 'wc_remove_sorting_options_hide_dropdown', count( array_unique( $enabled ) ) <= 1 ) ) {
+		if ( (bool) apply_filters( 'wc_remove_sorting_options_hide_dropdown', $this->get_available_sorting_options_count() <= 1 ) ) {
 
 			// WooCommerce core output
 			remove_action( 'woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 30 );
