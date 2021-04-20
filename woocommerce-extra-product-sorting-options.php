@@ -798,6 +798,12 @@ class WC_Extra_Sorting_Options {
 			set_theme_mod( 'wc_remove_product_sorting', [] );
 		}
 
+		// deactivates and uninstalls Remove Sorting Options legacy plugin if active
+		if ( in_array( 'woocommerce-remove-product-sorting/woocommerce-remove-product-sorting.php', get_option( 'active_plugins', [] ), true ) ) {
+			deactivate_plugins( 'woocommerce-remove-product-sorting/woocommerce-remove-product-sorting.php', true );
+			uninstall_plugin( 'woocommerce-remove-product-sorting/woocommerce-remove-product-sorting.php' );
+		}
+
 		// update the installed version option
 		update_option( 'wc_extra_sorting_options_version', self::VERSION );
 	}
