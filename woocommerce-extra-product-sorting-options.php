@@ -311,7 +311,7 @@ class WC_Extra_Sorting_Options {
 	 */
 	public function modify_sorting_settings( $order_by ) {
 
-		// maybe update the default sorting label
+		// maybe rename the "default sorting" label
 		$new_default_name = get_option( 'wc_rename_default_sorting', '' );
 
 		if ( ! empty( $new_default_name ) && ( $default_option = get_option( 'woocommerce_default_catalog_orderby', 'menu_order' ) ) ) {
@@ -453,9 +453,11 @@ class WC_Extra_Sorting_Options {
 
 		// sums up all the default and extra sorting options, minus the default ones removed, if any
 		$enabled = array_filter( array_diff(
-			array_keys( $this->get_core_sorting_setting_options() ),
-			array_values( get_theme_mod( 'wc_remove_product_sorting', [] ) ),
-			(array) get_theme_mod( 'wc_extra_product_sorting_options', [] )
+			array_merge(
+				array_keys( $this->get_core_sorting_setting_options() ),
+				(array) get_theme_mod( 'wc_extra_product_sorting_options', [] )
+			),
+			(array) get_theme_mod( 'wc_remove_product_sorting', [] )
 		) );
 
 		/**
@@ -467,7 +469,7 @@ class WC_Extra_Sorting_Options {
 		 *
 		 * @param bool $remove true if the dropdown should be removed
 		 */
-		if ( (bool) apply_filters( 'wc_remove_sorting_options_hide_dropdown', empty( $enabled ) ) ) {
+		if ( (bool) apply_filters( 'wc_remove_sorting_options_hide_dropdown', count( array_unique( $enabled ) ) <= 1 ) ) {
 
 			// WooCommerce core output
 			remove_action( 'woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 30 );
