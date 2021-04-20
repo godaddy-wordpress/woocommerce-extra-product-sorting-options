@@ -9,11 +9,11 @@ Requires PHP: 5.6
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Rename the default product sorting option and add up to 5 new sorting options including alphabetical and on-sale sorting.
+Rename the default product sorting option, add up to 5 new sorting options including alphabetical and on-sale sorting, or remove core sorting options.
 
 == Description ==
 
-WooCommerce Extra Product Sorting Options provides options that extend the default WooCommerce orderby options on the shop page. You can optionally set a new name for the default sorting (helpful if you've used this to create a custom sorting order), and can enable up to **5 new sorting options**: alphabetical, reverse alphabetical, on sale, review count, and availability product sorting.
+WooCommerce Extra Product Sorting Options provides options that extend the default WooCommerce orderby options on the shop page. You can optionally set a new name for the default sorting (helpful if you've used this to create a custom sorting order), and can enable up to **5 new sorting options**: alphabetical, reverse alphabetical, on sale, review count, and availability product sorting. You can also remove core sorting options, or remove the sorting dropdown completely.
 
 > **Requires: PHP 5.6, WooCommerce 3.5+ and WordPress 4.6+**
 
@@ -26,6 +26,9 @@ Includes options to:
  - enable on sale sorting (**note**: works only for simple products)
  - enable sorting by inventory / availability
  - enable sorting by review count (most reviews to least)
+ - remove core sorting options
+
+ - remove core sorting options
 
 = Rename Default Sorting =
 You can customize your product sorting order on your shop pages - [here's a handy tutorial](http://www.sellwithwp.com/create-woocommerce-custom-product-sorting/) to do so. However, many shop admins like to then rename this from "Default Sorting" to something more descriptive, such as "Our Sorting" or "Our Selection". You can optionally enter a new name for this sorting order if desired.
@@ -37,18 +40,20 @@ Want to show items with the highest stock first? You can enable sorting by avail
 
 You can add the option to sort items by sale status - there's a sorting option to show "On Sale" items first in the shop catalog. Please note that only simple products can be sorted by sale status, and variable products will display mixed with non-sale products.
 
-= Looking to remove sorting options? =
-We have a compatible plugin that will let you remove core WooCommerce sorting options, such as the default sorting method. You can check out the [WooCommerce Remove Product Sorting](http://www.skyverge.com/product/woocommerce-remove-product-sorting/) plugin page for more details.
+= Remove Sorting Options =
+You can remove the core sorting options as well! If all sorting options have been removed, the sorting dropdown will become hidden on shop pages.
+
+= Translations =
+**The plugin text domain is**: `woocommerce-extra-product-sorting-options`
 
 = More Details =
- - See the [product page](http://www.skyverge.com/product/woocommerce-extra-product-sorting-options/) for full details.
  - View more of SkyVerge's [free WooCommerce extensions](http://profiles.wordpress.org/skyverge/)
  - View all [SkyVerge WooCommerce extensions](http://www.skyverge.com/shop/)
  - View the FAQ for some tips.
 
 == Installation ==
 
-1. Be sure you're running WooCommerce 3.0.9+ and WordPress 4.4+ in your shop.
+1. Be sure you're running WooCommerce 3.5+ and WordPress 4.4+ in your shop.
 2. Upload the entire `woocommerce-extra-product-sorting-options` folder to the `/wp-content/plugins/` directory, or upload the .zip file with the plugin under **Plugins &gt; Add New &gt; Upload**
 3. Activate the plugin through the **Plugins** menu in WordPress
 4. Go to **WooCommerce &gt; Settings &gt; Products &gt; Display**. The new settings are added after "Default Product Sorting". If you enable more sorting options, you can set these as new defaults as well.
@@ -84,24 +89,6 @@ Yes you can! Join in on our [GitHub repository](https://github.com/skyverge/wooc
 1. Plugin Settings in the WooCommerce customizer panel
 2. Some new sorting options on the shop page
 3. Change sorting label (in shop dropdown) with the [Say What plugin](https://wordpress.org/plugins/say-what/)
-
-== Other Notes ==
-
-= Translations =
-
-**The plugin text domain is**: `woocommerce-extra-product-sorting-options`
-
-= Help! I upgraded to WooCommerce 3.0 and "featured" sorting disappeared. =
-
-Unfortunately this was removed because the way products are designated as "featured" has changed in WooCommerce 3.0+. Because the way this is stored changed behind the scenes, it's no longer possible to sort products using this value to show featured items first. We're sad to say this means that our plugin cannot offer this option for stores running WooCommerce 3.0+ since the data used to sort this way no longer exists.
-
-= This plugin used to have random sorting, I need it back! =
-
-We removed randomized product sorting some time ago because it wasn't 100% functional for many shops (as it required all products to be on one page), and thus is better served as custom code snippet instead of being part of this plugin.
-
-**Why didn't it work?** WordPress will get a new random set of products for each page in your shop, so random sorting only works at 100% when you have a small number of products and they're all displayed on one page. In order to "remember" which products have already been displayed, you'd need [some custom code](http://wordpress.stackexchange.com/questions/31647/is-it-possible-to-paginate-posts-correctly-that-are-random-ordered) to store these products in a session, which is not something we ever planned to support as it isn't possible with the structure of this plugin.
-
-Since this feature wasn't at 100%, we have removed it and turned it into a code snippet. If you need to re-add randomized sorting, please [use this code snippet](https://gist.github.com/bekarice/bac8b67064001ebc3bc2475424d99f87), ensuring that you [know how to add code to your site](http://skyverge.com/blog/add-custom-code-to-wordpress/).
 
 == Changelog ==
 
