@@ -798,14 +798,32 @@ class WC_Extra_Sorting_Options {
 			set_theme_mod( 'wc_remove_product_sorting', [] );
 		}
 
-		// deactivates and uninstalls Remove Sorting Options legacy plugin if active
-		if ( in_array( 'woocommerce-remove-product-sorting/woocommerce-remove-product-sorting.php', get_option( 'active_plugins', [] ), true ) ) {
-			deactivate_plugins( 'woocommerce-remove-product-sorting/woocommerce-remove-product-sorting.php', true );
-			uninstall_plugin( 'woocommerce-remove-product-sorting/woocommerce-remove-product-sorting.php' );
-		}
+		// removes Remove Product Sorting legacy plugin, if found
+		add_action( 'admin_init', [ $this, 'remove_legacy_plugin' ] );
 
 		// update the installed version option
 		update_option( 'wc_extra_sorting_options_version', self::VERSION );
+	}
+
+
+	/**
+	 * Removes WooCommerce Product Sorting.
+	 *
+	 * The legacy plugin has been merged into Extra Sorting Option so it's no longer necessary.
+	 *
+	 * @internal
+	 *
+	 * @since 2.9.0-dev.1
+	 */
+	public function remove_legacy_plugin() {
+
+		$legacy_plugin = 'woocommerce-remove-product-sorting/woocommerce-remove-product-sorting.php';
+
+		if ( in_array( $legacy_plugin, (array) get_option( 'active_plugins', [] ), true ) ) {
+			deactivate_plugins( $legacy_plugin, true );
+		}
+
+		delete_plugins( [ $legacy_plugin ] );
 	}
 
 
