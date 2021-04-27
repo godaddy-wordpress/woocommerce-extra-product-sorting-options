@@ -5,7 +5,7 @@
  * Description: Rename default sorting and optionally extra product sorting options.
  * Author: SkyVerge
  * Author URI: http://www.skyverge.com/
- * Version: 2.9.0-dev.1
+ * Version: 2.9.0
  * Text Domain: woocommerce-extra-product-sorting-options
  * Domain Path: /i18n/languages/
  *
@@ -20,7 +20,7 @@
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
  *
  * WC requires at least: 3.5.0
- * WC tested up to: 4.1.0
+ * WC tested up to: 5.2.2
  */
 
 defined( 'ABSPATH' ) or exit;
@@ -43,7 +43,7 @@ class WC_Extra_Sorting_Options {
 
 
 	/** plugin version number */
-	const VERSION = '2.9.0-dev.1';
+	const VERSION = '2.9.0';
 
 	/** required WooCommerce version number */
 	const MIN_WOOCOMMERCE_VERSION = '3.5.0';
@@ -94,7 +94,7 @@ class WC_Extra_Sorting_Options {
 	 * Adds Settings to WooCommerce Settings > Products page after "Default Product Sorting" setting.
 	 *
 	 * @since 1.0.0
-	 * @deprecated 2.9.0-dev.1
+	 * @deprecated 2.9.0
 	 *
 	 * @TODO remove this deprecated method by April 2022 or by version 3.0.0 {FN 2021-04-14}
 	 *
@@ -236,7 +236,7 @@ class WC_Extra_Sorting_Options {
 	 * Gets the set of settings options.
 	 *
 	 * @since 2.7.0
-	 * @deprecated 2.9.0-dev.1
+	 * @deprecated 2.9.0
 	 *
 	 * @TODO remove this method by version 3.0.0 or by April 2022 {FN 2021-04-14}
 	 *
@@ -274,7 +274,7 @@ class WC_Extra_Sorting_Options {
 	 *
 	 * WooCommerce doesn't store these into an option, and rather hardcodes them wrapped in a filter.
 	 *
-	 * @since 2.9.0-dev.1
+	 * @since 2.9.0
 	 *
 	 * @param bool $filter_output whether to filter the output through the WooCommerce core filter (default true)
 	 * @return array
@@ -299,7 +299,7 @@ class WC_Extra_Sorting_Options {
 	/**
 	 * Gets the number of available sorting options.
 	 *
-	 * @since 2.9.0-dev.1
+	 * @since 2.9.0
 	 *
 	 * @return int
 	 */
@@ -312,7 +312,7 @@ class WC_Extra_Sorting_Options {
 	/**
 	 * Gets the available sorting options.
 	 *
-	 * @since 2.9.0-dev.1
+	 * @since 2.9.0
 	 *
 	 * @return array
 	 */
@@ -481,7 +481,7 @@ class WC_Extra_Sorting_Options {
 	/**
 	 * Changes the default sorting if there is only one sorting option available.
 	 *
-	 * @since 2.9.0-dev.1
+	 * @since 2.9.0
 	 *
 	 * @internal
 	 *
@@ -503,7 +503,7 @@ class WC_Extra_Sorting_Options {
 	 *
 	 * @internal
 	 *
-	 * @since 2.9.0-dev.1
+	 * @since 2.9.0
 	 */
 	public function maybe_remove_catalog_orderby() {
 
@@ -512,7 +512,7 @@ class WC_Extra_Sorting_Options {
 		 *
 		 * Inherited from WooCommerce Remove Product Sorting Options legacy plugin.
 		 *
-		 * @since 2.9.0-dev.1
+		 * @since 2.9.0
 		 *
 		 * @param bool $remove true if the dropdown should be removed
 		 */
@@ -813,7 +813,7 @@ class WC_Extra_Sorting_Options {
 	 *
 	 * @internal
 	 *
-	 * @since 2.9.0-dev.1
+	 * @since 2.9.0
 	 */
 	public function remove_legacy_plugin() {
 
