@@ -19,22 +19,22 @@ WooCommerce Extra Product Sorting Options provides options that extend the defau
 
 ### Changelog
 
-**2021.04.27 - version 2.9.0
+**2021.04.27 - version 2.9.0**
  * Feature - Allow users to remove core sorting options
  * Misc - Require WordPress 4.4+
  * Misc - Require WooCommerce 3.5+
  * Misc - Require PHP 5.6+
 
-**2020.05.04 - version 2.8.4
+**2020.05.04 - version 2.8.4**
  * Misc - Add support for WooCommerce 4.1
 
-**2020.03.10 - version 2.8.3
+**2020.03.10 - version 2.8.3**
  * Misc - Add support for WooCommerce 4.0
 
-**2020.02.05 - version 2.8.2
+**2020.02.05 - version 2.8.2**
  * Misc - Add support for WooCommerce 3.9
 
-**2019.10.24 - version 2.8.1
+**2019.10.24 - version 2.8.1**
  * Misc - Add support for WooCommerce 3.8
 
 **2019.08.15 - version 2.8.0**
