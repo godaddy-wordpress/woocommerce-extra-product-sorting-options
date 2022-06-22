@@ -3,7 +3,7 @@ Contributors: skyverge, beka.rice, tamarazuk
 Tags: woocommerce, sorting, product sorting, orderby
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=paypal@skyverge.com&item_name=Donation+for+WooCommerce+Extra+Product+Sorting
 Requires at least: 4.4
-Tested up to: 5.7.1
+Tested up to: 6.0
 Stable Tag: 2.9.0
 Requires PHP: 5.6
 License: GPLv3
