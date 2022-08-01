@@ -1,6 +1,6 @@
 <?php
 /**
- * WooCommerce Extra Product Sorting Options
+ * Extra Product Sorting Options for WooCommerce
  *
  * This source file is subject to the GNU General Public License v3.0
  * that is bundled with this package in the file license.txt.
@@ -12,7 +12,7 @@
  *
  * DISCLAIMER
  *
- * Do not edit or add to this file if you wish to upgrade WooCommerce Extra Product Sorting Options to newer
+ * Do not edit or add to this file if you wish to upgrade Extra Product Sorting Options for WooCommerce to newer
  * versions in the future.
  *
  * Special thanks to Justin Tadlock for his guide here http://justintadlock.com/archives/2015/05/26/multiple-checkbox-customizer-control

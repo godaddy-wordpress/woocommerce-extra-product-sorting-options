@@ -1,11 +1,11 @@
 <?php
 /**
- * Plugin Name: WooCommerce Extra Product Sorting Options
+ * Plugin Name: Extra Product Sorting Options for WooCommerce
  * Plugin URI: http://www.skyverge.com/product/woocommerce-extra-product-sorting-options/
  * Description: Rename default sorting and optionally extra product sorting options.
  * Author: SkyVerge
  * Author URI: http://www.skyverge.com/
- * Version: 2.9.0
+ * Version: 2.9.1-dev.1
  * Text Domain: woocommerce-extra-product-sorting-options
  * Domain Path: /i18n/languages/
  *
@@ -43,7 +43,7 @@ class WC_Extra_Sorting_Options {
 
 
 	/** plugin version number */
-	const VERSION = '2.9.0';
+	const VERSION = '2.9.1-dev.1';
 
 	/** required WooCommerce version number */
 	const MIN_WOOCOMMERCE_VERSION = '3.5.0';
@@ -554,7 +554,7 @@ class WC_Extra_Sorting_Options {
 	 */
 	public function __clone() {
 		/* translators: Placeholders: %s - plugin name */
-		_doing_it_wrong( __FUNCTION__, sprintf( esc_html__( 'You cannot clone instances of %s.', 'woocommerce-extra-product-sorting-options' ), 'WooCommerce Extra Product Sorting Options' ), '2.4.0' );
+		_doing_it_wrong( __FUNCTION__, sprintf( esc_html__( 'You cannot clone instances of %s.', 'woocommerce-extra-product-sorting-options' ), 'Extra Product Sorting Options for WooCommerce' ), '2.4.0' );
 	}
 
 
@@ -565,7 +565,7 @@ class WC_Extra_Sorting_Options {
 	 */
 	public function __wakeup() {
 		/* translators: Placeholders: %s - plugin name */
-		_doing_it_wrong( __FUNCTION__, sprintf( esc_html__( 'You cannot unserialize instances of %s.', 'woocommerce-extra-product-sorting-options' ), 'WooCommerce Extra Product Sorting Options' ), '2.4.0' );
+		_doing_it_wrong( __FUNCTION__, sprintf( esc_html__( 'You cannot unserialize instances of %s.', 'woocommerce-extra-product-sorting-options' ), 'Extra Product Sorting Options for WooCommerce' ), '2.4.0' );
 	}
 
 
@@ -657,7 +657,7 @@ class WC_Extra_Sorting_Options {
 			<p>
 				<?php printf(
 					/* translators: Placeholders: %1$s <strong>, %2$s - </strong>, %3$s - version number, %4$s - opening HTML <a> link tag, %5$s - closing HTML </a> link tag, %6$s - opening HTML <a> link tag, %7$s - closing HTML </a> link tag */
-					esc_html__( '%1$sWooCommerce Extra Product Sorting Options is inactive.%2$s This plugin requires WooCommerce %3$s or newer. Please %4$supdate WooCommerce%5$s or %6$srun the WooCommerce database upgrade%7$s.', 'woocommerce-extra-product-sorting-options' ),
+					esc_html__( '%1$sExtra Product Sorting Options for WooCommerce is inactive.%2$s This plugin requires WooCommerce %3$s or newer. Please %4$supdate WooCommerce%5$s or %6$srun the WooCommerce database upgrade%7$s.', 'woocommerce-extra-product-sorting-options' ),
 					'<strong>', '</strong>',
 					self::MIN_WOOCOMMERCE_VERSION,
 					'<a href="' . admin_url( 'plugins.php' ) . '">', '</a>',
@@ -841,7 +841,7 @@ class WC_Extra_Sorting_Options {
 			<p>
 				<?php printf(
 					/* translators: Placeholders: %1$s - <strong>, %2$s - <strong>, %3$s - <a>, %4$s - </a> */
-					esc_html__( '%1$sWooCommerce Extra Product Sorting Options settings have changed.%2$s Random sorting is now disabled. If you need to re-add this option, please %3$sview our plugin notes%4$s.', 'woocommerce-extra-product-sorting-options' ),
+					esc_html__( '%1$sExtra Product Sorting Options for WooCommerce settings have changed.%2$s Random sorting is now disabled. If you need to re-add this option, please %3$sview our plugin notes%4$s.', 'woocommerce-extra-product-sorting-options' ),
 					'<strong>', '</strong>',
 					'<a href="http://wordpress.org/plugins/woocommerce-extra-product-sorting-options/other_notes/" target="_blank">', '&nbsp;&raquo;</a>'
 				); ?>
@@ -865,7 +865,7 @@ class WC_Extra_Sorting_Options {
 			<p>
 				<?php printf(
 					/* translators: Placeholders: %1$s - <strong>, %2$s - <strong>, %3$s - <a>, %4$s - </a> */
-					esc_html__( '%1$sWooCommerce Extra Product Sorting Options settings have changed.%2$s Featured sorting is no longer possible with WooCommerce 3.0+ as this product data has changed. Please %3$sview our plugin notes%4$s for more details.', 'woocommerce-extra-product-sorting-options' ),
+					esc_html__( '%1$sExtra Product Sorting Options for WooCommerce settings have changed.%2$s Featured sorting is no longer possible with WooCommerce 3.0+ as this product data has changed. Please %3$sview our plugin notes%4$s for more details.', 'woocommerce-extra-product-sorting-options' ),
 					'<strong>',
 					'</strong>',
 					'<a href="http://wordpress.org/plugins/woocommerce-extra-product-sorting-options/other_notes/" target="_blank">',
@@ -881,7 +881,7 @@ class WC_Extra_Sorting_Options {
 
 
 /**
- * Gets the singleton instance of WooCommerce Extra Sorting Options.
+ * Gets the singleton instance of Extra Sorting Options for WooCommerce.
  *
  * @since 2.2.2
  *

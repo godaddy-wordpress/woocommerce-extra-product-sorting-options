@@ -1,10 +1,10 @@
-=== WooCommerce Extra Product Sorting Options ===
+=== Extra Product Sorting Options for WooCommerce ===
 Contributors: skyverge, beka.rice, tamarazuk
 Tags: woocommerce, sorting, product sorting, orderby
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=paypal@skyverge.com&item_name=Donation+for+WooCommerce+Extra+Product+Sorting
 Requires at least: 4.4
 Tested up to: 6.0
-Stable Tag: 2.9.0
+Stable Tag: 2.9.1-dev.1
 Requires PHP: 5.6
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -13,7 +13,7 @@ Rename the default product sorting option, add up to 5 new sorting options inclu
 
 == Description ==
 
-WooCommerce Extra Product Sorting Options provides options that extend the default WooCommerce orderby options on the shop page. You can optionally set a new name for the default sorting (helpful if you've used this to create a custom sorting order), and can enable up to **5 new sorting options**: alphabetical, reverse alphabetical, on sale, review count, and availability product sorting. You can also remove core sorting options, or remove the sorting dropdown completely.
+Extra Product Sorting Options for WooCommerce provides options that extend the default WooCommerce orderby options on the shop page. You can optionally set a new name for the default sorting (helpful if you've used this to create a custom sorting order), and can enable up to **5 new sorting options**: alphabetical, reverse alphabetical, on sale, review count, and availability product sorting. You can also remove core sorting options, or remove the sorting dropdown completely.
 
 > **Requires: PHP 5.6, WooCommerce 3.5+ and WordPress 4.4+**
 
@@ -89,6 +89,9 @@ Yes you can! Join in on our [GitHub repository](https://github.com/skyverge/wooc
 3. Change sorting label (in shop dropdown) with the [Say What plugin](https://wordpress.org/plugins/say-what/)
 
 == Changelog ==
+
+= 2022.nn.nn - version 2.9.1-dev.1 =
+ * Misc - Rename to Extra Product Sorting Options for WooCommerce
 
 = 2021.04.27 - version 2.9.0 =
  * Feature - Allow users to remove core sorting options
