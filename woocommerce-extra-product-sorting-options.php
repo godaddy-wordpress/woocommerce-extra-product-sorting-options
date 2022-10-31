@@ -260,11 +260,15 @@ class WC_Extra_Sorting_Options {
 	private function get_extra_sorting_setting_options() {
 
 		return [
-			'alphabetical'  => __( 'Name: A to Z',    'woocommerce-extra-product-sorting-options' ),
-			'reverse_alpha' => __( 'Name: Z to A',    'woocommerce-extra-product-sorting-options' ),
-			'by_stock'      => __( 'Available Stock', 'woocommerce-extra-product-sorting-options' ),
-			'review_count'  => __( 'Review Count',    'woocommerce-extra-product-sorting-options' ),
-			'on_sale_first' => __( 'On-sale First',   'woocommerce-extra-product-sorting-options' ),
+			'alphabetical'  => __( 'Name: A to Z',      'woocommerce-extra-product-sorting-options' ),
+			'reverse_alpha' => __( 'Name: Z to A',      'woocommerce-extra-product-sorting-options' ),
+			'by_stock'      => __( 'Available Stock',   'woocommerce-extra-product-sorting-options' ),
+			'review_count'  => __( 'Review Count',      'woocommerce-extra-product-sorting-options' ),
+			'on_sale_first' => __( 'On-sale First',     'woocommerce-extra-product-sorting-options' ),
+			'weight_asc'    => __( 'Weight ascending',  'woocommerce-extra-product-sorting-options' ),
+			'weight_desc'   => __( 'Weight descending', 'woocommerce-extra-product-sorting-options' ),
+			'height_asc'    => __( 'Height ascending',  'woocommerce-extra-product-sorting-options' ),
+			'height_desc'   => __( 'Height descending', 'woocommerce-extra-product-sorting-options' ),
 		];
 	}
 
@@ -375,6 +379,18 @@ class WC_Extra_Sorting_Options {
 				case 'on_sale_first':
 					$order_by['on_sale_first'] = __( 'Show sale items first', 'woocommerce-extra-product-sorting-options' );
 				break;
+				case 'weight_asc':
+					$order_by['weight_asc']    = __( 'Sort by weight ascending', 'woocommerce-extra-product-sorting-options' );
+				break;
+				case 'weight_desc':
+					$order_by['weight_desc']   = __( 'Sort by weight descending', 'woocommerce-extra-product-sorting-options' );
+				break;
+				case 'height_asc':
+					$order_by['height_asc']    = __( 'Sort by height ascending', 'woocommerce-extra-product-sorting-options' );
+				break;
+				case 'height_desc':
+					$order_by['height_desc']   = __( 'Sort by height descending', 'woocommerce-extra-product-sorting-options' );
+				break;
 			}
 		}
 
@@ -470,6 +486,34 @@ class WC_Extra_Sorting_Options {
 
 				$sort_args['orderby']  = [ 'meta_value_num' => 'DESC', $fallback => $fallback_order ];
 				$sort_args['meta_key'] = '_sale_price';
+
+			break;
+
+			case 'weight_asc':
+
+				$sort_args['orderby']  = [ 'meta_value_num' => 'ASC', $fallback => $fallback_order ];
+				$sort_args['meta_key'] = '_weight';
+
+			break;
+
+			case 'weight_desc':
+
+				$sort_args['orderby']  = [ 'meta_value_num' => 'DESC', $fallback => $fallback_order ];
+				$sort_args['meta_key'] = '_weight';
+
+			break;
+
+			case 'height_asc':
+
+				$sort_args['orderby']  = [ 'meta_value_num' => 'ASC', $fallback => $fallback_order ];
+				$sort_args['meta_key'] = '_height';
+
+			break;
+
+			case 'height_desc':
+
+				$sort_args['orderby']  = [ 'meta_value_num' => 'DESC', $fallback => $fallback_order ];
+				$sort_args['meta_key'] = '_height';
 
 			break;
 		}
