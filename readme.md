@@ -7,7 +7,7 @@ Extra Product Sorting Options for WooCommerce provides options that extend the d
 ### Requirements
 
  - WooCommerce 3.0.9 or newer
- - WordPress 4.4 or newer
+ - WordPress 5.6 or newer
 
 ### Quick links &amp; info
 

@@ -2,10 +2,10 @@
 Contributors: skyverge, beka.rice, tamarazuk
 Tags: woocommerce, sorting, product sorting, orderby
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=paypal@skyverge.com&item_name=Donation+for+WooCommerce+Extra+Product+Sorting
-Requires at least: 4.4
-Tested up to: 6.0.1
-Stable Tag: 2.9.1
-Requires PHP: 5.6
+Requires at least: 5.6
+Tested up to: 6.1.1
+Stable Tag: 2.9.2-dev.1
+Requires PHP: 7.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -15,7 +15,7 @@ Rename the default product sorting option, add up to 5 new sorting options inclu
 
 Extra Product Sorting Options for WooCommerce provides options that extend the default WooCommerce orderby options on the shop page. You can optionally set a new name for the default sorting (helpful if you've used this to create a custom sorting order), and can enable up to **5 new sorting options**: alphabetical, reverse alphabetical, on sale, review count, and availability product sorting. You can also remove core sorting options, or remove the sorting dropdown completely.
 
-> **Requires: PHP 5.6, WooCommerce 3.5+ and WordPress 4.4+**
+> **Requires: PHP 7.4, WooCommerce 3.5+ and WordPress 5.6+**
 
 = Features =
 Includes options to:
@@ -51,7 +51,7 @@ You can remove the core sorting options as well! If all sorting options have bee
 
 == Installation ==
 
-1. Be sure you're running WooCommerce 3.5+ and WordPress 4.4+ in your shop.
+1. Be sure you're running WooCommerce 3.5+ and WordPress 5.6+ in your shop.
 2. Upload the entire `woocommerce-extra-product-sorting-options` folder to the `/wp-content/plugins/` directory, or upload the .zip file with the plugin under **Plugins &gt; Add New &gt; Upload**
 3. Activate the plugin through the **Plugins** menu in WordPress
 4. Go to **WooCommerce &gt; Settings &gt; Products &gt; Display**. The new settings are added after "Default Product Sorting". If you enable more sorting options, you can set these as new defaults as well.
@@ -89,6 +89,9 @@ Yes you can! Join in on our [GitHub repository](https://github.com/skyverge/wooc
 3. Change sorting label (in shop dropdown) with the [Say What plugin](https://wordpress.org/plugins/say-what/)
 
 == Changelog ==
+
+= 2022.nn.nn - version 2.9.2-dev.1 =
+ * Misc - Require PHP 7.4 and WordPress 5.6
 
 = 2022.07.31 - version 2.9.1 =
  * Misc - Rename to Extra Product Sorting Options for WooCommerce
