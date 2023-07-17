@@ -113,25 +113,6 @@ class WC_Extra_Sorting_Options {
 	/**
 	 * Adds Settings to WooCommerce Settings > Products page after "Default Product Sorting" setting.
 	 *
-	 * @since 1.0.0
-	 * @deprecated 2.9.0
-	 *
-	 * @TODO remove this deprecated method by April 2022 or by version 3.0.0 {FN 2021-04-14}
-	 *
-	 * @param array $settings the current product settings
-	 * @return array updated settings
-	 */
-	public function add_settings( $settings ) {
-
-		wc_deprecated_function( __METHOD__ ,'2.9.0' );
-
-		return $settings;
-	}
-
-
-	/**
-	 * Adds Settings to WooCommerce Settings > Products page after "Default Product Sorting" setting.
-	 *
 	 * @internal
 	 *
 	 * @since 2.7.0
@@ -249,24 +230,6 @@ class WC_Extra_Sorting_Options {
 		$multi_values = ! is_array( $values ) ? explode( ',', $values ) : $values;
 
 		return ! empty( $multi_values ) ? array_map( 'sanitize_text_field', $multi_values ) : [];
-	}
-
-
-	/**
-	 * Gets the set of settings options.
-	 *
-	 * @since 2.7.0
-	 * @deprecated 2.9.0
-	 *
-	 * @TODO remove this method by version 3.0.0 or by April 2022 {FN 2021-04-14}
-	 *
-	 * @return array settings options
-	 */
-	protected function get_settings_options() {
-
-		wc_deprecated_function( __METHOD__, '2.9.0' );
-
-		return $this->get_extra_sorting_setting_options();
 	}
 
 
