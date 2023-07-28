@@ -5,21 +5,21 @@
  * Description: Rename default sorting and optionally extra product sorting options.
  * Author: SkyVerge
  * Author URI: http://www.skyverge.com/
- * Version: 2.9.1
+ * Version: 2.10.0-dev.1
  * Text Domain: woocommerce-extra-product-sorting-options
  * Domain Path: /i18n/languages/
  *
- * Copyright: (c) 2014-2021, SkyVerge, Inc. (info@skyverge.com)
+ * Copyright: (c) 2014-2023, SkyVerge, Inc. (info@skyverge.com)
  *
  * License: GNU General Public License v3.0
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
  *
  * @author    SkyVerge
  * @category  Admin
- * @copyright Copyright (c) 2014-2021, SkyVerge, Inc.
+ * @copyright Copyright (c) 2014-2023, SkyVerge, Inc.
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
  *
- * WC requires at least: 3.5.0
+ * WC requires at least: 3.9.4
  * WC tested up to: 6.7.0
  */
 
@@ -43,10 +43,10 @@ class WC_Extra_Sorting_Options {
 
 
 	/** plugin version number */
-	const VERSION = '2.9.1';
+	const VERSION = '2.10.0-dev.1';
 
 	/** required WooCommerce version number */
-	const MIN_WOOCOMMERCE_VERSION = '3.5.0';
+	const MIN_WOOCOMMERCE_VERSION = '3.9.4';
 
 	/** @var WC_Extra_Sorting_Options single instance of this plugin */
 	protected static $instance;
@@ -87,25 +87,26 @@ class WC_Extra_Sorting_Options {
 			// run every time
 			$this->install();
 		}
+
+		// handle HPOS compatibility
+		add_action( 'before_woocommerce_init', [ $this, 'handle_hpos_compatibility' ] );
 	}
 
 
 	/**
-	 * Adds Settings to WooCommerce Settings > Products page after "Default Product Sorting" setting.
+	 * Declares HPOS compatibility.
 	 *
-	 * @since 1.0.0
-	 * @deprecated 2.9.0
+	 * @since 2.10.0-dev.1
 	 *
-	 * @TODO remove this deprecated method by April 2022 or by version 3.0.0 {FN 2021-04-14}
+	 * @internal
 	 *
-	 * @param array $settings the current product settings
-	 * @return array updated settings
+	 * @return void
 	 */
-	public function add_settings( $settings ) {
-
-		wc_deprecated_function( __METHOD__ ,'2.9.0' );
-
-		return $settings;
+	public function handle_hpos_compatibility()
+	{
+		if ( class_exists(\Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
+			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', plugin_basename( __FILE__ ), true );
+		}
 	}
 
 
@@ -229,24 +230,6 @@ class WC_Extra_Sorting_Options {
 		$multi_values = ! is_array( $values ) ? explode( ',', $values ) : $values;
 
 		return ! empty( $multi_values ) ? array_map( 'sanitize_text_field', $multi_values ) : [];
-	}
-
-
-	/**
-	 * Gets the set of settings options.
-	 *
-	 * @since 2.7.0
-	 * @deprecated 2.9.0
-	 *
-	 * @TODO remove this method by version 3.0.0 or by April 2022 {FN 2021-04-14}
-	 *
-	 * @return array settings options
-	 */
-	protected function get_settings_options() {
-
-		wc_deprecated_function( __METHOD__, '2.9.0' );
-
-		return $this->get_extra_sorting_setting_options();
 	}
 
 
