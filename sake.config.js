@@ -1,5 +1,4 @@
 module.exports = {
-	clubhouse: 14030,
 	deploy: 'wp',
 	framework: false,
 	tasks: {
