@@ -1,138 +1,138 @@
-# Copyright (C) 2022 SkyVerge
+# Copyright (C) 2023 SkyVerge
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: Extra Product Sorting Options for WooCommerce 2.9.1\n"
+"Project-Id-Version: Extra Product Sorting Options for WooCommerce 2.10.0\n"
 "Report-Msgid-Bugs-To: "
 "https://wordpress.org/support/plugin/woocommerce-extra-product-sorting-"
 "options\n"
-"POT-Creation-Date: 2022-08-01 03:31:54+00:00\n"
+"POT-Creation-Date: 2023-07-28 11:26:57+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2022-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2023-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
-#: woocommerce-extra-product-sorting-options.php:149
+#: woocommerce-extra-product-sorting-options.php:150
 msgid "New Default Sorting Label"
 msgstr ""
 
-#: woocommerce-extra-product-sorting-options.php:150
+#: woocommerce-extra-product-sorting-options.php:151
 msgid ""
 "If desired, enter a new name for the default sorting option, e.g., "
 "&quot;Our Sorting&quot;"
 msgstr ""
 
-#: woocommerce-extra-product-sorting-options.php:172
+#: woocommerce-extra-product-sorting-options.php:173
 msgid "Add Product Sorting:"
 msgstr ""
 
-#: woocommerce-extra-product-sorting-options.php:175
+#: woocommerce-extra-product-sorting-options.php:176
 #. translators: Placeholders: %1$s - <a>, %2$s - </a>
 msgid ""
 "Select sorting options to add to your shop. %1$ssee documentation%2$s for "
 "more details."
 msgstr ""
 
-#: woocommerce-extra-product-sorting-options.php:200
+#: woocommerce-extra-product-sorting-options.php:201
 msgid "Remove Product Sorting:"
 msgstr ""
 
-#: woocommerce-extra-product-sorting-options.php:203
+#: woocommerce-extra-product-sorting-options.php:204
 #. translators: Placeholders: %1$s - <a>, %2$s - </a>
 msgid ""
 "Select default sorting options to remove from your shop. %1$ssee "
 "documentation%2$s for more details."
 msgstr ""
 
-#: woocommerce-extra-product-sorting-options.php:263
+#: woocommerce-extra-product-sorting-options.php:246
 msgid "Name: A to Z"
 msgstr ""
 
-#: woocommerce-extra-product-sorting-options.php:264
+#: woocommerce-extra-product-sorting-options.php:247
 msgid "Name: Z to A"
 msgstr ""
 
-#: woocommerce-extra-product-sorting-options.php:265
+#: woocommerce-extra-product-sorting-options.php:248
 msgid "Available Stock"
 msgstr ""
 
-#: woocommerce-extra-product-sorting-options.php:266
+#: woocommerce-extra-product-sorting-options.php:249
 msgid "Review Count"
 msgstr ""
 
-#: woocommerce-extra-product-sorting-options.php:267
+#: woocommerce-extra-product-sorting-options.php:250
 msgid "On-sale First"
 msgstr ""
 
-#: woocommerce-extra-product-sorting-options.php:286
+#: woocommerce-extra-product-sorting-options.php:269
 msgid "Default sorting"
 msgstr ""
 
-#: woocommerce-extra-product-sorting-options.php:287
+#: woocommerce-extra-product-sorting-options.php:270
 msgid "Sort by popularity"
 msgstr ""
 
-#: woocommerce-extra-product-sorting-options.php:288
+#: woocommerce-extra-product-sorting-options.php:271
 msgid "Sort by average rating"
 msgstr ""
 
-#: woocommerce-extra-product-sorting-options.php:289
+#: woocommerce-extra-product-sorting-options.php:272
 msgid "Sort by latest"
 msgstr ""
 
-#: woocommerce-extra-product-sorting-options.php:290
+#: woocommerce-extra-product-sorting-options.php:273
 msgid "Sort by price: low to high"
 msgstr ""
 
-#: woocommerce-extra-product-sorting-options.php:291
+#: woocommerce-extra-product-sorting-options.php:274
 msgid "Sort by price: high to low"
 msgstr ""
 
-#: woocommerce-extra-product-sorting-options.php:364
+#: woocommerce-extra-product-sorting-options.php:347
 msgid "Sort by name: A to Z"
 msgstr ""
 
-#: woocommerce-extra-product-sorting-options.php:367
+#: woocommerce-extra-product-sorting-options.php:350
 msgid "Sort by name: Z to A"
 msgstr ""
 
-#: woocommerce-extra-product-sorting-options.php:370
+#: woocommerce-extra-product-sorting-options.php:353
 msgid "Sort by availability"
 msgstr ""
 
-#: woocommerce-extra-product-sorting-options.php:373
+#: woocommerce-extra-product-sorting-options.php:356
 msgid "Sort by review count"
 msgstr ""
 
-#: woocommerce-extra-product-sorting-options.php:376
+#: woocommerce-extra-product-sorting-options.php:359
 msgid "Show sale items first"
 msgstr ""
 
-#: woocommerce-extra-product-sorting-options.php:557
+#: woocommerce-extra-product-sorting-options.php:540
 #. translators: Placeholders: %s - plugin name
 msgid "You cannot clone instances of %s."
 msgstr ""
 
-#: woocommerce-extra-product-sorting-options.php:568
+#: woocommerce-extra-product-sorting-options.php:551
 #. translators: Placeholders: %s - plugin name
 msgid "You cannot unserialize instances of %s."
 msgstr ""
 
-#: woocommerce-extra-product-sorting-options.php:586
+#: woocommerce-extra-product-sorting-options.php:569
 msgid "Configure"
 msgstr ""
 
-#: woocommerce-extra-product-sorting-options.php:587
+#: woocommerce-extra-product-sorting-options.php:570
 msgid "FAQ"
 msgstr ""
 
-#: woocommerce-extra-product-sorting-options.php:588
+#: woocommerce-extra-product-sorting-options.php:571
 msgid "Support"
 msgstr ""
 
-#: woocommerce-extra-product-sorting-options.php:660
+#: woocommerce-extra-product-sorting-options.php:643
 #. translators: Placeholders: %1$s <strong>, %2$s - </strong>, %3$s - version
 #. number, %4$s - opening HTML <a> link tag, %5$s - closing HTML </a> link tag,
 #. %6$s - opening HTML <a> link tag, %7$s - closing HTML </a> link tag
@@ -142,7 +142,7 @@ msgid ""
 "WooCommerce%5$s or %6$srun the WooCommerce database upgrade%7$s."
 msgstr ""
 
-#: woocommerce-extra-product-sorting-options.php:844
+#: woocommerce-extra-product-sorting-options.php:827
 #. translators: Placeholders: %1$s - <strong>, %2$s - <strong>, %3$s - <a>,
 #. %4$s - </a>
 msgid ""
@@ -151,7 +151,7 @@ msgid ""
 "option, please %3$sview our plugin notes%4$s."
 msgstr ""
 
-#: woocommerce-extra-product-sorting-options.php:868
+#: woocommerce-extra-product-sorting-options.php:851
 #. translators: Placeholders: %1$s - <strong>, %2$s - <strong>, %3$s - <a>,
 #. %4$s - </a>
 msgid ""

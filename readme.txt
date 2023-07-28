@@ -3,8 +3,8 @@ Contributors: skyverge, beka.rice, tamarazuk
 Tags: woocommerce, sorting, product sorting, orderby
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=paypal@skyverge.com&item_name=Donation+for+WooCommerce+Extra+Product+Sorting
 Requires at least: 5.6
-Tested up to: 6.0.1
-Stable Tag: 2.10.0-dev.1
+Tested up to: 6.2.2
+Stable Tag: 2.10.0
 Requires PHP: 7.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -90,7 +90,7 @@ Yes you can! Join in on our [GitHub repository](https://github.com/skyverge/wooc
 
 == Changelog ==
 
-= 2023.nn.nn - version 2.10.0-dev.1 =
+= 2023.07.28 - version 2.10.0 =
  * Misc - Add compatibility for WooCommerce High Performance Order Storage (HPOS)
  * Misc - Require PHP 7.4+, WordPress 5.6+ and WooCommerce 3.9+
 
