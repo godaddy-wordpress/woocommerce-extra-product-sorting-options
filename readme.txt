@@ -90,6 +90,10 @@ Yes you can! Join in on our [GitHub repository](https://github.com/skyverge/wooc
 
 == Changelog ==
 
+= 2024.nn.nn - version 2.11.0-dev.1 =
+ * Misc - Add support for WooCommerce 9.3.3
+ * Misc - Add support for WordPress 6.6.2
+
 = 2023.07.28 - version 2.10.0 =
  * Misc - Add compatibility for WooCommerce High Performance Order Storage (HPOS)
  * Misc - Require PHP 7.4+, WordPress 5.6+ and WooCommerce 3.9+
