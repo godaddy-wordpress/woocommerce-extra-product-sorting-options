@@ -3,8 +3,8 @@ Contributors: skyverge, beka.rice, tamarazuk
 Tags: woocommerce, sorting, product sorting, orderby
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=paypal@skyverge.com&item_name=Donation+for+WooCommerce+Extra+Product+Sorting
 Requires at least: 5.6
-Tested up to: 6.6.2
-Stable Tag: 2.11.0-dev.1
+Tested up to: 6.7
+Stable Tag: 2.10.0
 Requires PHP: 7.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -89,10 +89,6 @@ Yes you can! Join in on our [GitHub repository](https://github.com/skyverge/wooc
 3. Change sorting label (in shop dropdown) with the [Say What plugin](https://wordpress.org/plugins/say-what/)
 
 == Changelog ==
-
-= 2024.nn.nn - version 2.11.0-dev.1 =
- * Misc - Add support for WooCommerce 9.3.3
- * Misc - Add support for WordPress 6.6.2
 
 = 2023.07.28 - version 2.10.0 =
  * Misc - Add compatibility for WooCommerce High Performance Order Storage (HPOS)
