@@ -73,6 +73,9 @@ class WC_Extra_Sorting_Options {
 		// add new product sorting arguments
 		add_filter( 'woocommerce_get_catalog_ordering_args', [ $this, 'add_new_shop_ordering_args' ] );
 
+		// on sale ordering meta query
+		add_filter('woocommerce_product_query_meta_query', [$this, 'addOnSaleOrderingArgs']);
+
 		// load translations
 		add_action( 'init', [ $this, 'load_translation' ] );
 
@@ -444,14 +447,57 @@ class WC_Extra_Sorting_Options {
 
 			case 'on_sale_first':
 
-				$sort_args['orderby']  = [ 'meta_value_num' => 'DESC', $fallback => $fallback_order ];
-				$sort_args['meta_key'] = '_sale_price';
+				// 'meta_key' for this orderby value is handled separately via 'meta_query'
+				// arguments set in the addOnSaleOrderingArgs() callback.
+				$sort_args['orderby']  = [ 'meta_value' => 'DESC', $fallback => $fallback_order ];
 
 			break;
 		}
 
 		return $sort_args;
 	}
+
+
+	/**
+	 * Adds meta query arguments to allow sorting by "On Sale" first.
+	 *
+	 * The 'on_sale_first' orderby is handled as a meta query to allow for querying
+	 * products entirely lacking the '_sale_price' meta.
+	 *
+	 * @param array $metaQuery
+	 * @return array
+	 */
+	public function addOnSaleOrderingArgs($metaQuery) {
+
+		if ('on_sale_first' !== $this->getOrderByFromRequest() ) {
+			return $metaQuery;
+		}
+
+		$metaQuery[] = [
+			'relation' => 'OR',
+			[
+				'key' => '_sale_price',
+				'compare' => 'NOT EXISTS',
+			],
+			[
+				'relation' => 'OR',
+				[
+					'key' => '_sale_price',
+					'value' => 0,
+					'compare' => '>=',
+					'type' => 'numeric',
+				],
+				[
+					'key' => '_sale_price',
+					'value' => '',
+					'compare' => '=',
+				],
+			],
+		];
+
+		return $metaQuery;
+	}
+
 
 	/**
 	 * Gets the orderby value from the current request.
