@@ -91,7 +91,7 @@ Yes you can! Join in on our [GitHub repository](https://github.com/skyverge/wooc
 == Changelog ==
 
 = 2025.nn.nn - version 2.11.0-dev.1 =
- * Fix - "Show on sale first" should include all products
+ * Fix - "Show on sale first" should not exclude products lacking sale price meta
  * Misc - Add support for WooCommerce 9.7
 
 = 2023.07.28 - version 2.10.0 =
