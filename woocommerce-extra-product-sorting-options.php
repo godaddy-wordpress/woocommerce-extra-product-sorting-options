@@ -382,14 +382,7 @@ class WC_Extra_Sorting_Options {
 	*/
 	public function add_new_shop_ordering_args( $sort_args ) {
 
-		// If we have the orderby via URL, let's pass it in.
-		// This means we're on a shop / archive, so if we don't have it, use the default.
-		if ( isset( $_GET['orderby'] ) ) {
-			$orderby_value = wc_clean( $_GET['orderby'] );
-		} else {
-			/* WooCommerce core filter defined in wc-template-functions.php */
-			$orderby_value = (string) apply_filters( 'woocommerce_default_catalog_orderby', get_option( 'woocommerce_default_catalog_orderby', 'menu_order' ) );
-		}
+		$orderby_value = $this->getOrderByFromRequest();
 
 		// Since a shortcode can be used on a non-WC page, we won't have $_GET['orderby'].
 		// Grab it from the passed in sorting args instead for non-WC pages.
@@ -458,6 +451,26 @@ class WC_Extra_Sorting_Options {
 		}
 
 		return $sort_args;
+	}
+
+	/**
+	 * Gets the orderby value from the current request.
+	 *
+	 * @return string
+	 */
+	private function getOrderByFromRequest() : string
+	{
+
+		// If we have the orderby via URL, let's pass it in.
+		// This means we're on a shop / archive, so if we don't have it, use the default.
+		if ( isset( $_GET['orderby'] ) ) {
+			$orderby_value = wc_clean( $_GET['orderby'] );
+		} else {
+			/* WooCommerce core filter defined in wc-template-functions.php */
+			$orderby_value = (string) apply_filters( 'woocommerce_default_catalog_orderby', get_option( 'woocommerce_default_catalog_orderby', 'menu_order' ) );
+		}
+
+		return $orderby_value;
 	}
 
 
