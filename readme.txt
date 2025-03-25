@@ -3,8 +3,8 @@ Contributors: skyverge, beka.rice, tamarazuk
 Tags: woocommerce, sorting, product sorting, orderby
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=paypal@skyverge.com&item_name=Donation+for+WooCommerce+Extra+Product+Sorting
 Requires at least: 5.6
-Tested up to: 6.7
-Stable Tag: 2.11.0-dev.1
+Tested up to: 6.7.2
+Stable Tag: 2.11.0
 Requires PHP: 7.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -90,7 +90,7 @@ Yes you can! Join in on our [GitHub repository](https://github.com/skyverge/wooc
 
 == Changelog ==
 
-= 2025.nn.nn - version 2.11.0-dev.1 =
+= 2025.03.25 - version 2.11.0 =
  * Fix - "Show on sale first" should not exclude products lacking sale price meta
  * Misc - Add support for WooCommerce 9.7
 
