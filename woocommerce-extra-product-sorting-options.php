@@ -73,9 +73,6 @@ class WC_Extra_Sorting_Options {
 		// add new product sorting arguments
 		add_filter( 'woocommerce_get_catalog_ordering_args', [ $this, 'add_new_shop_ordering_args' ] );
 
-		// on sale ordering meta query
-		add_filter('woocommerce_product_query_meta_query', [$this, 'addOnSaleOrderingArgs']);
-
 		// load translations
 		add_action( 'init', [ $this, 'load_translation' ] );
 
@@ -446,10 +443,12 @@ class WC_Extra_Sorting_Options {
 			break;
 
 			case 'on_sale_first':
-
 				// 'meta_key' for this orderby value is handled separately via 'meta_query'
 				// arguments set in the addOnSaleOrderingArgs() callback.
 				$sort_args['orderby']  = [ 'meta_value' => 'DESC', $fallback => $fallback_order ];
+
+				// on sale ordering meta query
+				add_filter('woocommerce_product_query_meta_query', [$this, 'addOnSaleOrderingArgs']);
 
 			break;
 		}
@@ -469,11 +468,7 @@ class WC_Extra_Sorting_Options {
 	 */
 	public function addOnSaleOrderingArgs($metaQuery) {
 
-		if ('on_sale_first' !== $this->getOrderByFromRequest() ) {
-			return $metaQuery;
-		}
-
-		$metaQuery[] = [
+		return $metaQuery[] = [
 			'relation' => 'OR',
 			[
 				'key' => '_sale_price',
@@ -494,8 +489,6 @@ class WC_Extra_Sorting_Options {
 				],
 			],
 		];
-
-		return $metaQuery;
 	}
 
 
