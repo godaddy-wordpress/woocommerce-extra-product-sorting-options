@@ -5,22 +5,22 @@
  * Description: Rename default sorting and optionally extra product sorting options.
  * Author: SkyVerge
  * Author URI: http://www.skyverge.com/
- * Version: 2.10.0
+ * Version: 2.11.0-dev.1
  * Text Domain: woocommerce-extra-product-sorting-options
  * Domain Path: /i18n/languages/
  *
- * Copyright: (c) 2014-2023, SkyVerge, Inc. (info@skyverge.com)
+ * Copyright: (c) 2014-2025, SkyVerge, Inc. (info@skyverge.com)
  *
  * License: GNU General Public License v3.0
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
  *
  * @author    SkyVerge
  * @category  Admin
- * @copyright Copyright (c) 2014-2023, SkyVerge, Inc.
+ * @copyright Copyright (c) 2014-2025, SkyVerge, Inc.
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
  *
  * WC requires at least: 3.9.4
- * WC tested up to: 9.3.3
+ * WC tested up to: 9.7.0
  */
 
 defined( 'ABSPATH' ) or exit;
@@ -43,7 +43,7 @@ class WC_Extra_Sorting_Options {
 
 
 	/** plugin version number */
-	const VERSION = '2.10.0';
+	const VERSION = '2.11.0-dev.1';
 
 	/** required WooCommerce version number */
 	const MIN_WOOCOMMERCE_VERSION = '3.9.4';
@@ -382,14 +382,7 @@ class WC_Extra_Sorting_Options {
 	*/
 	public function add_new_shop_ordering_args( $sort_args ) {
 
-		// If we have the orderby via URL, let's pass it in.
-		// This means we're on a shop / archive, so if we don't have it, use the default.
-		if ( isset( $_GET['orderby'] ) ) {
-			$orderby_value = wc_clean( $_GET['orderby'] );
-		} else {
-			/* WooCommerce core filter defined in wc-template-functions.php */
-			$orderby_value = (string) apply_filters( 'woocommerce_default_catalog_orderby', get_option( 'woocommerce_default_catalog_orderby', 'menu_order' ) );
-		}
+		$orderby_value = $this->getOrderByFromRequest();
 
 		// Since a shortcode can be used on a non-WC page, we won't have $_GET['orderby'].
 		// Grab it from the passed in sorting args instead for non-WC pages.
@@ -450,14 +443,73 @@ class WC_Extra_Sorting_Options {
 			break;
 
 			case 'on_sale_first':
+				// 'meta_key' for this orderby value is handled separately via 'meta_query'
+				// arguments set in the addOnSaleOrderingArgs() callback.
+				$sort_args['orderby']  = [ 'meta_value' => 'DESC', $fallback => $fallback_order ];
 
-				$sort_args['orderby']  = [ 'meta_value_num' => 'DESC', $fallback => $fallback_order ];
-				$sort_args['meta_key'] = '_sale_price';
+				// on sale ordering meta query
+				add_filter('woocommerce_product_query_meta_query', [$this, 'addOnSaleOrderingArgs']);
 
 			break;
 		}
 
 		return $sort_args;
+	}
+
+
+	/**
+	 * Adds meta query arguments to allow sorting by "On Sale" first.
+	 *
+	 * The 'on_sale_first' orderby is handled as a meta query to allow for querying
+	 * products entirely lacking the '_sale_price' meta.
+	 *
+	 * @param array $metaQuery
+	 * @return array
+	 */
+	public function addOnSaleOrderingArgs($metaQuery) {
+
+		return $metaQuery[] = [
+			'relation' => 'OR',
+			[
+				'key' => '_sale_price',
+				'compare' => 'NOT EXISTS',
+			],
+			[
+				'relation' => 'OR',
+				[
+					'key' => '_sale_price',
+					'value' => 0,
+					'compare' => '>=',
+					'type' => 'numeric',
+				],
+				[
+					'key' => '_sale_price',
+					'value' => '',
+					'compare' => '=',
+				],
+			],
+		];
+	}
+
+
+	/**
+	 * Gets the orderby value from the current request.
+	 *
+	 * @return string
+	 */
+	private function getOrderByFromRequest() : string
+	{
+
+		// If we have the orderby via URL, let's pass it in.
+		// This means we're on a shop / archive, so if we don't have it, use the default.
+		if ( isset( $_GET['orderby'] ) ) {
+			$orderby_value = wc_clean( $_GET['orderby'] );
+		} else {
+			/* WooCommerce core filter defined in wc-template-functions.php */
+			$orderby_value = (string) apply_filters( 'woocommerce_default_catalog_orderby', get_option( 'woocommerce_default_catalog_orderby', 'menu_order' ) );
+		}
+
+		return $orderby_value;
 	}
 
 
